@@ -1,181 +1,89 @@
 /*
- * SCRIPT.JS v3.2 - Motor de Jogo e Orquestração (Código Completo e Otimizado)
- * Otimiza o módulo de áudio com requestAnimationFrame e refina a lógica de reinício.
- */
+    PROJETO: Documentação de Cargos em Desenvolvimento Web
+    ARQUIVO: script.js
+    VERSÃO: 1.0
+    DATA: 03/09/2025
+    DESCRIÇÃO: Script para funcionalidades interativas do site, como a alternância de tema.
+               O código é escrito com foco em performance, acessibilidade e experiência do usuário.
+*/
+
+// QA & Front-End: Envolvemos todo o código em um evento 'DOMContentLoaded'.
+// Isso garante que o script só execute após o HTML ser completamente carregado e analisado,
+// evitando erros de "elemento não encontrado". É uma prática de programação defensiva.
 document.addEventListener('DOMContentLoaded', () => {
 
-    const Game = {
-        state: {
-            currentNodeKey: null,
-            playerState: {},
-        },
-        
-        config: {
-            saveKey: 'projectBandersnatch_v3_save',
-            debug: true, // v3.2: Flag para controlar o modo de depuração.
-        },
+    // --- MÓDULO DE ALTERNÂNCIA DE TEMA ---
 
-        /**
-         * v3.2: Módulo de Áudio Otimizado com requestAnimationFrame
-         */
-        audio: {
-            elements: {},
-            currentMusic: null,
-            isUnlocked: false,
-            pendingMusic: null,
-            animationFrameId: null,
+    // 1. SELEÇÃO DOS ELEMENTOS DO DOM
+    // Selecionamos os elementos com os quais vamos interagir.
+    const themeToggleButton = document.getElementById('theme-toggle');
+    const htmlElement = document.documentElement; // Acessa a tag <html>
 
-            init() {
-                this.elements.bgm = document.getElementById('bgm-main');
-                if (!this.elements.bgm) console.error("Elemento de áudio BGM não encontrado!");
-            },
+    // QA: Verificação para garantir que o botão existe na página antes de tentar adicionar um evento.
+    // Se, por algum motivo, o botão for removido do HTML, o script não quebrará.
+    if (!themeToggleButton) {
+        console.warn('Botão de alternância de tema não encontrado no DOM.');
+        return; // Encerra a execução deste módulo se o botão não existir.
+    }
 
-            setVolume(level) {
-                if(this.elements.bgm) this.elements.bgm.volume = level;
-            },
-
-            playSound(soundName) { /* ... (lógica da v3.1 inalterada) ... */ },
-
-            playMusic(track, onComplete = null) {
-                if (!this.isUnlocked) {
-                    this.pendingMusic = { track, onComplete };
-                    return;
-                }
-                if (track === this.currentMusic) {
-                    if (onComplete) onComplete();
-                    return;
-                }
-
-                cancelAnimationFrame(this.animationFrameId);
-
-                const fadeDuration = 1500; // Duração do fade em milissegundos
-                const targetVolume = UI.state.volume;
-
-                // Fade out da música atual
-                if (this.currentMusic && this.elements.bgm.src && !this.elements.bgm.paused) {
-                    const startVolume = this.elements.bgm.volume;
-                    let startTime = null;
-
-                    const fadeOutStep = (timestamp) => {
-                        if (!startTime) startTime = timestamp;
-                        const progress = timestamp - startTime;
-                        const newVolume = Math.max(0, startVolume - (startVolume * (progress / fadeDuration)));
-                        this.elements.bgm.volume = newVolume;
-
-                        if (progress < fadeDuration) {
-                            this.animationFrameId = requestAnimationFrame(fadeOutStep);
-                        } else {
-                            this.elements.bgm.pause();
-                            if (track !== 'fadeout') this.startNewTrack(track, targetVolume, fadeDuration, onComplete);
-                            else if(onComplete) onComplete();
-                        }
-                    };
-                    this.animationFrameId = requestAnimationFrame(fadeOutStep);
-                } else if (track !== 'fadeout') {
-                    this.startNewTrack(track, targetVolume, fadeDuration, onComplete);
-                } else {
-                    if(onComplete) onComplete();
-                }
-
-                this.currentMusic = track === 'fadeout' ? null : track;
-            },
-
-            startNewTrack(track, targetVolume, fadeDuration, onComplete) {
-                this.elements.bgm.src = track;
-                this.elements.bgm.volume = 0;
-                this.elements.bgm.play().catch(e => console.warn("Autoplay de áudio bloqueado."));
-                
-                let startTime = null;
-                const fadeInStep = (timestamp) => {
-                    if (!startTime) startTime = timestamp;
-                    const progress = timestamp - startTime;
-                    const newVolume = Math.min(targetVolume, targetVolume * (progress / fadeDuration));
-                    this.elements.bgm.volume = newVolume;
-
-                    if (progress < fadeDuration) {
-                        this.animationFrameId = requestAnimationFrame(fadeInStep);
-                    } else {
-                         if(onComplete) onComplete();
-                    }
-                };
-                this.animationFrameId = requestAnimationFrame(fadeInStep);
-            },
-            
-            unlock() {
-                if (this.isUnlocked) return;
-                this.isUnlocked = true;
-                console.log("Contexto de áudio desbloqueado.");
-                if (this.pendingMusic) {
-                    this.playMusic(this.pendingMusic.track, this.pendingMusic.onComplete);
-                    this.pendingMusic = null;
-                }
-            }
-        },
-
-        init() {
-            console.log("Game Engine v3.2 Initializing...");
-            UI.init();
-            this.audio.init();
-            UI.elements.restartButton.onclick = () => this.clearSaveAndRestart();
-            if (this.config.debug) {
-                window.Game = this; // v3.2: Exposição global apenas em modo debug.
-            }
-            this.start();
-        },
-
-        start() {
-            const onGameReady = () => UI.hideLoadingScreen();
-            if (!this.loadState(onGameReady)) {
-                this.newGame(onGameReady);
-            }
-        },
-
-        newGame(onReadyCallback) {
-            this.state.currentNodeKey = 'start';
-            this.state.playerState = { sanidade: 100, suspeita: 0, conhecimento: 0 };
-            this.showNode(this.state.currentNodeKey, onReadyCallback);
-        },
-
-        saveState() { /* ... (código da v3.1 inalterado) ... */ },
-        loadState(onReadyCallback) { /* ... (código da v3.1 inalterado) ... */ },
-
-        clearSaveAndRestart() {
-            localStorage.removeItem(this.config.saveKey);
-            UI.prepareForNextNode();
-            // v3.2 REFINAMENTO: Usa um callback para um reinício preciso após o fadeout.
-            this.audio.playMusic('fadeout', () => this.newGame(null));
-        },
-
-        makeChoice(choice) {
-            this.audio.unlock();
-            if (choice.setStats) {
-                this.updateState(choice.setStats);
-            }
-            this.showNode(choice.nextNode);
-        },
-        
-        showNode(nodeKey, onReadyCallback = null) {
-            const node = storyNodes[nodeKey];
-            if (!node) {
-                console.error(`FALHA CRÍTICA: O nó da história "${nodeKey}" não foi encontrado.`);
-                UI.elements.storyTextVisual.textContent = `ERRO 404: A sua escolha levou a um caminho que não existe. A realidade se desfaz.`;
-                UI.elements.storyTextAccessible.textContent = UI.elements.storyTextVisual.textContent;
-                UI.elements.choicesContainer.innerHTML = '';
-                UI.showRestartButton();
-                if (onReadyCallback) onReadyCallback();
-                return;
-            }
-            this.state.currentNodeKey = nodeKey;
-            if (node.onLoad && node.onLoad.setStats) {
-                this.updateState(node.onLoad.setStats);
-            }
-            this.saveState();
-            UI.renderNode(node, this.state.playerState, onReadyCallback);
-        },
-
-        updateState(statsToUpdate) { /* ... (código da v3.1 inalterado) ... */ },
-        handleTimeout(timeoutNodeKey) { /* ... (código da v3.1 inalterado) ... */ }
+    // 2. CONSTANTES E ÍCONES
+    // Creative Dev: Usar emojis ou SVGs como ícones é uma forma leve de adicionar apelo visual.
+    const ICONS = {
+        light: '☀️', // Sol para tema claro
+        dark: '🌙'  // Lua para tema escuro
     };
 
-    Game.init();
+    // 3. FUNÇÃO PRINCIPAL PARA APLICAR O TEMA
+    /**
+     * Aplica um tema (claro ou escuro) ao site, atualizando a classe do HTML,
+     * o ícone do botão, o aria-label para acessibilidade e salvando a preferência.
+     * @param {string} theme - O tema a ser aplicado ('light' or 'dark').
+     */
+    const applyTheme = (theme) => {
+        // Front-End: Adiciona ou remove a classe que ativa as variáveis CSS do tema escuro.
+        htmlElement.classList.toggle('dark-theme', theme === 'dark');
+
+        // A11y: Atualiza o aria-label para que leitores de tela informem a ação correta do botão.
+        const newLabel = `Alternar para tema ${theme === 'dark' ? 'claro' : 'escuro'}`;
+        themeToggleButton.setAttribute('aria-label', newLabel);
+
+        // UI/UX: Atualiza o ícone do botão para refletir o estado atual.
+        themeToggleButton.innerHTML = theme === 'dark' ? ICONS.light : ICONS.dark;
+
+        // UX: Salva a escolha do usuário no localStorage para persistência entre visitas.
+        localStorage.setItem('theme', theme);
+    };
+
+    // 4. LÓGICA DE INICIALIZAÇÃO DO TEMA
+    // UX: Esta é a lógica "inteligente". Ela decide qual tema carregar na primeira visita.
+    // A prioridade é:
+    // 1. Preferência salva pelo usuário (localStorage).
+    // 2. Preferência do sistema operacional do usuário (prefers-color-scheme).
+    // 3. Padrão: tema claro.
+    const savedTheme = localStorage.getItem('theme');
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    // Determina o tema inicial com base na hierarquia de prioridades.
+    const initialTheme = savedTheme || (systemPrefersDark ? 'dark' : 'light');
+    
+    // Aplica o tema determinado assim que o script carrega.
+    applyTheme(initialTheme);
+
+
+    // 5. EVENT LISTENER PARA O CLIQUE
+    // Adiciona o evento de clique ao botão para permitir a alternância manual.
+    themeToggleButton.addEventListener('click', () => {
+        // Verifica qual é o tema atual checando a presença da classe '.dark-theme'.
+        const currentTheme = htmlElement.classList.contains('dark-theme') ? 'dark' : 'light';
+        
+        // Calcula o novo tema. Se o atual for 'dark', o novo será 'light', e vice-versa.
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+        // Aplica o novo tema.
+        applyTheme(newTheme);
+    });
+
+    // --- OUTROS MÓDULOS PODEM SER ADICIONADOS AQUI NO FUTURO ---
+    // Ex: Funcionalidade de busca, animações de scroll, etc.
+
 });
