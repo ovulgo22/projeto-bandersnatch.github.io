@@ -1,142 +1,385 @@
-/*
-    PROJETO: Documentação de Cibersegurança Web
-    ARQUIVO: style.css
-    VERSÃO: 4.2
-    DATA: 03/09/2025 (06:36 America/Sao_Paulo)
-    
-    CHANGELOG v4.2 (ATUALIZAÇÃO DE SUPORTE E CORREÇÃO):
-    - CORREÇÃO: Adicionada a classe utilitária `.no-transitions` para suportar a funcionalidade de 
-      transição suave do script.js v4.1. Isso previne o "flash" de animação no carregamento da página.
-    - REFINAMENTO (A11y): Aprimorado o estilo de `:focus-visible` com um contorno mais espesso
-      para melhorar a clareza da navegação por teclado.
-*/
+/* =================================================================== */
+/* ARQUIVO: style.css (Versão 1.0)                                     */
+/* DESCRIÇÃO: Folha de estilos principal para o portfólio.             */
+/* =================================================================== */
 
-/* --- 1. IMPORTAÇÕES E DEFINIÇÕES GLOBAIS --- */
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@500;700&family=Inter:wght@400;500;700&display=swap');
+/* =================================================================== */
+/* 1. VARIÁVEIS GLOBAIS (CUSTOM PROPERTIES) & RESET                    */
+/* (UI Designer / Front-End Developer)                                 */
+/* =================================================================== */
 
 :root {
-    --color-background: #0a192f;
-    --color-surface: #112240;
-    --color-text-primary: #ccd6f6;
-    --color-text-secondary: #a7b4d4;
-    --color-text-tertiary: #8892b0;
-    --color-primary-accent: #64ffda;
-    --color-border: #233554;
-    --color-shadow: rgba(100, 255, 218, 0.07);
-    --space-xxs: 0.25rem; --space-xs: 0.5rem; --space-s: 1rem; --space-m: 1.5rem; --space-l: 2rem; --space-xl: 3rem; --space-xxl: 4rem;
-    --font-family-headings: 'Fira Code', monospace;
-    --font-family-body: 'Inter', sans-serif;
+    /* Paleta de Cores (Tema Escuro - Estilo Google I/O) */
+    --color-background: #121212; /* Quase preto para conforto visual */
+    --color-surface: #1e1e1e;    /* Cor de superfície para cards e seções */
+    --color-primary: #8ab4f8;     /* Azul como cor de destaque (links, botões) */
+    --color-primary-hover: #a1c2fa;
+    --color-text-primary: #e8eaed; /* Cor principal do texto (branco suave) */
+    --color-text-secondary: #bdc1c6;/* Cor secundária para subtítulos, descrições */
+    --color-border: #3c4043;
+
+    /* Tipografia */
+    --font-primary: 'Space Grotesk', sans-serif; /* Para títulos */
+    --font-secondary: 'Roboto', sans-serif;        /* Para corpo de texto */
+
+    /* Espaçamento e Bordas */
+    --spacing-unit: 8px;
     --border-radius: 4px;
-    --transition-speed: 250ms;
+
+    /* Transições */
+    --transition-speed: 0.3s;
 }
 
-html.light-theme {
-    --color-background: #f8f9fa;
-    --color-surface: #ffffff;
-    --color-text-primary: #212529;
-    --color-text-secondary: #495057;
-    --color-text-tertiary: #6c757d;
-    --color-primary-accent: #0057b7;
-    --color-border: #dee2e6;
-    --color-shadow: rgba(0, 87, 183, 0.1);
+/* Reset básico e configurações globais */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-/* --- 2. RESET E ESTILOS BASE --- */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
-body { 
-    font-family: var(--font-family-body);
-    font-size: 1rem;
-    line-height: 1.7;
-    color: var(--color-text-primary);
+html {
+    scroll-behavior: smooth; /* Rolagem suave entre as seções */
+    font-size: 100%; /* Base para unidades rem */
+}
+
+body {
     background-color: var(--color-background);
+    color: var(--color-text-primary);
+    font-family: var(--font-secondary);
+    line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    transition: color var(--transition-speed), background-color var(--transition-speed); 
-}
-@media (min-width: 768px) { body { font-size: 1.125rem; } }
-
-/* --- 3. TIPOGRAFIA E UTILITÁRIOS GLOBAIS --- */
-h1, h2, h3 { font-family: var(--font-family-headings); color: var(--color-text-primary); line-height: 1.4; font-weight: 700; letter-spacing: 0.5px; }
-h1 { font-size: clamp(2rem, 5vw, 2.5rem); }
-h2 { font-size: clamp(1.5rem, 4vw, 2rem); }
-h3 { font-size: 1.25rem; }
-a { color: var(--color-primary-accent); text-decoration: none; transition: filter var(--transition-speed); }
-a:hover { filter: brightness(1.2); }
-
-/* REFINAMENTO (A11y): Estilo de foco mais robusto e visível. */
-a:focus-visible, button:focus-visible { 
-    outline: 3px solid var(--color-primary-accent); 
-    outline-offset: 3px; 
-    border-radius: 2px; 
 }
 
-.container { width: 90%; max-width: 1100px; margin: 0 auto; }
-.visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+/* =================================================================== */
+/* 2. UTILITÁRIOS E LAYOUT GERAL                                       */
+/* =================================================================== */
 
-/* CORREÇÃO: Classe utilitária para o script desativar transições durante o carregamento. */
-.no-transitions *,
-.no-transitions *::before,
-.no-transitions *::after {
-  transition: none !important;
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: calc(var(--spacing-unit) * 8) 0;
 }
 
-/* --- 4. COMPONENTES GLOBAIS --- */
-.site-header { padding: var(--space-m) 0; border-bottom: 1px solid var(--color-border); }
-.header-content { display: flex; justify-content: space-between; align-items: center; }
-.logo-link { display: inline-flex; align-items: center; gap: var(--space-s); color: var(--color-text-primary); font-weight: 700; }
-.logo-link:hover { color: var(--color-primary-accent); filter: none; }
-.site-logo { width: 40px; height: 40px; }
-.site-header h1 { font-size: 1.5rem; }
-.subtitle { font-size: 1rem; color: var(--color-text-secondary); text-align: center; margin-top: var(--space-s); font-family: var(--font-family-headings); }
-.theme-toggle { background: transparent; border: 1px solid var(--color-border); width: 40px; height: 40px; border-radius: 50%; cursor: pointer; color: var(--color-text-tertiary); }
-.theme-toggle:hover { color: var(--color-primary-accent); border-color: var(--color-primary-accent); }
-.site-footer { padding: var(--space-l) 0; margin-top: var(--space-xl); text-align: center; font-size: 0.9rem; color: var(--color-text-secondary); border-top: 1px solid var(--color-border); }
-.site-footer p:first-child { margin-bottom: var(--space-xs); }
-
-/* --- 5. ESTRUTURA E CARDS DA PÁGINA PRINCIPAL --- */
-.content-section { padding: var(--space-xl) 0; }
-#introduction.content-section { padding-top: var(--space-l); padding-bottom: var(--space-l); }
-.intro-text { font-size: 1.125rem; color: var(--color-text-secondary); max-width: 70ch; margin: 0 auto var(--space-m) auto; text-align: center; }
-.intro-highlight { font-family: var(--font-family-headings); font-size: 1.25rem; color: var(--color-primary-accent); text-align: center; }
-.grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: var(--space-m); }
-
-.security-card {
-    display: flex;
-    text-decoration: none;
-    background-color: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--border-radius);
-    padding: var(--space-m);
-    transition: transform var(--transition-speed), box-shadow var(--transition-speed);
-    position: relative;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+.section-title {
+    font-family: var(--font-primary);
+    font-size: clamp(2rem, 5vw, 3rem); /* Tipografia fluida */
+    color: var(--color-primary);
+    text-align: center;
+    margin-bottom: calc(var(--spacing-unit) * 6);
 }
-.security-card::before {
-    content: '';
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Animação de entrada (Creative Developer) */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+section {
+    animation: fadeIn 0.8s ease-out forwards;
+}
+
+/* =================================================================== */
+/* 3. ACESSIBILIDADE (A11y Developer)                                  */
+/* =================================================================== */
+
+.skip-link {
     position: absolute;
-    top: 0; right: 0; bottom: 0; left: 0;
-    z-index: -1;
-    margin: -1px;
-    border-radius: inherit;
-    background: linear-gradient(to right, var(--color-primary-accent), var(--color-text-primary));
-    opacity: 0;
-    transition: opacity var(--transition-speed);
+    top: -40px;
+    left: 0;
+    background: var(--color-primary);
+    color: var(--color-background);
+    padding: var(--spacing-unit);
+    z-index: 100;
+    transition: top var(--transition-speed) ease;
 }
-.security-card:hover::before { opacity: 1; }
-.security-card:hover { border-color: transparent; }
-.security-card:hover, .security-card:focus-within {
+
+.skip-link:focus {
+    top: 0;
+}
+
+/* Estilo de foco visível apenas para navegação por teclado */
+:focus-visible {
+    outline: 3px solid var(--color-primary);
+    outline-offset: 3px;
+}
+
+/* =================================================================== */
+/* 4. CABEÇALHO E NAVEGAÇÃO                                            */
+/* =================================================================== */
+
+.main-header {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 50;
+    background-color: rgba(18, 18, 18, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.logo {
+    font-family: var(--font-primary);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    text-decoration: none;
+}
+
+.nav-menu {
+    list-style: none;
+    display: flex;
+    gap: calc(var(--spacing-unit) * 4);
+}
+
+.nav-menu a {
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color var(--transition-speed) ease;
+}
+
+.nav-menu a:hover,
+.nav-menu a:focus {
+    color: var(--color-primary);
+}
+
+/* =================================================================== */
+/* 5. SEÇÃO HERÓI                                                      */
+/* =================================================================== */
+
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-title {
+    font-family: var(--font-primary);
+    font-size: clamp(3rem, 10vw, 6rem);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: calc(var(--spacing-unit) * 2);
+}
+
+.hero-subtitle {
+    font-size: clamp(1rem, 3vw, 1.5rem);
+    color: var(--color-text-secondary);
+    margin-bottom: calc(var(--spacing-unit) * 4);
+}
+
+.cta-button {
+    display: inline-block;
+    background-color: var(--color-primary);
+    color: var(--color-background);
+    padding: calc(var(--spacing-unit) * 1.5) calc(var(--spacing-unit) * 4);
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    font-weight: 700;
+    transition: background-color var(--transition-speed) ease, transform var(--transition-speed) ease;
+}
+
+.cta-button:hover,
+.cta-button:focus {
+    background-color: var(--color-primary-hover);
+    transform: translateY(-3px);
+}
+
+/* =================================================================== */
+/* 6. SEÇÃO SOBRE                                                      */
+/* =================================================================== */
+
+.about-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: calc(var(--spacing-unit) * 6);
+    align-items: center;
+}
+
+.about-text p {
+    margin-bottom: calc(var(--spacing-unit) * 2);
+    color: var(--color-text-secondary);
+}
+
+.about-image img {
+    border-radius: 50%;
+    border: 3px solid var(--color-border);
+}
+
+/* =================================================================== */
+/* 7. SEÇÃO HABILIDADES                                                */
+/* =================================================================== */
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: calc(var(--spacing-unit) * 4);
+}
+
+.skill-category {
+    background-color: var(--color-surface);
+    padding: calc(var(--spacing-unit) * 4);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--color-border);
+}
+
+.skill-category h3 {
+    font-family: var(--font-primary);
+    color: var(--color-primary);
+    margin-bottom: calc(var(--spacing-unit) * 2);
+}
+
+.skill-category ul {
+    list-style: none;
+    color: var(--color-text-secondary);
+}
+
+/* =================================================================== */
+/* 8. SEÇÃO PROJETOS                                                   */
+/* =================================================================== */
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: calc(var(--spacing-unit) * 4);
+}
+
+.project-card {
+    background-color: var(--color-surface);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--color-border);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+}
+
+.project-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 20px -10px var(--color-shadow);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
-.security-card article { display: flex; flex-direction: column; width: 100%; }
-.security-card__header { display: flex; align-items: center; gap: var(--space-s); margin-bottom: var(--space-m); }
-.security-icon { width: 40px; height: 40px; flex-shrink: 0; transition: filter var(--transition-speed); }
-.security-card:hover .security-icon { filter: drop-shadow(0 0 5px var(--color-shadow)); }
-.security-card__title { color: var(--color-text-primary); transition: color var(--transition-speed); }
-.security-card:hover .security-card__title { color: var(--color-primary-accent); }
-.security-card__summary { color: var(--color-text-secondary); font-size: 1rem; flex-grow: 1; margin-bottom: var(--space-m); }
-.security-card__tags { display: flex; flex-wrap: wrap; gap: var(--space-xs); font-family: var(--font-family-headings); font-size: 0.8rem; }
-.security-card__tags span { padding: var(--space-xxs) var(--space-xs); color: var(--color-text-tertiary); background-color: var(--color-background); border-radius: 20px; }
-.security-card__footer { margin-top: auto; color: var(--color-text-tertiary); font-weight: 500; text-align: right; font-size: 0.9rem; transition: color var(--transition-speed), transform var(--transition-speed); }
-.security-card:hover .security-card__footer { color: var(--color-primary-accent); transform: translateX(4px); }
+
+.project-card__content {
+    padding: calc(var(--spacing-unit) * 3);
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.project-card__title {
+    font-family: var(--font-primary);
+    font-size: 1.5rem;
+    margin-bottom: var(--spacing-unit);
+}
+
+.project-card__description {
+    color: var(--color-text-secondary);
+    margin-bottom: calc(var(--spacing-unit) * 2);
+    flex-grow: 1;
+}
+
+.project-card__tags {
+    margin-bottom: calc(var(--spacing-unit) * 2);
+}
+
+.project-card__tags span {
+    display: inline-block;
+    background-color: var(--color-border);
+    color: var(--color-text-secondary);
+    padding: calc(var(--spacing-unit) * 0.5) var(--spacing-unit);
+    border-radius: var(--border-radius);
+    font-size: 0.8rem;
+    margin: 2px;
+}
+
+.project-card__links a {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 700;
+    margin-right: calc(var(--spacing-unit) * 2);
+}
+
+.project-card__links a:hover {
+    text-decoration: underline;
+}
+
+/* =================================================================== */
+/* 9. SEÇÃO CONTATO & RODAPÉ                                           */
+/* =================================================================== */
+
+.contact {
+    text-align: center;
+}
+
+.contact p {
+    max-width: 600px;
+    margin: 0 auto calc(var(--spacing-unit) * 4) auto;
+    color: var(--color-text-secondary);
+}
+
+.social-links {
+    margin-top: calc(var(--spacing-unit) * 4);
+}
+/* Estilize os SVGs dos ícones sociais aqui */
+
+.main-footer {
+    text-align: center;
+    padding: calc(var(--spacing-unit) * 4) 0;
+    margin-top: calc(var(--spacing-unit) * 6);
+    border-top: 1px solid var(--color-border);
+    color: var(--color-text-secondary);
+}
+
+/* =================================================================== */
+/* 10. RESPONSIVIDADE (MOBILE-FIRST)                                   */
+/* (Front-End Developer / QA Tester)                                   */
+/* =================================================================== */
+
+/* Para telas menores (Mobile) */
+@media (max-width: 768px) {
+    .nav-menu {
+        /* Aqui implementaremos um menu hamburguer com JavaScript no futuro */
+        display: none; 
+    }
+
+    .about-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .about-image {
+        margin-top: calc(var(--spacing-unit) * 4);
+        justify-self: center;
+    }
+    
+    .about-image img {
+        max-width: 200px;
+    }
+}
