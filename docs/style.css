@@ -247,8 +247,10 @@ body {
 }
 
 
+/* ... (todo o código anterior da v3.0 permanece o mesmo) ... */
+
 /*----------------------------------------------------------------*/
-/* 7. MODAL DE CONFIGURAÇÕES
+/* 7. MODAL DE CONFIGURAÇÕES (LÓGICA DE TRANSIÇÃO REFINADA)
 /*----------------------------------------------------------------*/
 #settings-modal {
     position: fixed;
@@ -260,13 +262,19 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    
+    /* v3.1 ANOMALY FIX: Lógica de transição simplificada */
     opacity: 0;
-    transition: opacity var(--transition-speed-normal), visibility var(--transition-speed-normal);
+    visibility: hidden;
+    transition: opacity var(--transition-speed-normal) ease-in-out, visibility var(--transition-speed-normal) ease-in-out;
 }
 
 #settings-modal.visible {
     opacity: 1;
+    visibility: visible;
 }
+
+/* ... (o restante do código do modal e do CSS permanece o mesmo) ... */
 
 .modal-content {
     background: var(--color-background);
