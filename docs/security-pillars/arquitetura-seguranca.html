@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Arquitetura de Segurança Web: Design e Mitigação | Guia Cibersegurança</title>
+    <meta name="description" content="Aprenda a projetar e construir aplicações web seguras desde a fundação. Explore princípios de arquitetura, modelagem de ameaças (Threat Modeling), e design seguro.">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "Arquitetura de Segurança Web: Projetando Defesas em Camadas",
+      "author": { "@type": "Organization", "name": "Guia Cibersegurança Web" },
+      "datePublished": "2025-09-03",
+      "keywords": ["Arquitetura de Segurança", "Threat Modeling", "STRIDE", "Security by Design", "DevSecOps", "Tríade CIA"]
+    }
+    </script>
+
+    <link rel="stylesheet" href="../style.css">
+    <script src="../script.js" defer></script>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Pular para o conteúdo principal</a>
+
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="../index.html" class="logo-link" aria-label="Página Inicial do Guia de Cibersegurança Web">
+                    <img src="../assets/shield-icon.svg" alt="Ícone de Escudo de Segurança" class="site-logo">
+                    <h1>Cibersegurança Web</h1>
+                </a>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Alternar tema claro/escuro"></button>
+            </div>
+            <p class="subtitle">Fortificando Aplicações Digitais: Construa, Proteja, Monitore.</p>
+        </div>
+    </header>
+
+    <div class="page-layout container">
+        <aside class="sidebar-nav">
+            <nav aria-label="Nesta página">
+                <a href="../index.html" class="back-link">&larr; Voltar para Pilares</a>
+                <h2>Nesta Página</h2>
+                <ol>
+                    <li><a href="#introducao">Introdução</a></li>
+                    <li><a href="#principios">Princípios Fundamentais</a></li>
+                    <li><a href="#threat-modeling">Modelagem de Ameaças</a></li>
+                    <li><a href="#design-seguro">Padrões de Design Seguro</a></li>
+                    <li><a href="#ferramentas">Ferramentas e Frameworks</a></li>
+                </ol>
+            </nav>
+        </aside>
+
+        <main id="main-content">
+            <article class="content-article">
+                <header class="article-header">
+                    <h1>Arquitetura de Segurança Web</h1>
+                    <p class="article-intro">
+                        A segurança de uma aplicação não começa com firewalls ou testes de invasão, mas com um blueprint sólido. A Arquitetura de Segurança é a disciplina de projetar um sistema para que ele seja inerentemente resiliente a ataques, integrando controles de segurança em cada camada da sua estrutura.
+                    </p>
+                </header>
+
+                <section id="introducao" class="content-section">
+                    <h2>O Que é "Security by Design"?</h2>
+                    <p>O conceito central é o "Security by Design" (Segurança desde a Concepção). Em vez de tratar a segurança como um aditivo ou uma correção tardia, nós a incorporamos em cada decisão de design, desde a escolha da tecnologia até a forma como os dados fluem pelo sistema. Uma arquitetura segura antecipa ameaças potenciais e implementa contramedidas antes que a primeira linha de código de produção seja escrita.</p>
+                </section>
+
+                <section id="principios" class="content-section">
+                    <h2>Princípios Fundamentais</h2>
+                    <p>Uma arquitetura robusta se baseia em princípios testados e comprovados, como a Tríade da Segurança da Informação (CIA):</p>
+                    <ul>
+                        <li><strong>Confidencialidade:</strong> Garantir que a informação seja acessível apenas por pessoas autorizadas. Controles como criptografia e gerenciamento de acesso são essenciais.</li>
+                        <li><strong>Integridade:</strong> Assegurar que os dados sejam precisos e confiáveis, protegendo-os contra modificações não autorizadas. Hashes e assinaturas digitais são exemplos de controles.</li>
+                        <li><strong>Disponibilidade:</strong> Garantir que o sistema e seus dados estejam disponíveis para usuários autorizados quando necessário. Isso envolve proteção contra ataques de negação de serviço (DDoS) e planejamento de redundância.</li>
+                    </ul>
+                    <p>Outro princípio vital é a **Defesa em Profundidade**, que consiste em criar múltiplas camadas de controles de segurança. Se uma camada falhar, outra estará pronta para conter a ameaça.</p>
+                </section>
+
+                <section id="threat-modeling" class="content-section">
+                    <h2>Modelagem de Ameaças (Threat Modeling)</h2>
+                    <p>A Modelagem de Ameaças é um processo estruturado para identificar e priorizar ameaças e vulnerabilidades em um sistema. É um exercício proativo que responde a quatro perguntas-chave:</p>
+                    <ol>
+                        <li>O que estamos construindo?</li>
+                        <li>O que pode dar errado?</li>
+                        <li>O que vamos fazer a respeito?</li>
+                        <li>Fizemos um bom trabalho?</li>
+                    </ol>
+                    <p>Um dos frameworks mais populares para isso é o <strong>STRIDE</strong>, da Microsoft, que categoriza ameaças em:</p>
+                    <ul>
+                        <li><strong>S</strong>poofing (Falsificação de Identidade)</li>
+                        <li><strong>T</strong>ampering (Adulteração de Dados)</li>
+                        <li><strong>R</strong>epudiation (Repúdio)</li>
+                        <li><strong>I</strong>nformation Disclosure (Divulgação de Informações)</li>
+                        <li><strong>D</strong>enial of Service (Negação de Serviço)</li>
+                        <li><strong>E</strong>levation of Privilege (Elevação de Privilégio)</li>
+                    </ul>
+                </section>
+                
+                <section id="design-seguro" class="content-section">
+                    <h2>Padrões de Design Seguro</h2>
+                    <p>Ao projetar, arquitetos aplicam padrões para reduzir a superfície de ataque:</p>
+                    <ul>
+                        <li><strong>Princípio do Menor Privilégio:</strong> Cada componente ou usuário deve ter apenas as permissões estritamente necessárias para realizar sua função.</li>
+                        <li><strong>Fail-Secure by Default:</strong> Em caso de falha, o sistema deve entrar em um estado que nega o acesso, em vez de permiti-lo.</li>
+                        <li><strong>Separação de Deveres:</strong> Dividir tarefas críticas entre múltiplos usuários ou componentes para evitar que um único ponto de falha comprometa o sistema.</li>
+                    </ul>
+                </section>
+
+                <section id="ferramentas" class="content-section">
+                    <h2>Ferramentas e Frameworks</h2>
+                    <ul>
+                        <li><strong>Diagramação:</strong> Ferramentas como Microsoft Threat Modeling Tool, Diagrams.net (Draw.io), ou Lucidchart para visualizar fluxos de dados e componentes.</li>
+                        <li><strong>Frameworks de Controle:</strong> NIST Cybersecurity Framework, CIS Controls, e ISO 27001/27002 para guiar a implementação de controles.</li>
+                    </ul>
+                </section>
+            </article>
+        </main>
+    </div>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2025 Guia Cibersegurança Web. Todos os direitos reservados.</p>
+            <p>Construa com Segurança.</p>
+        </div>
+    </footer>
+</body>
+</html>
