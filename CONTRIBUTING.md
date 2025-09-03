@@ -4,88 +4,66 @@ Primeiramente, obrigado pelo seu interesse em contribuir! 🎉
 
 Este projeto é um esforço da comunidade para criar um recurso educacional de alta qualidade. A sua ajuda é essencial para mantê-lo preciso, atualizado e útil para todos.
 
-Ao contribuir, você concorda em seguir nosso [Código de Conduta](CODE_OF_CONDUCT.md) (a ser adicionado).
+Ao contribuir, você concorda em seguir nosso Código de Conduta.
 
 ## 🚀 Como Você Pode Contribuir
 
 Existem várias maneiras de contribuir, e todas são valiosas:
 
 * **🔎 Relatando Bugs:** Encontrou algo que não funciona como esperado?
-* **💡 Sugerindo Melhorias:** Tem uma ideia para uma nova funcionalidade ou para melhorar uma existente?
-* **✍️ Melhorando a Documentação:** Encontrou um erro de digitação ou uma frase que poderia ser mais clara?
-* **💻 Escrevendo Código:** Quer adicionar conteúdo, corrigir um bug ou implementar uma nova funcionalidade?
+* **💡 Sugerindo Melhorias:** Tem uma ideia para um novo recurso ou para melhorar o conteúdo?
+* **✍️ Melhorando o Conteúdo:** Encontrou um erro de digitação, uma informação desatualizada ou uma frase que poderia ser mais clara em uma das páginas de detalhe?
+* **➕ Adicionando um Novo Cargo:** Quer adicionar um cargo que ainda não foi documentado?
 
-## 🐛 Guia para Relatar Bugs (Issues)
+## 🐛 Guia para Relatar Bugs e Sugerir Melhorias (Issues)
 
-Antes de criar um novo "Issue", por favor, verifique se já não existe um relatório semelhante.
+Antes de criar um novo "Issue", por favor, verifique se já não existe um relatório semelhante. Ao criar um, seja o mais detalhado possível, explicando o problema ou a sua ideia.
 
-Ao criar um "Issue" de bug, inclua o máximo de detalhes possível:
+## 💻 Guia para Contribuir com Conteúdo (Pull Requests)
 
-* **Título Claro e Descritivo:** Ex: "O botão de tema não funciona no Firefox Mobile".
-* **Passos para Reproduzir:** Descreva exatamente como podemos encontrar o mesmo erro.
-* **Comportamento Esperado:** O que deveria ter acontecido?
-* **Comportamento Atual:** O que de fato aconteceu? (Inclua screenshots, se aplicável).
-* **Seu Ambiente:** Qual navegador e sistema operacional você está usando?
-
-## ✨ Guia para Sugerir Melhorias
-
-Use o "Issue" para sugerir melhorias, explicando sua ideia:
-
-* **Qual problema sua sugestão resolve?** ("É difícil encontrar X", "O site seria mais acessível se Y").
-* **Descreva a solução que você imagina.** Como ela funcionaria do ponto de vista do usuário?
-* **Existem alternativas?** Você considerou outras formas de resolver o problema?
-
-## Pull Requests (PRs)
-
-Se você está pronto para contribuir com código, siga estes passos para garantir que seu PR seja aceito rapidamente.
+Com a nova arquitetura multi-página (v3.0), o processo de contribuição de conteúdo ficou mais estruturado.
 
 ### 1. Preparando o Ambiente
 
-1.  **Faça um Fork** do repositório clicando no botão "Fork" no canto superior direito.
-2.  **Clone o seu fork** para a sua máquina local:
-    ```bash
-    git clone [https://github.com/SEU-USUARIO/nome-do-repositorio.git](https://github.com/SEU-USUARIO/nome-do-repositorio.git)
-    ```
-3.  **Crie uma nova Branch** para suas alterações. Use um nome descritivo (em inglês, por convenção):
-    ```bash
-    git checkout -b feature/adiciona-secao-de-recursos
-    ```
-    ou para um bugfix:
-    ```bash
-    git checkout -b fix/corrige-bug-no-header
-    ```
+1.  **Faça um Fork** do repositório.
+2.  **Clone o seu fork** para a sua máquina local.
+3.  **Crie uma nova Branch** para suas alterações com um nome descritivo (ex: `feat/documenta-cargo-ux-designer` ou `fix/corrige-typo-em-ai`).
 
-### 2. Fazendo as Alterações e Commits
+### 2. Fazendo as Alterações
 
-1.  Faça as alterações desejadas no código.
-2.  Siga nosso Guia de Estilo (veja abaixo).
-3.  **Faça o commit** das suas alterações com uma mensagem clara e seguindo o padrão de *Conventional Commits*:
+#### **Caso 1: Melhorando um Cargo Existente**
 
-    * `feat:` para uma nova funcionalidade.
+1.  Navegue até a pasta `roles/`.
+2.  Encontre o arquivo `.html` correspondente ao cargo que você deseja editar (ex: `arquiteto-informacao.html`).
+3.  Faça as alterações diretamente no arquivo.
+
+#### **Caso 2: Adicionando um Novo Cargo**
+
+1.  Navegue até a pasta `roles/`.
+2.  **Copie um arquivo existente** (como `arquiteto-informacao.html`) para usar como um template. Isso garante que a estrutura de HTML, a barra lateral e os metadados sejam consistentes.
+3.  **Renomeie** o novo arquivo para o cargo que você está adicionando (ex: `ux-designer.html`). Use letras minúsculas e hífens.
+4.  **Edite o conteúdo** do novo arquivo:
+    * Atualize o `<title>` e a `<meta name="description">` no `<head>`.
+    * Atualize o JSON-LD (`<script type="application/ld+json">`).
+    * Atualize o conteúdo principal do artigo: o `<h1>`, a introdução e todas as seções.
+    * Atualize os links da barra lateral ("Nesta Página") para que correspondam aos `id`s das suas novas seções.
+5.  Abra o arquivo `index.html` na raiz do projeto.
+6.  **Adicione um novo "card"** no `<div class="grid-container">`, seguindo a estrutura dos cards existentes. Certifique-se de que o link `href` no card aponte para o novo arquivo que você criou na pasta `roles/` (ex: `href="roles/ux-designer.html"`).
+
+### 3. Fazendo Commits e Enviando o Pull Request
+
+1.  Após fazer suas alterações, **faça o commit** com uma mensagem clara seguindo o padrão de *Conventional Commits*:
+    * `feat:` para uma nova funcionalidade (como adicionar um novo cargo).
     * `fix:` para uma correção de bug.
-    * `docs:` para alterações na documentação.
-    * `style:` para formatação de código, sem alteração de lógica.
-    * `refactor:` para refatoração de código.
-    * `chore:` para tarefas de manutenção do repositório.
-
-    **Exemplo de commit:** `feat: Adiciona ícones SVG ao lado dos títulos dos cargos`
-
-### 3. Enviando o Pull Request
-
-1.  **Envie sua branch** para o seu fork no GitHub:
-    ```bash
-    git push origin feature/adiciona-secao-de-recursos
-    ```
-2.  Vá para a página do repositório original no GitHub e você verá um botão para **"Compare & pull request"**.
-3.  **Preencha o template do PR** com um título claro e uma descrição detalhada do que você fez e por quê.
-4.  Aguarde a revisão. Faremos o nosso melhor para revisar seu PR o mais rápido possível.
+    * `docs:` para alterações na documentação ou no conteúdo de um cargo.
+    * **Exemplo de commit:** `docs: Expande a seção de ferramentas do Arquiteto de Informação`
+2.  **Envie sua branch** para o seu fork no GitHub (`git push`).
+3.  Abra um **Pull Request** no repositório original, preenchendo o template com uma descrição clara do que foi feito.
 
 ## 🎨 Guia de Estilo de Código
 
-Para manter a consistência em todo o projeto, por favor, siga estas regras:
+* **HTML:** Escreva HTML5 semântico e válido. Mantenha a estrutura dos arquivos de template.
+* **CSS:** Se precisar de novos estilos, discuta em um "Issue" primeiro. Tente ao máximo reutilizar as classes e variáveis CSS existentes.
+* **JavaScript:** Não há necessidade de alterar o arquivo `script.js` para adicionar novo conteúdo. Se encontrar um bug, por favor, reporte em um "Issue".
 
-* **HTML:** Escreva HTML5 semântico e válido. Garanta que todas as novas seções sigam os padrões de acessibilidade (A11y) estabelecidos no `index.html`.
-* **CSS:** Siga a metodologia BEM (`bloco__elemento--modificador`) para novas classes. Use as variáveis CSS existentes em `:root` para cores, fontes e espaçamentos. Mantenha a abordagem *mobile-first*.
-* **JavaScript:** Mantenha o código limpo, modular e bem comentado. Evite adicionar bibliotecas ou frameworks externos sem antes discutir em um "Issue".
-
-Obrigado novamente por sua contribuição! Juntos, podemos construir um recurso incrível.
+Obrigado novamente por sua contribuição!
