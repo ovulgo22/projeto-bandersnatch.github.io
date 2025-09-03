@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projeto Bandersnatch v2.0</title>
+    <meta name="description" content="Um jogo narrativo interativo de escolhas e consequências.">
+    
+    <title>Projeto Bandersnatch v2.1</title>
+    
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,8 +16,8 @@
 
     <div id="glitch-overlay"></div>
 
-    <header id="stats-container" class="hidden">
-        </header>
+    <header id="stats-container" class="hidden" role="status">
+    </header>
 
     <main id="game-container">
         <div id="story-container">
@@ -26,7 +29,7 @@
         </div>
 
         <div id="choices-container">
-            </div>
+        </div>
     </main>
 
     <footer id="footer-container">
@@ -34,7 +37,10 @@
     </footer>
 
     <div id="audio-container">
-        <audio id="sfx-hover" src=""></audio> <audio id="sfx-click" src=""></audio> <audio id="sfx-glitch" src=""></audio> </div>
+        <audio id="sfx-hover"></audio>
+        <audio id="sfx-click"></audio>
+        <audio id="sfx-glitch"></audio>
+    </div>
 
     <script src="story.js" defer></script>
     <script src="ui.js" defer></script>
