@@ -1,1 +1,628 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="no-js">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
+    <title>Documentação Detalhada - Um Projeto Grandioso</title>
+    <meta name="description" content="Uma plataforma de documentação imersiva e detalhada, projetada para explorar conteúdos complexos com clareza, interatividade e acessibilidade. Inspirado na inovação do Google I/O e na robustez do GitHub.">
+    <meta name="keywords" content="Documentação, Tecnologia, Desenvolvimento, UX, UI, Front-End, Back-End, DevOps, SEO, Acessibilidade, Guia, Tutorial, API, Framework">
+    <meta name="author" content="Seu Nome ou Nome do Projeto">
+    <meta name="robots" content="index, follow">
+
+    <meta property="og:title" content="Documentação Detalhada - Um Projeto Grandioso">
+    <meta property="og:description" content="Explore conteúdos complexos através de uma experiência de documentação rica, interativa e visualmente deslumbrante.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://seu-usuario.github.io/seu-repositorio/">
+    <meta property="og:image" content="https://seu-usuario.github.io/seu-repositorio/assets/images/social-share-banner.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="pt_BR">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@seu_twitter_handle">
+    <meta name="twitter:creator" content="@seu_twitter_handle">
+    <meta name="twitter:title" content="Documentação Detalhada - Um Projeto Grandioso">
+    <meta name="twitter:description" content="Uma plataforma de documentação imersiva para conteúdos complexos.">
+    <meta name="twitter:image" content="https://seu-usuario.github.io/seu-repositorio/assets/images/twitter-card-banner.png">
+
+    <meta name="theme-color" content="#0A0A0A">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Doc Detalhada">
+
+    <link rel="icon" href="assets/icons/favicon.ico" sizes="any">
+    <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+    <link rel="manifest" href="manifest.json">
+
+    <link rel="preload" href="assets/fonts/Inter-VariableFont_slnt,wght.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="assets/css/main.css" as="style">
+    <link rel="preload" href="assets/js/main.js" as="script">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/main.css">
+
+    <script>(function(e){e.className=e.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>
+</head>
+
+<body class="loading">
+
+    <a href="#main-content" class="skip-to-content-link">Pular para o conteúdo principal</a>
+
+    <div id="loader-wrapper">
+        <div class="loader-logo">
+            <svg id="animated-logo" width="120" height="120" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="logo-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color: #4285F4;" />
+                        <stop offset="100%" style="stop-color: #0F9D58;" />
+                    </linearGradient>
+                </defs>
+                <path id="logo-path" fill="url(#logo-gradient)" d="M50 0 L100 25 L100 75 L50 100 L0 75 L0 25 Z" />
+                <text x="50" y="60" font-family="Inter, sans-serif" font-size="18" font-weight="bold" fill="#FFFFFF" text-anchor="middle">DOCS</text>
+            </svg>
+        </div>
+        <div class="loader-progress-bar">
+            <div class="loader-progress"></div>
+        </div>
+        <p class="loader-text" role="status" aria-live="polite">Carregando experiência interativa...</p>
+    </div>
+
+    <div id="page-wrapper" aria-hidden="true">
+
+        <header id="main-header" class="main-header" role="banner">
+            <div class="header-container">
+                <div class="header-logo-container">
+                    <a href="index.html" class="logo-link" aria-label="Página Inicial da Documentação">
+                        <svg class="header-logo" width="40" height="40" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                           <use xlink:href="#animated-logo" />
+                        </svg>
+                        <span class="logo-text">Documentação Grandiosa</span>
+                    </a>
+                </div>
+
+                <nav id="main-nav" class="main-nav" role="navigation" aria-label="Navegação Principal">
+                    <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="main-menu-list" aria-label="Abrir menu de navegação">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <ul id="main-menu-list" class="main-menu-list" role="menubar">
+                        <li role="none"><a href="#section-introduction" role="menuitem" class="nav-link">Introdução</a></li>
+                        <li class="has-dropdown" role="none">
+                            <a href="#section-core-concepts" role="menuitem" class="nav-link dropdown-toggle" aria-haspopup="true" aria-expanded="false">Conceitos Core</a>
+                            <div class="mega-menu" role="menu">
+                                <div class="mega-menu-grid">
+                                    <div class="mega-menu-column">
+                                        <h3 class="mega-menu-heading">Fundamentos</h3>
+                                        <ul role="none">
+                                            <li role="none"><a href="#concept-architecture" role="menuitem">Arquitetura do Sistema</a></li>
+                                            <li role="none"><a href="#concept-data-flow" role="menuitem">Fluxo de Dados</a></li>
+                                            <li role="none"><a href="#concept-authentication" role="menuitem">Autenticação e Segurança</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="mega-menu-column">
+                                        <h3 class="mega-menu-heading">Módulos Principais</h3>
+                                        <ul role="none">
+                                            <li role="none"><a href="#module-user-management" role="menuitem">Gerenciamento de Usuários</a></li>
+                                            <li role="none"><a href="#module-reporting" role="menuitem">Sistema de Relatórios</a></li>
+                                            <li role="none"><a href="#module-payments" role="menuitem">Integração de Pagamentos</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="mega-menu-column featured-article">
+                                        <h3 class="mega-menu-heading">Em Destaque</h3>
+                                        <a href="#case-study-performance" class="featured-link">
+                                            <img src="assets/images/featured-thumbnail.jpg" alt="Gráfico de performance do sistema." class="featured-image">
+                                            <p>Case Study: Otimizando a Performance em Larga Escala</p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li role="none"><a href="#section-api-reference" role="menuitem" class="nav-link">Referência da API</a></li>
+                        <li role="none"><a href="#section-tutorials" role="menuitem" class="nav-link">Tutoriais</a></li>
+                        <li role="none"><a href="#section-changelog" role="menuitem" class="nav-link">Changelog</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-controls">
+                    <button id="search-modal-trigger" class="control-button search-trigger" aria-label="Abrir busca">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+                        <span class="search-placeholder">Buscar...</span>
+                        <span class="search-shortcut">Ctrl+K</span>
+                    </button>
+
+                    <div class="theme-switcher-container">
+                        <button id="theme-switcher-toggle" class="control-button theme-switcher-toggle" aria-label="Mudar tema" aria-haspopup="true" aria-expanded="false">
+                            <svg class="theme-icon-light" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM12 9c1.65 0 3 1.35 3 3s-1.35 3-3 3-3-1.35-3-3 1.35-3 3-3zm0-5c-.55 0-1 .45-1 1v2c0 .55.45 1 1 1s1-.45 1-1V5c0-.55-.45-1-1-1zm0 14c-.55 0-1 .45-1 1v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1zm-8-5c-.55 0-1 .45-1 1s.45 1 1 1h2c.55 0 1-.45 1-1s-.45-1-1-1H4zm14 0c-.55 0-1 .45-1 1s.45 1 1 1h2c.55 0 1-.45 1-1s-.45-1-1-1h-2zM6.34 6.34c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41l1.41 1.41c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41L6.34 6.34zm11.32 11.32c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41l1.41 1.41c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41l-1.41-1.41zM6.34 17.66c.39-.39 1.02-.39 1.41 0l1.41-1.41c.39-.39.39-1.02 0-1.41-.39-.39-1.02-.39-1.41 0l-1.41 1.41c-.39.39-.39 1.02 0 1.41zM17.66 6.34c.39-.39 1.02-.39 1.41 0 .39.39.39 1.02 0 1.41l-1.41 1.41c-.39.39-1.02.39-1.41 0-.39-.39-.39-1.02 0-1.41l1.41-1.41z"/></svg>
+                            <svg class="theme-icon-dark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9c.83 0 1.62-.12 2.37-.34-.3-.2-.57-.45-.8-.74-.82-1.02-1.32-2.3-1.32-3.66 0-3.31 2.69-6 6-6 .34 0 .68.04 1 .11.03-.32.06-.66.06-1 0-4.97-4.03-9-9-9z"/></svg>
+                        </button>
+                        <ul id="theme-options" class="theme-options" role="menu">
+                            <li role="none"><button role="menuitem" class="theme-option" data-theme="light">Claro</button></li>
+                            <li role="none"><button role="menuitem" class="theme-option" data-theme="dark">Escuro</button></li>
+                            <li role="none"><button role="menuitem" class="theme-option" data-theme="system">Padrão do Sistema</button></li>
+                        </ul>
+                    </div>
+
+                    <a href="https://github.com/seu-usuario/seu-repositorio" class="control-button external-link" target="_blank" rel="noopener noreferrer" aria-label="Ver repositório no GitHub">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.11.82-.26.82-.577 0-.285-.01-1.04-.015-2.04-3.338.725-4.042-1.61-4.042-1.61-.546-1.385-1.333-1.755-1.333-1.755-1.09-.745.082-.73.082-.73 1.205.085 1.838 1.235 1.838 1.235 1.07 1.83 2.805 1.305 3.49.998.108-.775.418-1.305.76-1.605-2.665-.3-5.466-1.33-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.125-.3-.535-1.52.115-3.175 0 0 1.005-.32 3.3 1.23.96-.265 1.98-.4 3-.405 1.02.005 2.04.14 3 .405 2.295-1.55 3.3-1.23 3.3-1.23.65 1.655.24 2.875.115 3.175.77.84 1.235 1.91 1.235 3.22 0 4.61-2.805 5.625-5.475 5.92.43.37.82 1.1.82 2.22 0 1.605-.015 2.895-.015 3.285 0 .315.22.685.825.57C20.565 21.8 24 17.3 24 12 24 5.37 18.63 0 12 0z"/></svg>
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <main id="main-content" class="main-content" role="main">
+
+            <section id="section-hero" class="hero-section" aria-labelledby="hero-title">
+                <div class="hero-background-canvas" id="hero-canvas">
+                    </div>
+                <div class="hero-content">
+                    <div class="hero-text-container">
+                        <h1 id="hero-title" class="hero-title">
+                            <span class="hero-title-line">Explore.</span>
+                            <span class="hero-title-line">Compreenda.</span>
+                            <span class="hero-title-line">Construa.</span>
+                        </h1>
+                        <p class="hero-subtitle">A documentação definitiva para [Nome do seu Projeto/Tecnologia]. Projetada para ser clara, interativa e profundamente detalhada.</p>
+                        <div class="hero-cta-buttons">
+                            <a href="#section-introduction" class="cta-button primary">Começar Agora</a>
+                            <a href="#section-core-concepts" class="cta-button secondary">Ver Conceitos Principais</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-scroll-indicator" aria-hidden="true">
+                    <span>Role para explorar</span>
+                    <svg class="scroll-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M12 16.5l-6-6 1.41-1.41L12 13.67l4.59-4.58L18 10.5z"/></svg>
+                </div>
+            </section>
+
+            <section id="section-introduction" class="content-section" aria-labelledby="introduction-heading">
+                <div class="container">
+                    <div class="section-header">
+                        <h2 id="introduction-heading" class="section-title">Introdução</h2>
+                        <p class="section-subtitle">Uma visão geral sobre o propósito, a filosofia e a estrutura desta documentação.</p>
+                    </div>
+                    <div class="grid-layout two-columns">
+                        <article class="prose">
+                            <h3>O Que é [Nome do Projeto]?</h3>
+                            <p>
+                                [Nome do Projeto] é um [descreva o projeto: framework, biblioteca, plataforma, API, etc.] projetado para resolver [o problema principal que ele resolve]. Nossa missão é fornecer uma ferramenta [adjetivo 1, ex: poderosa], [adjetivo 2, ex: flexível] e [adjetivo 3, ex: escalável] que permita a desenvolvedores e equipes construir [tipo de aplicação ou resultado] de alta qualidade com mais eficiência.
+                            </p>
+                            <h3>Filosofia de Design</h3>
+                            <p>
+                                Acreditamos em três pilares fundamentais: <strong>Performance</strong>, <strong>Experiência do Desenvolvedor (DX)</strong> e <strong>Acessibilidade</strong>. Cada aspecto do [Nome do Projeto] foi cuidadosamente pensado para garantir que as aplicações resultantes sejam rápidas, o processo de desenvolvimento seja intuitivo e agradável, e o produto final seja utilizável por todos.
+                            </p>
+                            <h3>Para Quem é Esta Documentação?</h3>
+                            <p>
+                                Esta documentação foi estruturada para atender a diversos públicos:
+                            </p>
+                            <ul>
+                                <li><strong>Iniciantes:</strong> Se você está começando, os <a href="#section-tutorials">tutoriais passo a passo</a> são o lugar ideal para iniciar sua jornada.</li>
+                                <li><strong>Desenvolvedores Experientes:</strong> Explore os <a href="#section-core-concepts">conceitos core</a> para um entendimento profundo e utilize a <a href="#section-api-reference">referência da API</a> para consultas rápidas.</li>
+                                <li><strong>Arquitetos de Software:</strong> A seção sobre <a href="#concept-architecture">Arquitetura do Sistema</a> detalha os padrões de design e as decisões por trás da nossa estrutura.</li>
+                            </ul>
+                        </article>
+
+                        <aside class="interactive-card" aria-label="Estrutura do Projeto">
+                            <div class="card-header">
+                                <h4>Estrutura do Projeto</h4>
+                            </div>
+                            <div class="card-content">
+                                <div id="project-structure-visualization">
+                                    <div class="layer" data-layer="1">
+                                        <span class="layer-title">Interface (UI/Frontend)</span>
+                                        <div class="tech-stack">React, Vue, etc.</div>
+                                    </div>
+                                    <div class="connector"></div>
+                                    <div class="layer" data-layer="2">
+                                        <span class="layer-title">Lógica de Negócios (API/Backend)</span>
+                                        <div class="tech-stack">Node.js, Python, Go, etc.</div>
+                                    </div>
+                                    <div class="connector"></div>
+                                    <div class="layer" data-layer="3">
+                                        <span class="layer-title">Banco de Dados & Infra</span>
+                                        <div class="tech-stack">PostgreSQL, MongoDB, Docker</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </aside>
+                    </div>
+                </div>
+            </section>
+
+            <div class="section-divider">
+                <svg viewBox="0 0 100 10" preserveAspectRatio="none">
+                    <path class="divider-path" d="M0 5 Q 25 10, 50 5 T 100 5" />
+                </svg>
+            </div>
+
+            <section id="section-core-concepts" class="content-section" aria-labelledby="core-concepts-heading">
+                <div class="container">
+                    <div class="section-header">
+                        <h2 id="core-concepts-heading" class="section-title">Conceitos Core</h2>
+                        <p class="section-subtitle">Entenda os blocos de construção fundamentais e os princípios que guiam o [Nome do Projeto].</p>
+                    </div>
+
+                    <div class="grid-layout three-columns concepts-grid">
+
+                        <article class="concept-card" id="concept-architecture">
+                            <div class="card-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zm0 11.5L2 8.5v6l10 5 10-5v-6l-10 5z"/></svg>
+                            </div>
+                            <h3 class="card-title"><a href="docs/architecture.html">Arquitetura do Sistema</a></h3>
+                            <p class="card-description">Uma análise profunda da nossa arquitetura, desde a visão macro até os padrões de microserviços. Discutimos as escolhas, os trade-offs e como escalar sua aplicação.</p>
+                            <a href="docs/architecture.html" class="card-link" aria-label="Leia mais sobre Arquitetura do Sistema">Leia mais</a>
+                        </article>
+
+                        <article class="concept-card" id="concept-data-flow">
+                             <div class="card-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6h-6z"/></svg>
+                            </div>
+                            <h3 class="card-title"><a href="docs/data-flow.html">Fluxo de Dados</a></h3>
+                            <p class="card-description">Entenda como os dados se movem através do sistema. Do request inicial à resposta final, visualizando os ciclos de vida e as transformações de estado.</p>
+                             <a href="docs/data-flow.html" class="card-link" aria-label="Leia mais sobre Fluxo de Dados">Leia mais</a>
+                        </article>
+
+                        <article class="concept-card" id="concept-authentication">
+                             <div class="card-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6-3.5c1.93 0 3.5 1.57 3.5 3.5V8H8.5V6c0-1.93 1.57-3.5 3.5-3.5zm6 15.5H6V10h12v10zm-6-3c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"/></svg>
+                            </div>
+                            <h3 class="card-title"><a href="docs/authentication.html">Autenticação e Segurança</a></h3>
+                            <p class="card-description">Aprenda sobre nossas estratégias de segurança, fluxos de autenticação (OAuth 2.0, JWT), gerenciamento de permissões e melhores práticas para proteger sua aplicação.</p>
+                             <a href="docs/authentication.html" class="card-link" aria-label="Leia mais sobre Autenticação e Segurança">Leia mais</a>
+                        </article>
+
+                    </div>
+                </div>
+            </section>
+
+            <section id="section-api-reference" class="content-section dark-section" aria-labelledby="api-reference-heading">
+                <div class="container">
+                    <div class="section-header">
+                        <h2 id="api-reference-heading" class="section-title">Referência da API</h2>
+                        <p class="section-subtitle">Explore todos os endpoints, parâmetros e exemplos de código para integrar com nossa API de forma eficiente.</p>
+                    </div>
+
+                    <div class="api-reference-layout">
+                        <aside class="api-nav-sidebar" role="navigation" aria-label="Navegação da API">
+                            <div class="sidebar-sticky-content">
+                                <h4>Endpoints</h4>
+                                <ul class="api-nav-list">
+                                    <li><a href="#api-group-users" class="api-nav-group-title">Users</a>
+                                        <ul class="api-nav-sublist">
+                                            <li><a href="#api-get-users" class="api-nav-link"><span class="http-method get">GET</span> /users</a></li>
+                                            <li><a href="#api-post-users" class="api-nav-link"><span class="http-method post">POST</span> /users</a></li>
+                                            <li><a href="#api-get-user-by-id" class="api-nav-link"><span class="http-method get">GET</span> /users/{id}</a></li>
+                                            <li><a href="#api-put-user-by-id" class="api-nav-link"><span class="http-method put">PUT</span> /users/{id}</a></li>
+                                            <li><a href="#api-delete-user-by-id" class="api-nav-link"><span class="http-method delete">DELETE</span> /users/{id}</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="#api-group-products" class="api-nav-group-title">Products</a>
+                                        <ul class="api-nav-sublist">
+                                             <li><a href="#api-get-products" class="api-nav-link"><span class="http-method get">GET</span> /products</a></li>
+                                             <li><a href="#api-get-product-by-id" class="api-nav-link"><span class="http-method get">GET</span> /products/{id}</a></li>
+                                        </ul>
+                                    </li>
+                                    </ul>
+                            </div>
+                        </aside>
+
+                        <div class="api-content-main">
+                            <article id="api-get-users" class="api-endpoint-details">
+                                <header>
+                                    <h3 class="endpoint-title"><span class="http-method get">GET</span> /v1/users</h3>
+                                    <p class="endpoint-summary">Recupera uma lista paginada de usuários.</p>
+                                </header>
+                                <div class="endpoint-content">
+                                    <h4>Parâmetros de Query</h4>
+                                    <ul class="params-list">
+                                        <li><strong>limit</strong> <span class="param-type">integer</span> <span class="param-optional">Opcional</span><br>O número de resultados a serem retornados por página. Padrão: 20.</li>
+                                        <li><strong>offset</strong> <span class="param-type">integer</span> <span class="param-optional">Opcional</span><br>O número de resultados a serem pulados para paginação. Padrão: 0.</li>
+                                        <li><strong>sort</strong> <span class="param-type">string</span> <span class="param-optional">Opcional</span><br>Campo para ordenação. Ex: `name_asc`.</li>
+                                    </ul>
+
+                                    <h4>Respostas</h4>
+                                    <div class="response-code">
+                                        <span class="status-code">200 OK</span>
+                                        <p>Uma lista de objetos de usuário.</p>
+                                    </div>
+                                    <div class="response-code">
+                                        <span class="status-code">401 Unauthorized</span>
+                                        <p>Chave de API inválida ou ausente.</p>
+                                    </div>
+                                </div>
+                            </article>
+                            <article id="api-post-users" class="api-endpoint-details">
+                                <header>
+                                    <h3 class="endpoint-title"><span class="http-method post">POST</span> /v1/users</h3>
+                                    <p class="endpoint-summary">Cria um novo usuário.</p>
+                                </header>
+                                <div class="endpoint-content">
+                                    <h4>Corpo da Requisição (Request Body)</h4>
+                                    <p>Um objeto JSON contendo as informações do novo usuário.</p>
+                                    <h4>Respostas</h4>
+                                    <div class="response-code">
+                                        <span class="status-code">201 Created</span>
+                                        <p>O objeto do usuário recém-criado.</p>
+                                    </div>
+                                    <div class="response-code">
+                                        <span class="status-code">400 Bad Request</span>
+                                        <p>Dados inválidos no corpo da requisição.</p>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+
+                        <aside class="api-code-examples" aria-live="polite">
+                            <div class="sidebar-sticky-content">
+                                <h4>Exemplos de Código</h4>
+                                <div class="code-language-selector">
+                                    <button class="lang-tab active" data-lang="curl">cURL</button>
+                                    <button class="lang-tab" data-lang="javascript">JavaScript</button>
+                                    <button class="lang-tab" data-lang="python">Python</button>
+                                </div>
+                                <div class="code-snippet-container">
+                                    <div class="code-snippet" data-endpoint="api-get-users" data-lang="curl">
+<pre><code class="language-bash">
+curl -X GET "https://api.seusite.com/v1/users?limit=10" \
+     -H "Authorization: Bearer YOUR_API_KEY"
+</code></pre>
+                                    </div>
+                                    <div class="code-snippet hidden" data-endpoint="api-get-users" data-lang="javascript">
+<pre><code class="language-javascript">
+const apiKey = 'YOUR_API_KEY';
+
+fetch('https://api.seusite.com/v1/users?limit=10', {
+  headers: {
+    'Authorization': `Bearer ${apiKey}`
+  }
+})
+.then(response => response.json())
+.then(data => console.log(data));
+</code></pre>
+                                    </div>
+                                    <div class="code-snippet hidden" data-endpoint="api-get-users" data-lang="python">
+<pre><code class="language-python">
+import requests
+
+api_key = "YOUR_API_KEY"
+headers = {
+    "Authorization": f"Bearer {api_key}"
+}
+response = requests.get(
+    "https://api.seusite.com/v1/users?limit=10",
+    headers=headers
+)
+
+print(response.json())
+</code></pre>
+                                    </div>
+
+                                    <div class="code-snippet hidden" data-endpoint="api-post-users" data-lang="curl">
+<pre><code class="language-bash">
+curl -X POST "https://api.seusite.com/v1/users" \
+     -H "Authorization: Bearer YOUR_API_KEY" \
+     -H "Content-Type: application/json" \
+     -d '{
+           "name": "Ada Lovelace",
+           "email": "ada@example.com"
+         }'
+</code></pre>
+                                    </div>
+
+                                </div>
+                                <h4>Resposta Exemplo</h4>
+                                <div class="response-example-container">
+<pre><code class="language-json">
+{
+  "data": [
+    {
+      "id": "usr_12345",
+      "name": "Alan Turing",
+      "email": "alan@example.com",
+      "created_at": "2025-09-15T10:30:00Z"
+    }
+  ],
+  "pagination": {
+    "total": 1,
+    "limit": 10,
+    "offset": 0,
+    "next_url": null
+  }
+}
+</code></pre>
+                                </div>
+                            </div>
+                        </aside>
+                    </div>
+                </div>
+            </section>
+
+            <section id="section-tutorials" class="content-section" aria-labelledby="tutorials-heading">
+                <div class="container">
+                    <div class="section-header">
+                        <h2 id="tutorials-heading" class="section-title">Tutoriais</h2>
+                        <p class="section-subtitle">Aprenda na prática com nossos guias passo a passo, do básico ao avançado.</p>
+                    </div>
+                    <div class="tutorials-grid">
+                        <a href="tutorials/getting-started.html" class="tutorial-card">
+                            <div class="tutorial-card-image">
+                                <img src="assets/images/tutorial-thumb-1.jpg" alt="Ilustração de um foguete decolando.">
+                                <span class="tutorial-difficulty beginner">Iniciante</span>
+                            </div>
+                            <div class="tutorial-card-content">
+                                <h3 class="tutorial-title">Guia de Início Rápido</h3>
+                                <p class="tutorial-description">Configure seu ambiente e construa sua primeira aplicação com [Nome do Projeto] em menos de 15 minutos.</p>
+                                <span class="tutorial-meta">Tempo estimado: 15 min</span>
+                            </div>
+                        </a>
+                        <a href="tutorials/building-a-blog.html" class="tutorial-card">
+                            <div class="tutorial-card-image">
+                                <img src="assets/images/tutorial-thumb-2.jpg" alt="Ilustração de um editor de texto com código.">
+                                <span class="tutorial-difficulty intermediate">Intermediário</span>
+                            </div>
+                            <div class="tutorial-card-content">
+                                <h3 class="tutorial-title">Construindo um Blog com a nossa API</h3>
+                                <p class="tutorial-description">Um guia completo que aborda autenticação, criação de posts e renderização de conteúdo do zero.</p>
+                                <span class="tutorial-meta">Tempo estimado: 1h 30min</span>
+                            </div>
+                        </a>
+                        <a href="tutorials/advanced-deployment.html" class="tutorial-card">
+                            <div class="tutorial-card-image">
+                                <img src="assets/images/tutorial-thumb-3.jpg" alt="Ilustração de servidores em nuvem.">
+                                <span class="tutorial-difficulty advanced">Avançado</span>
+                            </div>
+                            <div class="tutorial-card-content">
+                                <h3 class="tutorial-title">Deployment Avançado e CI/CD</h3>
+                                <p class="tutorial-description">Aprenda a fazer o deploy da sua aplicação em produção com Docker e a configurar um pipeline de integração contínua.</p>
+                                <span class="tutorial-meta">Tempo estimado: 2h</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </section>
+            
+            <div class="section-divider">
+                <svg viewBox="0 0 100 10" preserveAspectRatio="none">
+                    <path class="divider-path" d="M0 5 Q 25 0, 50 5 T 100 5" />
+                </svg>
+            </div>
+
+            <section id="section-changelog" class="content-section" aria-labelledby="changelog-heading">
+                <div class="container">
+                     <div class="section-header">
+                        <h2 id="changelog-heading" class="section-title">Changelog</h2>
+                        <p class="section-subtitle">Acompanhe todas as novas features, melhorias e correções em cada versão.</p>
+                    </div>
+                    <div class="changelog-container">
+                        <article class="changelog-version">
+                            <header class="changelog-header">
+                                <h3 class="version-number"><a href="/releases/v3.0.0">v3.0.0</a></h3>
+                                <time class="release-date" datetime="2025-08-28">28 de Agosto de 2025</time>
+                            </header>
+                            <div class="changelog-content">
+                                <div class="changelog-category new">
+                                    <h4>✨ Novas Features</h4>
+                                    <ul>
+                                        <li>Introduzido o novo Módulo de Relatórios, com dashboards personalizáveis.</li>
+                                        <li>Adicionado suporte a autenticação via WebAuthn (passkeys).</li>
+                                    </ul>
+                                </div>
+                                <div class="changelog-category improvement">
+                                    <h4>🚀 Melhorias</h4>
+                                    <ul>
+                                        <li>A performance do endpoint `/v1/users` foi otimizada em 40% com um novo sistema de caching.</li>
+                                        <li>Melhorada a acessibilidade do modal de busca.</li>
+                                    </ul>
+                                </div>
+                                 <div class="changelog-category fix">
+                                    <h4>🐛 Correções</h4>
+                                    <ul>
+                                        <li>Corrigido um bug que causava erro 500 em requisições com paginação inválida.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </article>
+                         <article class="changelog-version">
+                            <header class="changelog-header">
+                                <h3 class="version-number"><a href="/releases/v2.5.1">v2.5.1</a></h3>
+                                <time class="release-date" datetime="2025-07-15">15 de Julho de 2025</time>
+                            </header>
+                            <div class="changelog-content">
+                                 <div class="changelog-category fix">
+                                    <h4>🐛 Correções</h4>
+                                    <ul>
+                                        <li>Corrigido um problema de renderização no seletor de tema em navegadores baseados em WebKit.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </article>
+                        <div class="changelog-footer">
+                            <a href="/full-changelog" class="cta-button secondary">Ver histórico completo</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <footer id="main-footer" class="main-footer" role="contentinfo">
+            <div class="container">
+                <div class="footer-grid">
+                    <div class="footer-column about">
+                        <h4 class="footer-heading">Sobre o Projeto</h4>
+                        <p>Uma plataforma de documentação criada para ser a fonte definitiva de conhecimento sobre [Nome do Projeto].</p>
+                        <p>&copy; 2025 [Seu Nome ou Empresa]. Todos os direitos reservados.</p>
+                    </div>
+                    <div class="footer-column links">
+                        <h4 class="footer-heading">Navegação</h4>
+                        <ul>
+                            <li><a href="#section-introduction">Introdução</a></li>
+                            <li><a href="#section-core-concepts">Conceitos</a></li>
+                            <li><a href="#section-api-reference">API</a></li>
+                            <li><a href="#section-tutorials">Tutoriais</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column community">
+                        <h4 class="footer-heading">Comunidade</h4>
+                         <ul>
+                            <li><a href="#" target="_blank" rel="noopener noreferrer">Fórum da Comunidade</a></li>
+                            <li><a href="#" target="_blank" rel="noopener noreferrer">Stack Overflow</a></li>
+                            <li><a href="#" target="_blank" rel="noopener noreferrer">Discord</a></li>
+                        </ul>
+                    </div>
+                     <div class="footer-column social">
+                        <h4 class="footer-heading">Conecte-se</h4>
+                        <div class="social-links">
+                            <a href="https://github.com/seu-usuario/seu-repositorio" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.11.82-.26.82-.577 0-.285-.01-1.04-.015-2.04-3.338.725-4.042-1.61-4.042-1.61-.546-1.385-1.333-1.755-1.333-1.755-1.09-.745.082-.73.082-.73 1.205.085 1.838 1.235 1.838 1.235 1.07 1.83 2.805 1.305 3.49.998.108-.775.418-1.305.76-1.605-2.665-.3-5.466-1.33-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.125-.3-.535-1.52.115-3.175 0 0 1.005-.32 3.3 1.23.96-.265 1.98-.4 3-.405 1.02.005 2.04.14 3 .405 2.295-1.55 3.3-1.23 3.3-1.23.65 1.655.24 2.875.115 3.175.77.84 1.235 1.91 1.235 3.22 0 4.61-2.805 5.625-5.475 5.92.43.37.82 1.1.82 2.22 0 1.605-.015 2.895-.015 3.285 0 .315.22.685.825.57C20.565 21.8 24 17.3 24 12 24 5.37 18.63 0 12 0z"/></svg>
+                            </a>
+                            <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+                               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M22.46 6c-.77.35-1.6.58-2.46.67.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.27 0 .34.04.67.11.98-3.56-.18-6.72-1.89-8.84-4.48-.37.63-.58 1.37-.58 2.15 0 1.48.75 2.79 1.9 3.55-.7-.02-1.37-.22-1.95-.55v.05c0 2.07 1.47 3.8 3.42 4.19-.36.1-.73.15-1.12.15-.27 0-.54-.03-.8-.08.54 1.7 2.1 2.93 3.96 2.96-1.46 1.14-3.3 1.82-5.3 1.82-.34 0-.68-.02-1.02-.06 1.88 1.21 4.12 1.92 6.56 1.92 7.88 0 12.2-6.54 12.2-12.2 0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.22z"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </div> <div id="search-modal" class="search-modal" role="dialog" aria-modal="true" aria-labelledby="search-modal-title" hidden>
+        <div class="search-modal-overlay" tabindex="-1" data-close-modal></div>
+        <div class="search-modal-content">
+            <header class="search-modal-header">
+                <h2 id="search-modal-title" class="sr-only">Busca na Documentação</h2>
+                <div class="search-input-wrapper">
+                    <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+                    <input type="search" id="search-input" class="search-input" placeholder="Busque por conceitos, endpoints, tutoriais..." autocomplete="off">
+                </div>
+                <button id="search-modal-close" class="search-modal-close" aria-label="Fechar busca" data-close-modal>ESC</button>
+            </header>
+            <div id="search-results-container" class="search-results-container">
+                <div class="search-placeholder-content">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="48" height="48"><path d="M13 11.45V16h-2v-4.55c-1.72-.44-3-2.02-3-3.95 0-2.21 1.79-4 4-4s4 1.79 4 4c0 1.93-1.28 3.51-3 3.95zM12 5c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zM20 2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 18H4V4h16v16z"/></svg>
+                    <p class="search-tip">Comece a digitar para ver os resultados.</p>
+                 </div>
+            </div>
+             <footer class="search-modal-footer">
+                <span>Navegue com ↑↓, selecione com ↵</span>
+            </footer>
+        </div>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <script src="assets/js/vendor/prism.js" data-manual></script>
+
+    <script src="assets/js/main.js"></script>
+
+</body>
+  </html>
