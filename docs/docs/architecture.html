@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="no-js">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Arquitetura do Sistema - Documentação Detalhada</title>
+    <meta name="description" content="Uma análise profunda da arquitetura do [Nome do Projeto], cobrindo os princípios de design, componentes principais e fluxos de dados.">
+
+    <meta property="og:title" content="Arquitetura do Sistema - Documentação Detalhada">
+    
+    <link rel="icon" href="../assets/icons/favicon.ico" sizes="any">
+    <link rel="icon" href="../assets/icons/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../assets/icons/apple-touch-icon.png">
+    <link rel="manifest" href="../manifest.json">
+
+    <link rel="preload" href="../assets/fonts/Inter-VariableFont_slnt,wght.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="../assets/css/main.css" as="style">
+    <link rel="preload" href="../assets/js/main.js" as="script">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../assets/css/main.css">
+
+    <script>(function(e){e.className=e.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>
+</head>
+
+<body class="doc-page">
+
+    <a href="#doc-main-content" class="skip-to-content-link">Pular para o conteúdo principal</a>
+    
+    <header id="main-header" class="main-header main-header-sticky" role="banner">
+        <div class="header-container">
+            <div class="header-logo-container">
+                <a href="../index.html" class="logo-link" aria-label="Página Inicial da Documentação">
+                    <svg class="header-logo" width="40" height="40" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <defs><linearGradient id="logo-gradient" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color: #4285F4;" /><stop offset="100%" style="stop-color: #0F9D58;" /></linearGradient></defs>
+                        <path id="logo-path" fill="url(#logo-gradient)" d="M50 0 L100 25 L100 75 L50 100 L0 75 L0 25 Z" /><text x="50" y="60" font-family="Inter, sans-serif" font-size="18" font-weight="bold" fill="#FFFFFF" text-anchor="middle">DOCS</text>
+                    </svg>
+                    <span class="logo-text">Documentação Grandiosa</span>
+                </a>
+            </div>
+            <nav id="main-nav" class="main-nav" role="navigation" aria-label="Navegação Principal">
+                <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="main-menu-list" aria-label="Abrir menu de navegação"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+                <ul id="main-menu-list" class="main-menu-list" role="menubar">
+                    <li role="none"><a href="../index.html#section-introduction" role="menuitem" class="nav-link">Introdução</a></li>
+                    <li role="none"><a href="../index.html#section-core-concepts" role="menuitem" class="nav-link">Conceitos Core</a></li>
+                    <li role="none"><a href="../index.html#section-api-reference" role="menuitem" class="nav-link">Referência da API</a></li>
+                    <li role="none"><a href="../index.html#section-tutorials" role="menuitem" class="nav-link">Tutoriais</a></li>
+                </ul>
+            </nav>
+            <div class="header-controls">
+                <button id="search-modal-trigger" class="control-button search-trigger" aria-label="Abrir busca">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+                    <span class="search-placeholder">Buscar...</span><span class="search-shortcut">Ctrl+K</span>
+                </button>
+                <div class="theme-switcher-container">
+                    <button id="theme-switcher-toggle" class="control-button theme-switcher-toggle" aria-label="Mudar tema" aria-haspopup="true" aria-expanded="false">
+                        <svg class="theme-icon-light" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM12 9c1.65 0 3 1.35 3 3s-1.35 3-3 3-3-1.35-3-3 1.35-3 3-3zm0-5c-.55 0-1 .45-1 1v2c0 .55.45 1 1 1s1-.45 1-1V5c0-.55-.45-1-1-1zm0 14c-.55 0-1 .45-1 1v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1zm-8-5c-.55 0-1 .45-1 1s.45 1 1 1h2c.55 0 1-.45 1-1s-.45-1-1-1H4zm14 0c-.55 0-1 .45-1 1s.45 1 1 1h2c.55 0 1-.45 1-1s-.45-1-1-1h-2zM6.34 6.34c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41l1.41 1.41c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41L6.34 6.34zm11.32 11.32c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41l1.41 1.41c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41l-1.41-1.41zM6.34 17.66c.39-.39 1.02-.39 1.41 0l1.41-1.41c.39-.39.39-1.02 0-1.41-.39-.39-1.02-.39-1.41 0l-1.41 1.41c-.39.39-.39 1.02 0 1.41zM17.66 6.34c.39-.39 1.02-.39 1.41 0 .39.39.39 1.02 0 1.41l-1.41 1.41c-.39.39-1.02-.39-1.41 0-.39-.39-.39-1.02 0-1.41l1.41-1.41z"/></svg>
+                        <svg class="theme-icon-dark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9c.83 0 1.62-.12 2.37-.34-.3-.2-.57-.45-.8-.74-.82-1.02-1.32-2.3-1.32-3.66 0-3.31 2.69-6 6-6 .34 0 .68.04 1 .11.03-.32.06-.66.06-1 0-4.97-4.03-9-9-9z"/></svg>
+                    </button>
+                    <ul id="theme-options" class="theme-options" role="menu">
+                         <li role="none"><button role="menuitem" class="theme-option" data-theme="light">Claro</button></li>
+                         <li role="none"><button role="menuitem" class="theme-option" data-theme="dark">Escuro</button></li>
+                         <li role="none"><button role="menuitem" class="theme-option" data-theme="system">Padrão do Sistema</button></li>
+                    </ul>
+                </div>
+                <a href="https://github.com/seu-usuario/seu-repositorio" class="control-button external-link" target="_blank" rel="noopener noreferrer" aria-label="Ver repositório no GitHub"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.11.82-.26.82-.577 0-.285-.01-1.04-.015-2.04-3.338.725-4.042-1.61-4.042-1.61-.546-1.385-1.333-1.755-1.333-1.755-1.09-.745.082-.73.082-.73 1.205.085 1.838 1.235 1.838 1.235 1.07 1.83 2.805 1.305 3.49.998.108-.775.418-1.305.76-1.605-2.665-.3-5.466-1.33-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.125-.3-.535-1.52.115-3.175 0 0 1.005-.32 3.3 1.23.96-.265 1.98-.4 3-.405 1.02.005 2.04.14 3 .405 2.295-1.55 3.3-1.23 3.3-1.23.65 1.655.24 2.875.115 3.175.77.84 1.235 1.91 1.235 3.22 0 4.61-2.805 5.625-5.475 5.92.43.37.82 1.1.82 2.22 0 1.605-.015 2.895-.015 3.285 0 .315.22.685.825.57C20.565 21.8 24 17.3 24 12 24 5.37 18.63 0 12 0z"/></svg></a>
+            </div>
+        </div>
+    </header>
+
+    <div class="doc-layout-container container">
+        
+        <aside class="doc-sidebar-left">
+            <nav aria-label="Seções da documentação">
+                <ul>
+                    <li><a href="../index.html#section-introduction">Introdução</a></li>
+                    <li class="has-children active">
+                        <a href="../index.html#section-core-concepts">Conceitos Core</a>
+                        <ul>
+                            <li><a href="architecture.html" class="is-current-page" aria-current="page">Arquitetura do Sistema</a></li>
+                            <li><a href="data-flow.html">Fluxo de Dados</a></li>
+                            <li><a href="authentication.html">Autenticação e Segurança</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="../index.html#section-api-reference">Referência da API</a></li>
+                    <li><a href="../index.html#section-tutorials">Tutoriais</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main id="doc-main-content" class="doc-content prose" role="main">
+            <header class="doc-header">
+                <p class="doc-breadcrumb">Conceitos Core</p>
+                <h1 id="main-title">Arquitetura do Sistema</h1>
+                <p class="doc-intro">Esta seção oferece uma visão aprofundada da arquitetura do [Nome do Projeto]. Vamos explorar as decisões de design, os componentes chave e como eles interagem para criar um sistema robusto e escalável.</p>
+            </header>
+
+            <section id="principios-de-design" aria-labelledby="title-principios">
+                <h2 id="title-principios">Princípios de Design</h2>
+                <p>Nossa arquitetura é guiada por três princípios fundamentais que informam cada decisão técnica:</p>
+                <ul>
+                    <li><strong>Modularidade:</strong> O sistema é dividido em componentes independentes e de baixo acoplamento. Isso facilita a manutenção, o teste e a substituição de partes do sistema sem afetar o todo.</li>
+                    <li><strong>Escalabilidade:</strong> Projetamos para o crescimento. A arquitetura suporta escalonamento horizontal, permitindo adicionar mais recursos para lidar com o aumento da carga.</li>
+                    <li><strong>Resiliência:</strong> Falhas são inevitáveis. O sistema é projetado para ser tolerante a falhas, isolando o impacto de um componente com falha e garantindo a continuidade do serviço.</li>
+                </ul>
+            </section>
+            
+            <section id="visao-geral" aria-labelledby="title-visao-geral">
+                <h2 id="title-visao-geral">Visão Geral de Alto Nível</h2>
+                <p>O diagrama a seguir ilustra a interação entre os principais serviços que compõem nossa plataforma. (Aqui você pode incorporar um SVG ou uma imagem de um diagrama de arquitetura).</p>
+                <figure>
+                    <img src="../assets/images/diagram-architecture.svg" alt="Diagrama de arquitetura mostrando a interação entre a API Gateway, o serviço de autenticação, o serviço de usuários e o banco de dados.">
+                    <figcaption>Diagrama de alto nível da arquitetura de microsserviços.</figcaption>
+                </figure>
+            </section>
+            
+            <section id="componentes-chave" aria-labelledby="title-componentes">
+                <h2 id="title-componentes">Componentes Chave</h2>
+                <p>Vamos detalhar cada um dos principais componentes:</p>
+                
+                <h3 id="api-gateway">API Gateway</h3>
+                <p>O API Gateway é o ponto de entrada único para todas as requisições dos clientes. Ele é responsável por roteamento, autenticação, rate limiting e agregação de respostas de múltiplos serviços.</p>
+<pre><code class="language-bash">
+# Exemplo de uma rota no API Gateway
+/users/{userId} -> encaminha para o Serviço de Usuários
+/orders/{orderId} -> encaminha para o Serviço de Pedidos
+</code></pre>
+                
+                <h3 id="servico-autenticacao">Serviço de Autenticação</h3>
+                <p>Este microsserviço lida com tudo relacionado à identidade do usuário: registro, login, emissão e validação de tokens (JWT). Ele se comunica com o banco de dados de usuários, mas sua responsabilidade é focada exclusivamente na autenticação e autorização.</p>
+
+                <div class="callout-info">
+                    <p><strong>Nota:</strong> Usamos o fluxo OAuth 2.0 Client Credentials para comunicação entre serviços.</p>
+                </div>
+            </section>
+
+            </main>
+        
+        <aside class="doc-sidebar-right">
+            <nav aria-labelledby="on-this-page-title">
+                <h3 id="on-this-page-title">Nesta Página</h3>
+                <ul>
+                    <li><a href="#principios-de-design">Princípios de Design</a></li>
+                    <li><a href="#visao-geral">Visão Geral</a></li>
+                    <li><a href="#componentes-chave">Componentes Chave</a>
+                        <ul>
+                            <li><a href="#api-gateway">API Gateway</a></li>
+                            <li><a href="#servico-autenticacao">Serviço de Autenticação</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+    </div>
+
+    <footer id="main-footer" class="main-footer" role="contentinfo">
+        </footer>
+    
+    <div id="search-modal" class="search-modal" role="dialog" aria-modal="true" aria-labelledby="search-modal-title" hidden>
+        </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <script src="../assets/js/vendor/prism.js" data-manual></script>
+    
+    <script src="../assets/js/main.js"></script>
+
+</body>
+</html>
