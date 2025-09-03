@@ -1,41 +1,102 @@
+/*
+ * STORY.JS v2.0 - O Roteiro Interativo
+ *
+ * ESTRUTURA DE UM NÓ (NODE):
+ *
+ * [nodeId]: {
+ * text: "O texto que será exibido para o jogador.",
+ * * onLoad: { (Opcional) Ações a serem executadas quando este nó carregar.
+ * setStats: { sanidade: -10, item: true } // Modifica os stats do jogador.
+ * },
+ *
+ * effects: { (Opcional) Efeitos visuais ou sonoros a serem acionados.
+ * glitch: true, // Ativa o overlay de glitch.
+ * sound: 'nomeDoAudio' // Toca um som específico.
+ * },
+ *
+ * choices: [
+ * {
+ * text: "Texto da escolha.",
+ * nextNode: "idDoProximoNo",
+ *
+ * timer: 10, // (Opcional) Adiciona um timer de 10 segundos para a decisão.
+ *
+ * requires: { (Opcional) Condições para esta escolha aparecer.
+ * sanidade: { lessThan: 50 }, // Requer que a sanidade seja MENOR que 50.
+ * item: true // Requer que o jogador possua o 'item'.
+ * },
+ *
+ * setStats: { sanidade: 5 } // (Opcional) Modifica stats ao escolher esta opção.
+ * }
+ * ]
+ * }
+ */
+
 const storyNodes = {
     start: {
-        text: "Você acorda em uma sala escura. Um monitor antigo pisca à sua frente, exibindo um único prompt: > Olá, Estranho. Quer jogar um jogo?",
+        text: "O zumbido baixo de um CRT preenche o silêncio. Você está em uma sala sem janelas. O monitor à sua frente pisca: > ACORDE.",
         choices: [
-            { text: "Aceitar o convite.", nextNode: "gameAccepted" },
-            { text: "Tentar encontrar a porta.", nextNode: "findDoor" }
+            { text: "Obedecer.", nextNode: "obey" },
+            { text: "Ignorar e examinar a sala.", nextNode: "examineRoom" }
         ]
     },
-    findDoor: {
-        text: "Você se levanta e cambaleia na escuridão. Suas mãos encontram uma parede fria e metálica. Não há maçaneta, nem fresta. Apenas o brilho do monitor ilumina o ambiente. Ele agora exibe: > Escolha errada.",
+    examineRoom: {
+        text: "As paredes são de um concreto liso e frio. Não há portas. A única saída parece ser através da tela. O monitor agora exibe: > NÃO HÁ ESCAPATÓRIA. APENAS ESCOLHAS.",
+        onLoad: { setStats: { suspeita: 10 } },
         choices: [
-            { text: "Voltar para o computador.", nextNode: "gameAccepted" }
+            { text: "Voltar-se para o monitor.", nextNode: "obey" }
         ]
     },
-    gameAccepted: {
-        text: "O monitor pisca e exibe um código complexo. Duas linhas se destacam. Uma parece estável, a outra, experimental. > Qual você executa?",
+    obey: {
+        text: "Você foca na tela. O texto muda. > O sistema está instável. Uma anomalia foi detectada. Deseja iniciar a depuração ou forçar a execução?",
+        timer: 15,
+        effects: { sound: 'sfx-tension' },
         choices: [
-            { text: "Executar o código estável.", nextNode: "stableCode" },
-            { text: "Executar o código experimental.", nextNode: "experimentalCode" }
+            { text: "Iniciar depuração.", nextNode: "debug" },
+            { text: "Forçar execução.", nextNode: "forceExecute" }
         ]
     },
-    stableCode: {
-        text: "O código compila sem erros. Uma porta se abre atrás de você, revelando o mundo exterior exatamente como você o deixou. Você está livre. Foi apenas um sonho estranho... ou não?",
-        choices: [] // Final 1
-    },
-    experimentalCode: {
-        text: "O terminal enche-se de caracteres corrompidos. A tela pisca violentamente e exibe uma imagem de você mesmo, sentado nesta mesma cadeira, olhando para este mesmo monitor. A imagem sorri. > Estamos apenas começando.",
+    debug: {
+        text: "Você entra no modo de depuração. Linhas de código fluem pela tela, a maioria indecifrável, mas uma variável chama sua atenção: 'userSanity'. Seu valor atual é 100.",
+        onLoad: { setStats: { conhecimento: 1 } },
         choices: [
-            { text: "Puxar os cabos da tomada.", nextNode: "pullCables" },
-            { text: "Digitar 'QUEM É VOCÊ?' no terminal.", nextNode: "askWho" }
+            { text: "Alterar o valor para 0.", nextNode: "sanityZero" },
+            { text: "Sair da depuração.", nextNode: "debugExit" }
         ]
     },
-    pullCables: {
-        text: "Você arranca os cabos da parede. O monitor apaga, mergulhando a sala em escuridão total. Um som de clique ecoa. A porta se abre. Mas a liberdade tem um custo. Você sente que algo mudou dentro de você.",
-        choices: [] // Final 2
+    forceExecute: {
+        text: "Você força a execução. A tela racha em um mosaico de pixels mortos. Um som agudo preenche a sala e sua cabeça dói. A realidade parece... fina.",
+        onLoad: { setStats: { sanidade: -20 } },
+        effects: { glitch: true, sound: 'sfx-glitch' },
+        choices: [
+            { text: "Reiniciar o terminal.", nextNode: "obey" },
+            { text: "Tentar quebrar o monitor.", nextNode: "breakMonitor" },
+            { 
+                text: "Aceitar a estática como sua nova realidade.", 
+                nextNode: "embraceStatic",
+                requires: { sanidade: { lessThan: 85 } } // Só aparece se a sanidade já foi afetada.
+            }
+        ]
     },
-    askWho: {
-        text: "As palavras aparecem lentamente na tela: > Eu sou você. A versão que fez a escolha certa. O loop continua, e agora você está preso aqui, para sempre.",
-        choices: [] // Final 3
+    breakMonitor: {
+        text: "Você golpeia a tela com toda a sua força. Ela não quebra. Em vez disso, sua mão a atravessa como se fosse água. A estática fria sobe pelo seu braço, consumindo você.",
+        onLoad: { setStats: { sanidade: -50 } },
+        effects: { glitch: true, sound: 'sfx-long_glitch' },
+        choices: [] // Final: Consumido
+    },
+    embraceStatic: {
+        text: "Você relaxa e encara a estática. A dor de cabeça some. No ruído branco, você começa a ver padrões, verdades, um código subjacente ao universo. Você não precisa mais de um corpo.",
+        onload: { setStats: { sanidade: -100, conhecimento: 10 } },
+        choices: [] // Final: Iluminado
+    },
+    sanityZero: {
+        text: "Você altera o valor para 0 e pressiona Enter. A sala desaparece. Você é código. Você é a anomalia. Você está livre do hardware.",
+        choices: [] // Final: Anomalia
+    },
+    debugExit: {
+        text: "Você sai da depuração. Tudo parece normal, mas agora você sabe que está sendo observado. Que cada escolha sua está sendo registrada.",
+        choices: [
+            { text: "Continuar, com cautela.", nextNode: "forceExecute", setStats: { sanidade: -5 } }
+        ]
     }
 };
