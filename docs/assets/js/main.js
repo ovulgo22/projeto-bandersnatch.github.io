@@ -507,3 +507,220 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     window.app = new GrandDocsApp();
 });
+
+/**
+ * =========================================================================
+ * main.js (Parte Final)
+ * =========================================================================
+ */
+
+// A classe GrandDocsApp completa, com o módulo de animações preenchido.
+
+class GrandDocsApp {
+    constructor() {
+        // Garante que o GSAP ScrollTrigger plugin está registrado.
+        gsap.registerPlugin(ScrollTrigger);
+        this.initDOMSelectors();
+        this.initModules();
+    }
+
+    initDOMSelectors() {
+        this.dom = {
+            body: document.body,
+            header: document.getElementById('main-header'),
+            mobileMenuToggle: document.getElementById('mobile-menu-toggle'),
+            mainNavList: document.getElementById('main-menu-list'),
+            themeToggle: document.getElementById('theme-switcher-toggle'),
+            themeOptions: document.getElementById('theme-options'),
+            searchModalTrigger: document.getElementById('search-modal-trigger'),
+            searchModal: document.getElementById('search-modal'),
+            searchModalClose: document.getElementById('search-modal-close'),
+            searchInput: document.getElementById('search-input'),
+            searchModalClosers: document.querySelectorAll('[data-close-modal]'),
+            apiReferenceLayout: document.querySelector('.api-reference-layout'),
+            apiNavLinks: document.querySelectorAll('.api-nav-link'),
+            apiEndpointDetails: document.querySelectorAll('.api-endpoint-details'),
+            codeLanguageTabs: document.querySelectorAll('.lang-tab'),
+            
+            // --- Seletores para Animações ---
+            heroCanvas: document.getElementById('hero-canvas'),
+            heroTitleLines: document.querySelectorAll('.hero-title-line'),
+            animatedSections: document.querySelectorAll('.content-section'),
+        };
+        this.lastScrollY = window.scrollY;
+        this.apiObserver = null;
+    }
+
+    initModules() {
+        this.initLoader();
+        this.initHeaderBehavior();
+        this.initThemeSwitcher();
+        this.initMobileMenu();
+        this.initSearchModal();
+        this.initApiReference();
+        this.initCreativeAnimations();
+        this.initPrism();
+    }
+
+    // ... (Todos os métodos das partes 1 e 2 estão aqui)
+
+    /**
+     * 7. Módulo de Animações Criativas
+     */
+    initCreativeAnimations() {
+        // Animação de entrada do Hero assim que a página é carregada
+        window.addEventListener('load', () => {
+            if (this.dom.heroTitleLines.length > 0) {
+                gsap.to(this.dom.heroTitleLines, {
+                    y: 0,
+                    duration: 1.2,
+                    stagger: 0.1,
+                    ease: 'power4.out',
+                    delay: 0.2
+                });
+            }
+        });
+
+        // Animações de scroll-triggered para elementos genéricos
+        const animatedElements = gsap.utils.toArray([
+            '.concept-card', 
+            '.tutorial-card', 
+            '.prose', 
+            '.interactive-card',
+            '.changelog-version'
+        ]);
+
+        animatedElements.forEach(el => {
+            gsap.from(el, {
+                scrollTrigger: {
+                    trigger: el,
+                    start: 'top 90%', // Começa quando 90% do elemento está visível
+                    toggleActions: 'play none none none',
+                },
+                opacity: 0,
+                y: 50,
+                duration: 0.8,
+                ease: 'power3.out'
+            });
+        });
+
+        // Inicializa o canvas do Hero
+        this.initHeroCanvas();
+    }
+    
+    /**
+     * 7.1. Sub-módulo: Canvas de fundo do Hero com Three.js
+     */
+    initHeroCanvas() {
+        if (!this.dom.heroCanvas || typeof THREE === 'undefined') {
+            if (this.dom.heroCanvas) this.dom.heroCanvas.style.backgroundColor = '#0A0A0A';
+            console.warn('Three.js não encontrado ou canvas do hero ausente. Background interativo desativado.');
+            return;
+        }
+
+        let scene, camera, renderer, particles, mouseX = 0, mouseY = 0;
+        const windowHalfX = window.innerWidth / 2;
+        const windowHalfY = window.innerHeight / 2;
+
+        // --- Cena, Câmera e Renderizador ---
+        scene = new THREE.Scene();
+        camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 10000);
+        camera.position.z = 1000;
+
+        // --- Partículas ---
+        const material = new THREE.PointsMaterial({
+            size: 2,
+            color: 0x3367D6, // Cor primária do site
+            map: new THREE.TextureLoader().load("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='white'%3E%3Ccircle cx='12' cy='12' r='12'/%3E%3C/svg%3E"),
+            transparent: true,
+            blending: THREE.AdditiveBlending,
+            depthWrite: false
+        });
+
+        const geometry = new THREE.BufferGeometry();
+        const vertices = [];
+        const numParticles = 5000;
+
+        for (let i = 0; i < numParticles; i++) {
+            const x = Math.random() * 2000 - 1000;
+            const y = Math.random() * 2000 - 1000;
+            const z = Math.random() * 2000 - 1000;
+            vertices.push(x, y, z);
+        }
+
+        geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+        particles = new THREE.Points(geometry, material);
+        scene.add(particles);
+
+        // --- Renderizador ---
+        renderer = new THREE.WebGLRenderer({ antialias: true, canvas: this.dom.heroCanvas });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        
+        // --- Animação e Interação ---
+        const animate = () => {
+            requestAnimationFrame(animate);
+
+            const time = Date.now() * 0.00005;
+            camera.position.x += (mouseX - camera.position.x) * 0.05;
+            camera.position.y += (-mouseY - camera.position.y) * 0.05;
+            camera.lookAt(scene.position);
+
+            particles.rotation.x = time * 0.5;
+            particles.rotation.y = time * 0.25;
+
+            renderer.render(scene, camera);
+        };
+
+        const onWindowResize = () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        };
+        
+        const onDocumentMouseMove = (event) => {
+            mouseX = (event.clientX - windowHalfX) / 2;
+            mouseY = (event.clientY - windowHalfY) / 2;
+        };
+
+        window.addEventListener('resize', onWindowResize, false);
+        document.addEventListener('mousemove', onDocumentMouseMove, false);
+
+        animate();
+    }
+    
+
+    /**
+     * 8. Inicializa o Prism.js manualmente
+     */
+    initPrism() {
+        if (typeof Prism !== 'undefined') {
+            Prism.highlightAll();
+        } else {
+            console.warn("Prism.js não foi encontrado. Syntax highlighting desativado.");
+        }
+    }
+    
+    // --- MÉTODOS COMPLETOS DAS PARTES 1 E 2 ---
+    // (Incluir todos os outros métodos como initLoader, initHeaderBehavior, initSearchModal, etc. aqui)
+    initLoader() { window.addEventListener('load', () => { this.dom.body.classList.remove('loading'); this.dom.body.classList.add('loaded'); document.getElementById('page-wrapper').setAttribute('aria-hidden', 'false'); }); }
+    initHeaderBehavior() { window.addEventListener('scroll', () => { if (window.scrollY > this.lastScrollY && window.scrollY > this.dom.header.clientHeight) { this.dom.header.classList.add('hidden'); } else { this.dom.header.classList.remove('hidden'); } if (window.scrollY > 50) { this.dom.header.classList.add('scrolled'); const bgColor = getComputedStyle(document.documentElement).getPropertyValue('--color-background-offset').trim(); const rgb = this.hexToRgb(bgColor); if (rgb) { this.dom.header.style.setProperty('--color-background-offset-rgb', `${rgb.r}, ${rgb.g}, ${rgb.b}`); } } else { this.dom.header.classList.remove('scrolled'); } this.lastScrollY = window.scrollY; }, { passive: true }); }
+    initMobileMenu() { if (!this.dom.mobileMenuToggle) return; this.dom.mobileMenuToggle.addEventListener('click', () => { const isMenuOpen = this.dom.mobileMenuToggle.getAttribute('aria-expanded') === 'true'; this.dom.mobileMenuToggle.setAttribute('aria-expanded', !isMenuOpen); this.dom.header.classList.toggle('menu-open'); this.dom.body.classList.toggle('no-scroll'); }); }
+    hexToRgb(hex) { let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex); return result ? { r: parseInt(result[1], 16), g: parseInt(result[2], 16), b: parseInt(result[3], 16) } : null; }
+    initThemeSwitcher() { const storedTheme = localStorage.getItem('theme'); const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)'); const applyTheme = (theme) => { if (theme === 'system') { document.documentElement.setAttribute('data-theme', systemPrefersDark.matches ? 'dark' : 'light'); } else { document.documentElement.setAttribute('data-theme', theme); } }; applyTheme(storedTheme || 'system'); this.dom.themeToggle.addEventListener('click', () => { const isExpanded = this.dom.themeToggle.getAttribute('aria-expanded') === 'true'; this.dom.themeToggle.setAttribute('aria-expanded', !isExpanded); this.dom.themeOptions.classList.toggle('visible'); }); this.dom.themeOptions.addEventListener('click', (e) => { const themeButton = e.target.closest('.theme-option'); if (themeButton) { const selectedTheme = themeButton.dataset.theme; localStorage.setItem('theme', selectedTheme); applyTheme(selectedTheme); this.dom.themeToggle.setAttribute('aria-expanded', 'false'); this.dom.themeOptions.classList.remove('visible'); } }); systemPrefersDark.addEventListener('change', () => { if (localStorage.getItem('theme') === 'system') applyTheme('system'); }); document.addEventListener('click', (e) => { if (!this.dom.themeToggle.contains(e.target) && !this.dom.themeOptions.contains(e.target)) { this.dom.themeToggle.setAttribute('aria-expanded', 'false'); this.dom.themeOptions.classList.remove('visible'); } }); }
+    initSearchModal() { if (!this.dom.searchModal) return; this.dom.searchModalTrigger.addEventListener('click', () => this.openSearchModal()); this.dom.searchModalClosers.forEach(el => { el.addEventListener('click', () => this.closeSearchModal()); }); window.addEventListener('keydown', (e) => { if ((e.ctrlKey || e.metaKey) && e.key === 'k') { e.preventDefault(); this.openSearchModal(); } if (e.key === 'Escape' && this.dom.searchModal.hidden === false) { this.closeSearchModal(); } }); }
+    openSearchModal() { this.dom.searchModal.hidden = false; this.dom.body.classList.add('no-scroll'); setTimeout(() => this.dom.searchInput.focus(), 100); }
+    closeSearchModal() { this.dom.searchModal.hidden = true; this.dom.body.classList.remove('no-scroll'); }
+    initApiReference() { if (!this.dom.apiReferenceLayout) return; this.dom.codeLanguageTabs.forEach(tab => { tab.addEventListener('click', () => { const lang = tab.dataset.lang; const parentContainer = tab.closest('.api-code-examples'); parentContainer.querySelector('.lang-tab.active').classList.remove('active'); tab.classList.add('active'); const allSnippets = parentContainer.querySelectorAll('.code-snippet'); allSnippets.forEach(snippet => { snippet.classList.add('hidden'); if (snippet.dataset.lang === lang) { snippet.classList.remove('hidden'); } }); }); }); const observerOptions = { rootMargin: `-${this.dom.header.clientHeight}px 0px -60% 0px`, threshold: 0 }; this.apiObserver = new IntersectionObserver((entries, observer) => { entries.forEach(entry => { const id = entry.target.getAttribute('id'); const navLink = this.dom.apiReferenceLayout.querySelector(`.api-nav-link[href="#${id}"]`); if (entry.isIntersecting) { this.dom.apiNavLinks.forEach(link => link.classList.remove('active')); if(navLink) navLink.classList.add('active'); } }); }, observerOptions); this.dom.apiEndpointDetails.forEach(section => { this.apiObserver.observe(section); }); }
+}
+
+
+/**
+ * Inicialização Geral
+ */
+document.addEventListener('DOMContentLoaded', () => {
+    if (typeof gsap === 'undefined') {
+        console.error('GSAP não foi carregado. As animações serão desativadas.');
+        return;
+    }
+    window.app = new GrandDocsApp();
+});
