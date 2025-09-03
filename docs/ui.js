@@ -1,7 +1,6 @@
 /*
- * UI.JS v2.0 - O Módulo de Renderização da Interface
- * Responsável por toda a manipulação do DOM. Lê as regras do jogo e do estado
- * do jogador para construir a interface visual.
+ * UI.JS v2.1 - O Módulo de Renderização da Interface
+ * Correções de bugs de interação e melhoria da comunicação com o motor do jogo.
  */
 const UI = {
     // --- Referências aos Elementos do DOM ---
@@ -12,50 +11,47 @@ const UI = {
     timerContainer: document.getElementById('timer-container'),
     timerBar: document.getElementById('timer-bar'),
     glitchOverlay: document.getElementById('glitch-overlay'),
+    timerTimeout: null, // v2.1: Centralizado o controle do timeout
 
     // --- Inicialização ---
     init() {
-        this.restartButton.addEventListener('click', () => Game.start());
+        // O listener do botão de restart é agora definido no script.js para ter acesso ao Game engine.
     },
 
     // --- Funções Principais de Renderização ---
 
-    /**
-     * Renderiza um nó da história completo na tela.
-     * @param {object} node - O objeto do nó da história de story.js.
-     * @param {object} playerState - O estado atual do jogador.
-     */
     renderNode(node, playerState) {
-        this.clearUIForNextNode();
+        this.prepareForNextNode();
         this.renderStats(playerState);
         this.triggerEffects(node.effects);
 
         this.typewriterEffect(node.text, () => {
+            const hasTimer = this.findTimerInChoices(node.choices);
             this.renderChoices(node.choices, playerState);
+
+            if (hasTimer) {
+                this.startTimer(hasTimer, () => Game.handleTimeout(node.timeoutNode));
+            }
+            
             if (!node.choices || node.choices.length === 0) {
                 this.showRestartButton();
             }
         });
     },
 
-    /**
-     * Renderiza os status do jogador na parte superior da tela.
-     * @param {object} playerState - O estado atual do jogador.
-     */
     renderStats(playerState) {
         if (!playerState || Object.keys(playerState).length === 0) {
             this.statsContainer.classList.add('hidden');
             return;
         }
         
-        this.statsContainer.innerHTML = ''; // Limpa stats antigos
+        this.statsContainer.innerHTML = '';
         for (const [stat, value] of Object.entries(playerState)) {
             if (value !== null && value !== undefined) {
                 const statElement = document.createElement('span');
                 statElement.className = 'stat-item';
-                // Formatação especial para diferentes tipos de stats
                 if (typeof value === 'boolean' && value === true) {
-                    statElement.textContent = `${stat.replace(/([A-Z])/g, ' $1').toUpperCase()}`; // Ex: "hasKey" -> "HAS KEY"
+                    statElement.textContent = `${stat.replace(/([A-Z])/g, ' $1').toUpperCase()}`;
                 } else if (typeof value === 'number') {
                     statElement.textContent = `${stat.toUpperCase()}: ${value}`;
                 }
@@ -65,63 +61,54 @@ const UI = {
         this.statsContainer.classList.remove('hidden');
     },
 
-    /**
-     * Cria e exibe os botões de escolha, filtrando os que não cumprem os requisitos.
-     * @param {Array} choices - O array de escolhas do nó.
-     * @param {object} playerState - O estado atual do jogador.
-     */
     renderChoices(choices, playerState) {
         if (!choices) return;
 
-        let hasTimer = false;
         choices.forEach((choice, index) => {
             if (this.meetsRequirements(choice, playerState)) {
-                if (choice.timer) hasTimer = choice.timer; // Encontrou um timer
-                
                 const button = document.createElement('button');
                 button.textContent = choice.text;
                 button.className = 'choice-button';
+                
                 button.onclick = () => {
-                    this.stopTimer();
+                    this.lockChoices(); // v2.1 BUGFIX: Trava outras escolhas imediatamente.
                     Game.makeChoice(choice);
                 };
                 
                 this.choicesContainer.appendChild(button);
                 
-                // Animação de entrada escalonada
                 setTimeout(() => {
                     button.style.opacity = '1';
                     button.style.transform = 'translateY(0)';
                 }, index * 150);
             }
         });
-        
-        if (hasTimer) {
-            this.startTimer(hasTimer);
-        }
     },
 
     // --- Funções de Efeitos e Utilitários ---
 
     /**
-     * Inicia a barra de tempo para decisões urgentes.
+     * Inicia a barra de tempo.
      * @param {number} duration - A duração em segundos.
+     * @param {function} onTimeoutCallback - v2.1: Função a ser chamada quando o tempo acabar.
      */
-    startTimer(duration) {
+    startTimer(duration, onTimeoutCallback) {
         this.timerContainer.classList.remove('hidden');
-        this.timerBar.style.animation = 'none'; // Reseta a animação
-        void this.timerBar.offsetWidth; // Força um reflow do DOM
+        this.timerBar.style.animation = 'none';
+        void this.timerBar.offsetWidth;
         
         this.timerBar.style.animation = `countdown ${duration}s linear forwards`;
+        
         this.timerTimeout = setTimeout(() => {
-            // Ação a ser tomada se o tempo acabar (pode ser expandida)
-            Game.handleTimeout();
+            this.lockChoices(); // v2.1 BUGFIX: Trava a UI ao fim do tempo.
+            if (onTimeoutCallback) onTimeoutCallback();
         }, duration * 1000);
     },
 
     stopTimer() {
         if (this.timerTimeout) {
             clearTimeout(this.timerTimeout);
+            this.timerTimeout = null;
             this.timerBar.style.animation = 'none';
             this.timerContainer.classList.add('hidden');
         }
@@ -133,10 +120,20 @@ const UI = {
             this.glitchOverlay.classList.add('active');
             setTimeout(() => this.glitchOverlay.classList.remove('active'), 700);
         }
-        // Futuramente, pode tocar sons: if (effects.sound) { playSound(effects.sound); }
     },
-
+    
+    // v2.1 BUGFIX: Previne cliques múltiplos e race conditions.
+    lockChoices() {
+        this.stopTimer();
+        this.choicesContainer.classList.add('locked'); // Adiciona classe para desabilitar pointer-events via CSS
+        
+        // Adiciona um feedback visual aos botões não escolhidos
+        const buttons = this.choicesContainer.querySelectorAll('.choice-button');
+        buttons.forEach(btn => btn.disabled = true);
+    },
+    
     typewriterEffect(text, callback) {
+        // ... (código inalterado)
         let i = 0;
         const speed = 20;
         this.storyTextElement.textContent = '';
@@ -147,22 +144,15 @@ const UI = {
                 i++;
                 setTimeout(type, speed);
             } else {
-                if (callback) callback(); // Chama a função de retorno ao terminar
+                if (callback) callback();
             }
         };
         type();
     },
 
-    /**
-     * Verifica se o jogador cumpre os requisitos para uma escolha.
-     * @param {object} choice - O objeto da escolha.
-     * @param {object} playerState - O estado atual do jogador.
-     * @returns {boolean} - True se os requisitos forem cumpridos.
-     */
     meetsRequirements(choice, playerState) {
-        if (!choice.requires) {
-            return true; // Sem requisitos, sempre mostra.
-        }
+        // ... (código inalterado)
+        if (!choice.requires) return true;
         for (const [stat, reqValue] of Object.entries(choice.requires)) {
             const playerValue = playerState[stat];
             if (typeof reqValue === 'boolean' && playerValue !== reqValue) return false;
@@ -173,16 +163,23 @@ const UI = {
         }
         return true;
     },
+    
+    findTimerInChoices(choices) {
+        if (!choices) return null;
+        const choiceWithTimer = choices.find(c => c.timer);
+        return choiceWithTimer ? choiceWithTimer.timer : null;
+    },
 
     showRestartButton() {
         this.restartButton.classList.remove('hidden');
     },
 
-    clearUIForNextNode() {
+    prepareForNextNode() {
+        this.stopTimer(); // Garante que qualquer timer anterior seja limpo
         this.storyTextElement.textContent = '';
         this.choicesContainer.innerHTML = '';
+        this.choicesContainer.classList.remove('locked'); // v2.1: Destrava o container para a nova cena
         this.restartButton.classList.add('hidden');
-        this.stopTimer();
     }
 };
 
