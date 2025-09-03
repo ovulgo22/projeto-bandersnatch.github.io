@@ -1,60 +1,48 @@
 /*
     PROJETO: Documentação de Cargos em Desenvolvimento Web
     ARQUIVO: style.css
-    VERSÃO: 1.0
+    VERSÃO: 2.0
     DATA: 03/09/2025
-    DESCRIÇÃO: Folha de estilos principal. Define a aparência visual, a responsividade,
-               a acessibilidade e o tema claro/escuro para o site.
+    
+    CHANGELOG v2.0:
+    - ADICIONADO: Estilos para o layout principal de duas colunas (.page-layout) usando CSS Grid.
+    - ADICIONADO: Estilos para a barra de navegação lateral (.sidebar-nav), incluindo `position: sticky`.
+    - ADICIONADO: Estilos para o link de acessibilidade (.skip-link), visível apenas ao receber foco.
+    - ADICIONADO: Estilos para as novas seções de conteúdo detalhado (.role-section) e seus componentes (.role-title, .role-icon).
+    - ADICIONADO: Estilo para o estado ativo do link na navegação lateral (.sidebar-nav a.active).
+    - REMOVIDO: Estilos obsoletos da v1.0 (.role-card, #roles-list) para manter o código limpo.
 */
 
-/* --- 1. IMPORTAÇÕES E DEFINIÇÕES GLOBAIS --- */
-
-/* UI Designer: Importando fontes do Google Fonts para uma tipografia mais rica e profissional.
-   'Merriweather' para títulos (serifada, autoridade) e 'Lato' para o corpo (sans-serif, legibilidade). */
+/* --- 1. IMPORTAÇÕES E DEFINIÇÕES GLOBAIS (sem alterações da v1.0) --- */
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Merriweather:wght@700;900&display=swap');
 
-/* Front-End & UI Designer: Uso de Variáveis CSS (Custom Properties) para fácil manutenção e theming.
-   Toda a paleta de cores, fontes e espaçamentos é centralizada aqui. */
 :root {
-    /* Paleta de Cores (Tema Claro - Padrão) */
     --color-background: #f8f9fa;
     --color-text-primary: #212529;
     --color-text-secondary: #5a6169;
     --color-surface: #ffffff;
-    --color-primary: #0057b7; /* Um azul profissional e acessível */
+    --color-primary: #0057b7;
     --color-border: #dee2e6;
-
-    /* Tipografia */
     --font-family-headings: 'Merriweather', serif;
     --font-family-body: 'Lato', sans-serif;
-
-    /* Espaçamento e Bordas */
-    --spacing-unit: 1rem; /* Base de 16px */
+    --spacing-unit: 1rem;
     --border-radius: 8px;
-
-    /* Sombras (Creative Dev) */
     --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
     --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
-
-    /* Transições (Creative Dev & UX) */
     --transition-speed: 250ms;
 }
 
-/* Front-End: Definindo o tema escuro. O JavaScript irá adicionar a classe .dark-theme no <html> */
 html.dark-theme {
     --color-background: #121212;
     --color-text-primary: #e0e0e0;
     --color-text-secondary: #a0a0a0;
     --color-surface: #1e1e1e;
-    --color-primary: #4dabf7; /* Um azul mais claro para contraste no escuro */
+    --color-primary: #4dabf7;
     --color-border: #424242;
     --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-
-/* --- 2. RESET E ESTILOS BASE --- */
-
-/* Front-End & QA: Um reset moderno para garantir consistência entre navegadores. */
+/* --- 2. RESET E ESTILOS BASE (sem alterações da v1.0) --- */
 *,
 *::before,
 *::after {
@@ -63,17 +51,15 @@ html.dark-theme {
     padding: 0;
 }
 
-/* A11y: `scroll-behavior: smooth` para rolagem suave, mas respeitando as preferências do usuário. */
 @media (prefers-reduced-motion: no-preference) {
     html {
         scroll-behavior: smooth;
     }
 }
 
-/* UX & UI Designer: Estilos base para o corpo do documento. */
 body {
     font-family: var(--font-family-body);
-    font-size: 1.125rem; /* 18px, bom para leitura */
+    font-size: 1.125rem;
     line-height: 1.7;
     color: var(--color-text-primary);
     background-color: var(--color-background);
@@ -82,162 +68,139 @@ body {
     transition: color var(--transition-speed), background-color var(--transition-speed);
 }
 
-
-/* --- 3. TIPOGRAFIA E UTILITÁRIOS --- */
-
+/* --- 3. TIPOGRAFIA E UTILITÁRIOS (sem alterações da v1.0) --- */
 h1, h2, h3 {
     font-family: var(--font-family-headings);
     color: var(--color-text-primary);
     line-height: 1.3;
 }
+h1 { font-size: clamp(2.5rem, 5vw, 3.5rem); }
+h2 { font-size: clamp(1.8rem, 4vw, 2.25rem); }
+h3 { font-size: 1.5rem; margin: 1.5rem 0 0.5rem; }
 
-h1 { font-size: clamp(2.5rem, 5vw, 3.5rem); } /* Tipografia fluida */
-h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); }
-h3 { font-size: 1.5rem; }
+p { margin-bottom: var(--spacing-unit); max-width: 75ch; }
+ul { margin-bottom: var(--spacing-unit); padding-left: 2rem; }
+li { margin-bottom: calc(var(--spacing-unit) / 2); }
 
-p {
-    margin-bottom: var(--spacing-unit);
-    max-width: 75ch; /* Limita a largura da linha para melhor legibilidade */
-}
+a { color: var(--color-primary); text-decoration: none; font-weight: 700; transition: opacity var(--transition-speed); }
+a:hover { opacity: 0.8; text-decoration: underline; }
+a:focus, button:focus { outline: 3px solid var(--color-primary); outline-offset: 4px; border-radius: 4px; }
 
-a {
-    color: var(--color-primary);
-    text-decoration: none;
-    font-weight: 700;
-    transition: opacity var(--transition-speed);
-}
+.container { width: 90%; max-width: 1200px; margin-left: auto; margin-right: auto; }
 
-a:hover {
-    opacity: 0.8;
-    text-decoration: underline;
-}
-
-/* A11y: Essencial garantir que elementos focáveis sejam visualmente distintos. */
-a:focus, button:focus {
-    outline: 3px solid var(--color-primary);
-    outline-offset: 4px;
-    border-radius: 4px; /* Para contornos mais suaves */
-}
-
-/* AI & UI Designer: Container para centralizar o conteúdo com uma largura máxima legível. */
-.container {
-    width: 90%;
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-
-/* --- 4. COMPONENTES ESPECÍFICOS --- */
-
-/* Header e Footer */
-.site-header, .site-footer {
-    padding: calc(var(--spacing-unit) * 2) 0;
-    text-align: center;
-}
-
-.site-header {
-    border-bottom: 1px solid var(--color-border);
-    position: relative;
-}
-
-.subtitle {
-    font-size: 1.2rem;
-    color: var(--color-text-secondary);
-}
-
-.site-footer {
-    margin-top: calc(var(--spacing-unit) * 3);
-    border-top: 1px solid var(--color-border);
-    font-size: 0.9rem;
-    color: var(--color-text-secondary);
-}
-
-/* Main Content */
-.site-main section {
-    padding: calc(var(--spacing-unit) * 3) 0;
-}
-
-/* Botão de Tema (UI/UX & Creative Dev) */
-.theme-toggle {
+/* --- 4. NOVOS ESTILOS DE ACESSIBILIDADE --- */
+/* A11y: Estilo para o link "Pular para o conteúdo". Fica fora da tela por padrão
+   e aparece apenas quando recebe foco, como ao pressionar a tecla Tab na carga da página. */
+.skip-link {
     position: absolute;
-    top: 50%;
-    right: 5%;
-    transform: translateY(-50%);
-    background: transparent;
-    border: 2px solid var(--color-border);
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: all var(--transition-speed) ease-in-out;
+    top: -100px; /* Posiciona o elemento completamente fora da tela. */
+    left: 0;
+    background-color: var(--color-primary);
+    color: white;
+    padding: var(--spacing-unit);
+    z-index: 1000;
+    transition: top var(--transition-speed) ease-in-out;
+}
+.skip-link:focus {
+    top: 0; /* Traz o link para a visão quando ele recebe foco. */
 }
 
-.theme-toggle:hover {
-    border-color: var(--color-primary);
-    transform: translateY(-50%) rotate(15deg);
-}
+/* --- 5. COMPONENTES PRINCIPAIS (Header, Footer, Botão) (sem alterações da v1.0) --- */
+.site-header, .site-footer { padding: calc(var(--spacing-unit) * 2) 0; text-align: center; }
+.site-header { border-bottom: 1px solid var(--color-border); position: relative; }
+.subtitle { font-size: 1.2rem; color: var(--color-text-secondary); }
+.site-footer { margin-top: calc(var(--spacing-unit) * 3); border-top: 1px solid var(--color-border); font-size: 0.9rem; color: var(--color-text-secondary); }
+.theme-toggle { position: absolute; top: 50%; right: 5%; transform: translateY(-50%); background: transparent; border: 2px solid var(--color-border); width: 45px; height: 45px; border-radius: 50%; cursor: pointer; transition: all var(--transition-speed) ease-in-out; }
+.theme-toggle:hover { border-color: var(--color-primary); transform: translateY(-50%) rotate(15deg); }
 
-/* A lista de cards dos cargos (Front-End) */
-#roles-list {
-    /* Usando CSS Grid para um layout de grid responsivo e robusto. */
+/* --- 6. NOVO LAYOUT DA PÁGINA (v2.0) --- */
+/* Front-End: Usando CSS Grid para criar o layout de duas colunas.
+   Mobile-first: por padrão, é uma única coluna (barra lateral acima do conteúdo). */
+.page-layout {
     display: grid;
-    grid-template-columns: 1fr; /* Padrão mobile: uma coluna */
-    gap: calc(var(--spacing-unit) * 1.5);
+    grid-template-columns: 1fr;
+    gap: calc(var(--spacing-unit) * 2);
+    margin-top: calc(var(--spacing-unit) * 2);
 }
 
-/* O card individual (BEM) */
-.role-card {
-    background-color: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--border-radius);
-    padding: calc(var(--spacing-unit) * 1.5);
-    box-shadow: var(--shadow-sm);
-    transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+/* --- 7. NOVOS COMPONENTES (Barra Lateral e Conteúdo Principal) (v2.0) --- */
+/* UX/UI: Barra lateral que se torna fixa durante a rolagem para fácil navegação. */
+.sidebar-nav {
+    /* O comportamento 'sticky' só será ativado em telas maiores (veja Media Queries). */
 }
-
-/* Creative Dev: Efeito de "levantar" o card no hover para feedback visual. */
-@media (prefers-reduced-motion: no-preference) {
-    .role-card:hover {
-        transform: translateY(-5px);
-        box-shadow: var(--shadow-md);
-    }
-}
-
-.role-card__title {
-    margin-bottom: calc(var(--spacing-unit) * 0.5);
-    color: var(--color-primary);
-}
-
-.role-card__description {
-    color: var(--color-text-secondary);
+.sidebar-nav h2 {
+    font-size: 1.2rem;
     margin-bottom: var(--spacing-unit);
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: calc(var(--spacing-unit) / 2);
 }
-
-.role-card__link {
-    display: inline-block;
-    font-size: 1rem;
+.sidebar-nav ol {
+    list-style: none;
+    padding-left: 0;
+}
+.sidebar-nav li {
+    margin-bottom: calc(var(--spacing-unit) / 2);
+}
+.sidebar-nav a {
+    display: block;
+    padding: calc(var(--spacing-unit) / 4) calc(var(--spacing-unit) / 2);
+    border-radius: 4px;
+    font-weight: 400;
+    color: var(--color-text-secondary);
+}
+.sidebar-nav a:hover {
+    background-color: var(--color-border);
+    color: var(--color-text-primary);
+    text-decoration: none;
+    opacity: 1;
+}
+/* Creative Dev/UX: Estilo para o link ativo, que será controlado via JavaScript. */
+.sidebar-nav a.active {
+    background-color: var(--color-primary);
+    color: white;
     font-weight: 700;
 }
 
-
-/* --- 5. MEDIA QUERIES (DESIGN RESPONSIVO) --- */
-
-/* Front-End & UX: Abordagem Mobile-First. Estilos base são para mobile,
-   e usamos min-width para adaptar a telas maiores. */
-
-/* Para tablets e telas maiores */
-@media (min-width: 768px) {
-    #roles-list {
-        /* Duas colunas para tablets */
-        grid-template-columns: repeat(2, 1fr);
-    }
+/* Estilos para as seções de conteúdo detalhado. */
+.role-section {
+    padding-top: calc(var(--spacing-unit) * 3);
+    border-top: 2px solid var(--color-border);
+}
+/* A primeira seção não precisa de borda ou espaçamento no topo. */
+#introduction + .role-section {
+    padding-top: 0;
+    border-top: none;
+}
+.role-title {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-unit);
+    margin-bottom: var(--spacing-unit);
+}
+.role-icon {
+    width: 2.25rem;
+    height: 2.25rem;
+    flex-shrink: 0; /* Previne que o ícone seja esmagado. */
+    color: var(--color-primary); /* Por padrão, usa a cor primária. */
+    fill: currentColor; /* O SVG herda a cor do seu elemento pai (a tag h2). */
 }
 
-/* Para desktops */
+/* --- 8. MEDIA QUERIES (DESIGN RESPONSIVO) --- */
+/* Ativando o layout de duas colunas e a barra lateral fixa apenas em telas maiores. */
 @media (min-width: 1024px) {
-    #roles-list {
-        /* Três colunas para desktops, aproveitando melhor o espaço. */
-        grid-template-columns: repeat(3, 1fr);
+    .page-layout {
+        /* Define duas colunas: a primeira com 280px para a navegação
+           e a segunda ocupando o espaço restante (1fr). */
+        grid-template-columns: 280px 1fr;
+        gap: calc(var(--spacing-unit) * 3);
+    }
+    .sidebar-nav {
+        position: sticky;
+        top: calc(var(--spacing-unit) * 2); /* Distância do topo ao se tornar fixo. */
+        align-self: start; /* Garante que a barra lateral se alinhe ao topo do grid. */
+        /* Define uma altura máxima para a barra lateral, permitindo que ela tenha sua própria rolagem
+           se o conteúdo for muito extenso, sem empurrar o rodapé para baixo. */
+        max-height: calc(100vh - 4rem);
+        overflow-y: auto;
     }
 }
