@@ -4,15 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <link rel="manifest" href="manifest.json">
+
     <title>Projeto Bandersnatch | Uma Experiência Narrativa</title>
     <meta name="description" content="Mergulhe em uma história interativa onde suas escolhas moldam a realidade. Uma experiência inspirada em Black Mirror: Bandersnatch.">
     <meta name="author" content="Seu Nome ou Nome do Estúdio">
-    <meta name="theme-color" content="#0A0A0A"> <meta property="og:title" content="Projeto Bandersnatch">
+    <meta name="theme-color" content="#0A0A0A">
+
+    <meta property="og:title" content="Projeto Bandersnatch">
     <meta property="og:description" content="Mergulhe em uma história interativa onde suas escolhas moldam a realidade.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://seu-usuario.github.io/seu-repositorio/"> <meta property="og:image" content="https://seu-usuario.github.io/seu-repositorio/social-preview.png"> <link rel="icon" href="favicon.ico" sizes="any">
+    <meta property="og:url" content="https://seu-usuario.github.io/seu-repositorio/">
+    <meta property="og:image" content="https://seu-usuario.github.io/seu-repositorio/social-preview.png">
+    
+    <link rel="icon" href="favicon.ico" sizes="any">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="apple-touch-icon.png"> <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+    <link rel="preload" as="image" href="img/sala-escura.jpg">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=VT323&display=swap" rel="stylesheet">
     
@@ -26,51 +37,30 @@
     </div>
 
     <div id="ui-container">
-
-        <div id="background-container">
-            </div>
-
+        <div id="background-container"></div>
         <div id="vfx-overlay"></div>
         <div id="glitch-overlay"></div>
         
         <div id="settings-modal" class="hidden" role="dialog" aria-modal="true" aria-labelledby="settings-title">
-            <div class="modal-content">
-                <h2 id="settings-title">CONFIGURAÇÕES</h2>
-                <div class="setting-row">
-                    <label for="volume-slider">Volume:</label>
-                    <input type="range" id="volume-slider" min="0" max="1" step="0.1" value="0.5">
-                </div>
-                <div class="setting-row">
-                    <p>Velocidade do Texto:</p>
-                    <div class="radio-group">
-                        <input type="radio" id="speed-slow" name="text-speed" value="50"><label for="speed-slow">Lenta</label>
-                        <input type="radio" id="speed-normal" name="text-speed" value="25" checked><label for="speed-normal">Normal</label>
-                        <input type="radio" id="speed-fast" name="text-speed" value="10"><label for="speed-fast">Rápida</label>
-                    </div>
-                </div>
-                <button id="close-settings-button" aria-label="Fechar configurações">FECHAR</button>
             </div>
-        </div>
 
         <div id="game-content">
             <header id="game-header">
                 <div id="stats-container" role="status"></div>
-                <button id="open-settings-button" aria-label="Abrir configurações">
-                    &#9881;
-                </button>
+                <button id="open-settings-button" aria-label="Abrir configurações">&#9881;</button>
             </header>
 
             <main id="main-content">
                 <section id="story-container">
-                    <p id="story-text" aria-live="assertive"></p>
+                    <p id="story-text-visual" aria-hidden="true"></p>
+                    <p id="story-text-accessible" class="sr-only" aria-live="assertive" aria-atomic="true"></p>
                 </section>
                 
                 <section id="timer-container" class="hidden">
                     <div id="timer-bar"></div>
                 </section>
 
-                <section id="choices-container" role="group" aria-label="Escolhas disponíveis">
-                </section>
+                <section id="choices-container" role="group" aria-label="Escolhas disponíveis"></section>
             </main>
 
             <footer id="game-footer">
@@ -88,10 +78,7 @@
     </noscript>
 
     <div id="audio-container">
-        <audio id="sfx-hover"></audio>
-        <audio id="sfx-click"></audio>
-        <audio id="sfx-glitch"></audio>
-        <audio id="bgm-main" loop></audio> </div>
+        </div>
 
     <script src="story.js" defer></script>
     <script src="ui.js" defer></script>
