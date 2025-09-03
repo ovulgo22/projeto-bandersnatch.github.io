@@ -1,32 +1,21 @@
 /*
- * STORY.JS v2.0 - O Roteiro Interativo
+ * STORY.JS v2.1 - O Roteiro Interativo
  *
  * ESTRUTURA DE UM NÓ (NODE):
  *
  * [nodeId]: {
- * text: "O texto que será exibido para o jogador.",
- * * onLoad: { (Opcional) Ações a serem executadas quando este nó carregar.
- * setStats: { sanidade: -10, item: true } // Modifica os stats do jogador.
- * },
- *
- * effects: { (Opcional) Efeitos visuais ou sonoros a serem acionados.
- * glitch: true, // Ativa o overlay de glitch.
- * sound: 'nomeDoAudio' // Toca um som específico.
- * },
- *
- * choices: [
+ * text: "...",
+ * onLoad: { ... },
+ * effects: { ... },
+ * * // v2.1: A consequência do timer agora é definida aqui, na própria história.
+ * timer: 15, // (Opcional) Adiciona um timer para a decisão.
+ * timeoutNode: 'idDoNoDeTimeout', // (Opcional) Nó para onde ir se o tempo acabar.
+ * * choices: [
  * {
- * text: "Texto da escolha.",
- * nextNode: "idDoProximoNo",
- *
- * timer: 10, // (Opcional) Adiciona um timer de 10 segundos para a decisão.
- *
- * requires: { (Opcional) Condições para esta escolha aparecer.
- * sanidade: { lessThan: 50 }, // Requer que a sanidade seja MENOR que 50.
- * item: true // Requer que o jogador possua o 'item'.
- * },
- *
- * setStats: { sanidade: 5 } // (Opcional) Modifica stats ao escolher esta opção.
+ * text: "...",
+ * nextNode: "...",
+ * requires: { ... },
+ * setStats: { ... }
  * }
  * ]
  * }
@@ -50,6 +39,7 @@ const storyNodes = {
     obey: {
         text: "Você foca na tela. O texto muda. > O sistema está instável. Uma anomalia foi detectada. Deseja iniciar a depuração ou forçar a execução?",
         timer: 15,
+        timeoutNode: 'hesitation', // v2.1 ANOMALY FIX: Define o destino do timeout aqui.
         effects: { sound: 'sfx-tension' },
         choices: [
             { text: "Iniciar depuração.", nextNode: "debug" },
@@ -74,7 +64,7 @@ const storyNodes = {
             { 
                 text: "Aceitar a estática como sua nova realidade.", 
                 nextNode: "embraceStatic",
-                requires: { sanidade: { lessThan: 85 } } // Só aparece se a sanidade já foi afetada.
+                requires: { sanidade: { lessThan: 85 } }
             }
         ]
     },
@@ -86,7 +76,7 @@ const storyNodes = {
     },
     embraceStatic: {
         text: "Você relaxa e encara a estática. A dor de cabeça some. No ruído branco, você começa a ver padrões, verdades, um código subjacente ao universo. Você não precisa mais de um corpo.",
-        onload: { setStats: { sanidade: -100, conhecimento: 10 } },
+        onLoad: { setStats: { sanidade: -100, conhecimento: 10 } },
         choices: [] // Final: Iluminado
     },
     sanityZero: {
@@ -98,5 +88,11 @@ const storyNodes = {
         choices: [
             { text: "Continuar, com cautela.", nextNode: "forceExecute", setStats: { sanidade: -5 } }
         ]
+    },
+    // v2.1: Novo nó de final específico para o timeout.
+    hesitation: {
+        text: "Você hesita por tempo demais. A anomalia no sistema interpreta sua inação como uma ameaça. O código se autoprotege, ejetando sua consciência do loop. A tela se apaga. Fim da linha.",
+        effects: { sound: 'sfx-fail' },
+        choices: [] // Final: Hesitação
     }
 };
