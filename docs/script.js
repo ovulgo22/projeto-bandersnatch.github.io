@@ -1,89 +1,106 @@
 /*
     PROJETO: Documentação de Cargos em Desenvolvimento Web
     ARQUIVO: script.js
-    VERSÃO: 1.0
-    DATA: 03/09/2025
-    DESCRIÇÃO: Script para funcionalidades interativas do site, como a alternância de tema.
-               O código é escrito com foco em performance, acessibilidade e experiência do usuário.
+    VERSÃO: 2.0
+    DATA: 03/09/2025 (06:07 America/Sao_Paulo)
+    
+    CHANGELOG v2.0:
+    - MÓDULO ADICIONADO: Scroll Spy (Espião de Rolagem) para a navegação lateral.
+    - FUNCIONALIDADE: Destaca o link na barra lateral que corresponde à seção visível na tela.
+    - TECNOLOGIA: Implementado com a Intersection Observer API para alta performance, evitando
+                  eventos de 'scroll' que podem causar lentidão.
+    - REATORAÇÃO: O código foi organizado em módulos para melhor legibilidade e manutenção.
 */
 
-// QA & Front-End: Envolvemos todo o código em um evento 'DOMContentLoaded'.
-// Isso garante que o script só execute após o HTML ser completamente carregado e analisado,
-// evitando erros de "elemento não encontrado". É uma prática de programação defensiva.
+// QA & Front-End: O evento 'DOMContentLoaded' continua sendo a melhor prática para garantir
+// que o DOM esteja pronto antes da execução de qualquer script.
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- MÓDULO DE ALTERNÂNCIA DE TEMA ---
+    // --- MÓDULO 1: ALTERNÂNCIA DE TEMA (Lógica da v1.0, sem alterações) ---
 
-    // 1. SELEÇÃO DOS ELEMENTOS DO DOM
-    // Selecionamos os elementos com os quais vamos interagir.
-    const themeToggleButton = document.getElementById('theme-toggle');
-    const htmlElement = document.documentElement; // Acessa a tag <html>
+    (() => {
+        const themeToggleButton = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
 
-    // QA: Verificação para garantir que o botão existe na página antes de tentar adicionar um evento.
-    // Se, por algum motivo, o botão for removido do HTML, o script não quebrará.
-    if (!themeToggleButton) {
-        console.warn('Botão de alternância de tema não encontrado no DOM.');
-        return; // Encerra a execução deste módulo se o botão não existir.
-    }
+        if (!themeToggleButton) {
+            console.warn('Botão de alternância de tema não encontrado no DOM.');
+            return;
+        }
 
-    // 2. CONSTANTES E ÍCONES
-    // Creative Dev: Usar emojis ou SVGs como ícones é uma forma leve de adicionar apelo visual.
-    const ICONS = {
-        light: '☀️', // Sol para tema claro
-        dark: '🌙'  // Lua para tema escuro
-    };
+        const ICONS = { light: '☀️', dark: '🌙' };
 
-    // 3. FUNÇÃO PRINCIPAL PARA APLICAR O TEMA
-    /**
-     * Aplica um tema (claro ou escuro) ao site, atualizando a classe do HTML,
-     * o ícone do botão, o aria-label para acessibilidade e salvando a preferência.
-     * @param {string} theme - O tema a ser aplicado ('light' or 'dark').
-     */
-    const applyTheme = (theme) => {
-        // Front-End: Adiciona ou remove a classe que ativa as variáveis CSS do tema escuro.
-        htmlElement.classList.toggle('dark-theme', theme === 'dark');
+        const applyTheme = (theme) => {
+            htmlElement.classList.toggle('dark-theme', theme === 'dark');
+            const newLabel = `Alternar para tema ${theme === 'dark' ? 'claro' : 'escuro'}`;
+            themeToggleButton.setAttribute('aria-label', newLabel);
+            themeToggleButton.innerHTML = theme === 'dark' ? ICONS.light : ICONS.dark;
+            localStorage.setItem('theme', theme);
+        };
 
-        // A11y: Atualiza o aria-label para que leitores de tela informem a ação correta do botão.
-        const newLabel = `Alternar para tema ${theme === 'dark' ? 'claro' : 'escuro'}`;
-        themeToggleButton.setAttribute('aria-label', newLabel);
+        const savedTheme = localStorage.getItem('theme');
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const initialTheme = savedTheme || (systemPrefersDark ? 'dark' : 'light');
+        applyTheme(initialTheme);
 
-        // UI/UX: Atualiza o ícone do botão para refletir o estado atual.
-        themeToggleButton.innerHTML = theme === 'dark' ? ICONS.light : ICONS.dark;
-
-        // UX: Salva a escolha do usuário no localStorage para persistência entre visitas.
-        localStorage.setItem('theme', theme);
-    };
-
-    // 4. LÓGICA DE INICIALIZAÇÃO DO TEMA
-    // UX: Esta é a lógica "inteligente". Ela decide qual tema carregar na primeira visita.
-    // A prioridade é:
-    // 1. Preferência salva pelo usuário (localStorage).
-    // 2. Preferência do sistema operacional do usuário (prefers-color-scheme).
-    // 3. Padrão: tema claro.
-    const savedTheme = localStorage.getItem('theme');
-    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-    // Determina o tema inicial com base na hierarquia de prioridades.
-    const initialTheme = savedTheme || (systemPrefersDark ? 'dark' : 'light');
-    
-    // Aplica o tema determinado assim que o script carrega.
-    applyTheme(initialTheme);
+        themeToggleButton.addEventListener('click', () => {
+            const currentTheme = htmlElement.classList.contains('dark-theme') ? 'dark' : 'light';
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            applyTheme(newTheme);
+        });
+    })();
 
 
-    // 5. EVENT LISTENER PARA O CLIQUE
-    // Adiciona o evento de clique ao botão para permitir a alternância manual.
-    themeToggleButton.addEventListener('click', () => {
-        // Verifica qual é o tema atual checando a presença da classe '.dark-theme'.
-        const currentTheme = htmlElement.classList.contains('dark-theme') ? 'dark' : 'light';
-        
-        // Calcula o novo tema. Se o atual for 'dark', o novo será 'light', e vice-versa.
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    // --- MÓDULO 2: SCROLL SPY PARA NAVEGAÇÃO LATERAL (Novo na v2.0) ---
 
-        // Aplica o novo tema.
-        applyTheme(newTheme);
-    });
+    (() => {
+        // Front-End: Selecionamos todas as seções que queremos observar e todos os links da navegação.
+        const sections = document.querySelectorAll('.role-section');
+        const navLinks = document.querySelectorAll('.sidebar-nav a');
 
-    // --- OUTROS MÓDULOS PODEM SER ADICIONADOS AQUI NO FUTURO ---
-    // Ex: Funcionalidade de busca, animações de scroll, etc.
+        // QA: Se não houver seções ou links (página vazia), o script não executa o resto do módulo.
+        if (sections.length === 0 || navLinks.length === 0) {
+            return;
+        }
+
+        // UX/Front-End: Opções para o Intersection Observer.
+        // O 'rootMargin' cria uma "linha de gatilho" imaginária no centro da tela.
+        // -40% do topo e -60% da base significa que a seção só é considerada "ativa"
+        // quando seu início cruza a linha dos 40% superiores da viewport.
+        const observerOptions = {
+            root: null, // Observa em relação à viewport do navegador.
+            rootMargin: '-40% 0px -60% 0px',
+            threshold: 0
+        };
+
+        // A função que será executada sempre que uma seção entrar ou sair da "linha de gatilho".
+        const observerCallback = (entries, observer) => {
+            entries.forEach(entry => {
+                // Se a seção está cruzando nossa linha de gatilho na direção correta...
+                if (entry.isIntersecting) {
+                    // Pega o ID da seção que está visível.
+                    const currentSectionId = entry.target.id;
+
+                    // Remove a classe 'active' de todos os links.
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                    });
+
+                    // Encontra o link de navegação que corresponde à seção atual e adiciona a classe 'active'.
+                    const activeLink = document.querySelector(`.sidebar-nav a[href="#${currentSectionId}"]`);
+                    if (activeLink) {
+                        activeLink.classList.add('active');
+                    }
+                }
+            });
+        };
+
+        // Front-End: Cria a instância do observer.
+        const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+        // Inicia a observação para cada uma das seções de conteúdo.
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    })();
 
 });
