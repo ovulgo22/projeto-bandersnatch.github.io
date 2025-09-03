@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>Guia Completo de Carreiras em Desenvolvimento Web | O Portal</title>
-    <meta name="description" content="Explore os 11 principais cargos que constroem a web. Um portal detalhado para guiar seus estudos sobre Arquitetura de Informação, UX/UI, Desenvolvimento, DevOps e mais.">
-    <meta name="keywords" content="Carreiras Web, Portal de Desenvolvimento, Guia de Profissões, HTML, CSS, JavaScript, UX, UI, DevOps, SEO">
+    <title>Cibersegurança Web: Fortificando Aplicações Digitais | Guia Completo</title>
+    <meta name="description" content="Explore os pilares da cibersegurança web, desde a arquitetura segura ao DevSecOps, análise de vulnerabilidades, resposta a incidentes e conformidade. Seu guia essencial para construir e proteger a web.">
+    <meta name="keywords" content="Cibersegurança Web, Segurança de Aplicações, DevSecOps, Engenharia de Segurança, Análise de Vulnerabilidades, OWASP, GDPR, LGPD, ISO 27001, Teste de Invasão, Pentest, Resposta a Incidentes, Conformidade, Privacidade de Dados">
 
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
@@ -15,106 +15,131 @@
 
     <header class="site-header">
         <div class="container">
-            <h1>Guia Definitivo de Carreiras Web</h1>
-            <p class="subtitle">Um portal para explorar os papéis que constroem a web moderna.</p>
-            <button id="theme-toggle" class="theme-toggle" aria-label="Alternar para tema escuro"></button>
+            <div class="header-content">
+                <a href="index.html" class="logo-link" aria-label="Página Inicial do Guia de Cibersegurança Web">
+                    <img src="assets/shield-icon.svg" alt="Ícone de Escudo de Segurança" class="site-logo">
+                    <h1>Cibersegurança Web</h1>
+                </a>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Alternar tema claro/escuro"></button>
+            </div>
+            <p class="subtitle">Fortificando Aplicações Digitais: Construa, Proteja, Monitore.</p>
         </div>
     </header>
 
     <main class="site-main">
         <div class="container">
             <section id="introduction">
-                <h2>Explore os Pilares da Web</h2>
-                <p>
-                    A criação de uma experiência digital de excelência exige uma orquestra de talentos. Cada cargo abaixo representa uma disciplina fundamental. Clique em um card para mergulhar em um estudo aprofundado sobre suas responsabilidades, ferramentas e mentalidade.
+                <p class="intro-text">
+                    No cenário digital de hoje, a segurança não é uma opção, mas uma fundação. Este guia foi meticulosamente elaborado para desvendar os princípios, as práticas e os papéis cruciais que asseguram a integridade, a confidencialidade e a disponibilidade das suas aplicações web.
+                </p>
+                <p class="intro-highlight">
+                    Navegue pelas seções abaixo para fortalecer seu conhecimento e suas defesas.
                 </p>
             </section>
 
-            <section id="roles-grid" aria-labelledby="grid-title">
-                <h2 id="grid-title" class="visually-hidden">Seleção de Cargos</h2>
+            <section id="security-pillars" aria-labelledby="pillars-title">
+                <h2 id="pillars-title" class="visually-hidden">Pilares da Cibersegurança Web</h2>
                 <div class="grid-container">
 
-                    <a href="roles/arquiteto-informacao.html" class="role-card" aria-label="Saiba mais sobre Arquiteto de Informação">
+                    <a href="security-pillars/arquitetura-seguranca.html" class="security-card" aria-label="Detalhes sobre Arquitetura de Segurança Web">
                         <article>
-                            <header class="role-card__header">
-                                <svg role="img" viewBox="0 0 24 24" class="role-icon"><title>Ícone de Arquiteto de Informação</title><path d="M10 3v4H6V3h4M21 3v4h-4V3h4m-7 1v4h-4V4h4M6 17v4h4v-4H6m1-6v4h4v-4H7m7 0v4h4v-4h-4m3 6v4h4v-4h-4m-7 1v3H6v-3h4m-3-6v4H6v-4h1Z"/></svg>
-                                <h3 class="role-card__title">Arquiteto de Informação</h3>
+                            <header class="security-card__header">
+                                <img src="assets/icons/architecture-icon.svg" alt="Ícone de Arquitetura" class="security-icon">
+                                <h3 class="security-card__title">Arquitetura de Segurança Web</h3>
                             </header>
-                            <p class="role-card__summary">O planejador mestre da estrutura, organização e navegação do conteúdo.</p>
-                            <div class="role-card__tags">
-                                <span>#Estrutura</span>
-                                <span>#Navegação</span>
-                                <span>#Taxonomia</span>
+                            <p class="security-card__summary">Projete sistemas com segurança desde a concepção, identificando e mitigando riscos em todas as camadas.</p>
+                            <div class="security-card__tags">
+                                <span>#ThreatModeling</span>
+                                <span>#DesignSeguro</span>
+                                <span>#DevSecOps</span>
                             </div>
-                            <footer class="role-card__footer">
-                                <span>Ver Detalhes &rarr;</span>
+                            <footer class="security-card__footer">
+                                <span>Explorar &rarr;</span>
                             </footer>
                         </article>
                     </a>
 
-                    <a href="roles/ux-designer.html" class="role-card" aria-label="Saiba mais sobre UX Designer">
+                    <a href="security-pillars/desenvolvimento-seguro.html" class="security-card" aria-label="Detalhes sobre Desenvolvimento Seguro">
                         <article>
-                            <header class="role-card__header">
-                                <svg role="img" viewBox="0 0 24 24" class="role-icon"><title>Ícone de UX Designer</title><path d="M12 4a4 4 0 1 0 0 8a4 4 0 0 0 0-8ZM8 5a2 2 0 1 1 4 0a2 2 0 0 1-4 0Zm8 10a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v1h14v-1Z"/></svg>
-                                <h3 class="role-card__title">UX Designer</h3>
+                            <header class="security-card__header">
+                                <img src="assets/icons/coding-icon.svg" alt="Ícone de Desenvolvimento" class="security-icon">
+                                <h3 class="security-card__title">Desenvolvimento Seguro</h3>
                             </header>
-                            <p class="role-card__summary">O advogado do usuário, focado em tornar a experiência fácil e agradável.</p>
-                            <div class="role-card__tags">
-                                <span>#Pesquisa</span>
-                                <span>#Jornadas</span>
-                                <span>#Empatia</span>
+                            <p class="security-card__summary">Escreva código que resista a ataques, aplicando práticas recomendadas e frameworks de segurança.</p>
+                            <div class="security-card__tags">
+                                <span>#OWASP</span>
+                                <span>#CodeReview</span>
+                                <span>#Sanitização</span>
                             </div>
-                            <footer class="role-card__footer">
-                                <span>Ver Detalhes &rarr;</span>
+                            <footer class="security-card__footer">
+                                <span>Explorar &rarr;</span>
                             </footer>
                         </article>
                     </a>
 
-                    <a href="roles/ui-designer.html" class="role-card" aria-label="Saiba mais sobre UI Designer">
+                    <a href="security-pillars/analise-vulnerabilidades.html" class="security-card" aria-label="Detalhes sobre Análise de Vulnerabilidades">
                         <article>
-                            <header class="role-card__header">
-                                <svg role="img" viewBox="0 0 24 24" class="role-icon"><title>Ícone de UI Designer</title><path d="m8.5 3l-4 4l.8.8L9 4.1V15h2V4.1l3.7 3.7l.8-.8l-4-4a.5.5 0 0 0-.7 0ZM15 9h-2v2h2v-2Zm-3 3h2v2h-2v-2Zm3 3h2v2h-2v-2Zm-3 3h2v2h-2v-2Z"/></svg>
-                                <h3 class="role-card__title">UI Designer</h3>
+                            <header class="security-card__header">
+                                <img src="assets/icons/vulnerability-scan-icon.svg" alt="Ícone de Análise de Vulnerabilidades" class="security-icon">
+                                <h3 class="security-card__title">Análise de Vulnerabilidades</h3>
                             </header>
-                            <p class="role-card__summary">O artista visual que cria a aparência e a sensação da interface.</p>
-                             <div class="role-card__tags">
-                                <span>#Visual</span>
-                                <span>#Design System</span>
-                                <span>#Estética</span>
+                            <p class="security-card__summary">Identifique fraquezas em suas aplicações através de testes automatizados e manuais.</p>
+                            <div class="security-card__tags">
+                                <span>#Pentest</span>
+                                <span>#SAST</span>
+                                <span>#DAST</span>
                             </div>
-                            <footer class="role-card__footer">
-                                <span>Ver Detalhes &rarr;</span>
+                            <footer class="security-card__footer">
+                                <span>Explorar &rarr;</span>
+                            </footer>
+                        </article>
+                    </a>
+
+                    <a href="security-pillars/monitoramento-incidentes.html" class="security-card" aria-label="Detalhes sobre Monitoramento e Resposta a Incidentes">
+                        <article>
+                            <header class="security-card__header">
+                                <img src="assets/icons/monitoring-incident-icon.svg" alt="Ícone de Monitoramento e Incidente" class="security-icon">
+                                <h3 class="security-card__title">Monitoramento e Resposta a Incidentes</h3>
+                            </header>
+                            <p class="security-card__summary">Detecte anomalias em tempo real e reaja rapidamente a ameaças para minimizar danos.</p>
+                            <div class="security-card__tags">
+                                <span>#SIEM</span>
+                                <span>#IRP</span>
+                                <span>#Forensics</span>
+                            </div>
+                            <footer class="security-card__footer">
+                                <span>Explorar &rarr;</span>
                             </footer>
                         </article>
                     </a>
                     
-                    <a href="roles/dev-frontend.html" class="role-card" aria-label="Saiba mais sobre Desenvolvedor Front-End">
+                    <a href="security-pillars/conformidade-governanca.html" class="security-card" aria-label="Detalhes sobre Conformidade e Governança em Segurança">
                         <article>
-                            <header class="role-card__header">
-                                <svg role="img" viewBox="0 0 24 24" class="role-icon"><title>Ícone de Desenvolvedor Front-End</title><path d="M8 3L3 8l5 5l1.41-1.41L5.83 8l3.58-3.59L8 3zm8 0l-1.41 1.41L18.17 8l-3.58 3.59L16 13l5-5-5-5zM12 21a1 1 0 0 1-1-1v-2.59l-3.71 3.71-1.41-1.41L9.59 16H7a1 1 0 0 1 0-2h2.59l-3.71-3.71 1.41-1.41L11.59 12H12V8h-1.59L6.7 11.71 5.29 10.29 9 6.59V4a1 1 0 0 1 2 0v2.59l3.71-3.71 1.41 1.41L12.41 8H15a1 1 0 0 1 0 2h-2.59l3.71 3.71-1.41 1.41L10.41 12H10v4h1.59l3.71-3.71 1.41 1.41L13 17.59V20a1 1 0 0 1-1 1z"/></svg>
-                                <h3 class="role-card__title">Desenvolvedor Front-End</h3>
+                            <header class="security-card__header">
+                                <img src="assets/icons/compliance-icon.svg" alt="Ícone de Conformidade" class="security-icon">
+                                <h3 class="security-card__title">Conformidade e Governança</h3>
                             </header>
-                            <p class="role-card__summary">O construtor que transforma design em código interativo no navegador.</p>
-                             <div class="role-card__tags">
-                                <span>#HTML</span>
-                                <span>#CSS</span>
-                                <span>#JavaScript</span>
+                            <p class="security-card__summary">Navegue pelo complexo cenário regulatório e estabeleça políticas de segurança robustas.</p>
+                            <div class="security-card__tags">
+                                <span>#LGPD</span>
+                                <span>#GDPR</span>
+                                <span>#ISO27001</span>
                             </div>
-                            <footer class="role-card__footer">
-                                <span>Ver Detalhes &rarr;</span>
+                            <footer class="security-card__footer">
+                                <span>Explorar &rarr;</span>
                             </footer>
                         </article>
                     </a>
-                    
-                    </div>
+
+                </div>
             </section>
         </div>
     </main>
 
     <footer class="site-footer">
         <div class="container">
-            <p>&copy; 2025 Guia Definitivo de Carreiras Web. Todos os direitos reservados.</p>
-            <p>Um projeto construído com a sinergia de 11 especialidades.</p>
+            <p>&copy; 2025 Guia Cibersegurança Web. Todos os direitos reservados.</p>
+            <p>Construa com Segurança.</p>
         </div>
     </footer>
 
