@@ -1,30 +1,27 @@
 /*
-    PROJETO: Documentação de Cargos em Desenvolvimento Web
+    PROJETO: Documentação de Cibersegurança Web
     ARQUIVO: script.js
-    VERSÃO: 3.0
-    DATA: 03/09/2025 (06:16 America/Sao_Paulo)
+    VERSÃO: 4.0
+    DATA: 03/09/2025 (06:25 America/Sao_Paulo)
     
-    CHANGELOG v3.0 (ATUALIZAÇÃO ARQUITETURAL):
-    - CORREÇÃO/REATORAÇÃO: O script foi adaptado para a nova arquitetura multi-página.
-    - LÓGICA CONDICIONAL: O módulo de Scroll Spy agora é envolvido por uma verificação.
-      Ele só é executado se detectar a presença de uma barra de navegação lateral ('.sidebar-nav') na página.
-    - PREVENÇÃO DE ERROS: Isso previne erros de console na página principal (index.html) e garante
-      que a funcionalidade de rolagem só seja ativada nas páginas de detalhe, onde é necessária.
-    - MANTIDO: O módulo de alternância de tema continua global e funciona em todas as páginas sem alterações.
+    CHANGELOG v4.0 (MEGA ATUALIZAÇÃO - NOVA TEMÁTICA):
+    - CORREÇÃO (LÓGICA DE TEMA): Refatorado para a nova abordagem "dark-first" do CSS.
+      - O script agora alterna a classe `.light-theme` no elemento <html>.
+      - A lógica de `localStorage` e `prefers-color-scheme` foi invertida para refletir que escuro é o padrão.
+    - MANUTENÇÃO (SCROLL SPY): O módulo de Scroll Spy foi mantido, pois será utilizado
+      nas futuras páginas de detalhe. Sua lógica condicional previne a execução na página principal.
+    - LIMPEZA: Comentários e variáveis atualizados para a nova temática.
 */
 
-// O evento 'DOMContentLoaded' continua a ser a base para a execução segura do script.
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- MÓDULO 1: ALTERNÂNCIA DE TEMA (Global) ---
-    // Esta função anônima auto-executável (IIFE) mantém seu escopo isolado.
-    // Funciona em todas as páginas.
+    // --- MÓDULO 1: ALTERNÂNCIA DE TEMA (Lógica invertida para "dark-first") ---
+
     (() => {
         const themeToggleButton = document.getElementById('theme-toggle');
         const htmlElement = document.documentElement;
 
         if (!themeToggleButton) {
-            // A verificação continua sendo uma boa prática.
             console.warn('Botão de alternância de tema não encontrado no DOM.');
             return;
         }
@@ -32,37 +29,47 @@ document.addEventListener('DOMContentLoaded', () => {
         const ICONS = { light: '☀️', dark: '🌙' };
 
         const applyTheme = (theme) => {
-            htmlElement.classList.toggle('dark-theme', theme === 'dark');
-            const newLabel = `Alternar para tema ${theme === 'dark' ? 'claro' : 'escuro'}`;
+            // Se o tema for 'light', adiciona a classe. Se for 'dark', remove (voltando ao padrão).
+            htmlElement.classList.toggle('light-theme', theme === 'light');
+            
+            // O label e o ícone são o OPOSTO do tema atual. Se o tema é claro, o botão mostra a lua para MUDAR para escuro.
+            const newLabel = `Alternar para tema ${theme === 'light' ? 'escuro' : 'claro'}`;
             themeToggleButton.setAttribute('aria-label', newLabel);
-            themeToggleButton.innerHTML = theme === 'dark' ? ICONS.light : ICONS.dark;
+            themeToggleButton.innerHTML = theme === 'light' ? ICONS.dark : ICONS.light;
+
             localStorage.setItem('theme', theme);
         };
 
         const savedTheme = localStorage.getItem('theme');
-        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        const initialTheme = savedTheme || (systemPrefersDark ? 'dark' : 'light');
+        // Agora, o não-padrão é o tema claro.
+        const systemPrefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+
+        // O tema inicial será o salvo, OU 'light' se o sistema preferir, OU o padrão ('dark').
+        const initialTheme = savedTheme || (systemPrefersLight ? 'light' : 'dark');
+        
         applyTheme(initialTheme);
 
         themeToggleButton.addEventListener('click', () => {
-            const currentTheme = htmlElement.classList.contains('dark-theme') ? 'dark' : 'light';
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            // Verifica o tema atual pela ausência ou presença da classe.
+            const currentTheme = htmlElement.classList.contains('light-theme') ? 'light' : 'dark';
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
             applyTheme(newTheme);
         });
     })();
 
 
-    // --- MÓDULO 2: SCROLL SPY PARA NAVEGAÇÃO LATERAL (Condicional - Apenas em Páginas de Detalhe) ---
+    // --- MÓDULO 2: SCROLL SPY PARA PÁGINAS DE DETALHE (Mantido para uso futuro) ---
     
-    // QA & Front-End: A verificação principal. Buscamos um elemento que só existe nas páginas de detalhe.
+    // Esta lógica não será executada na página principal (index.html), pois
+    // o elemento '.sidebar-nav' não existe nela. Ela aguarda as páginas de conteúdo.
     const sidebarNav = document.querySelector('.sidebar-nav');
 
-    // Se o elemento .sidebar-nav for encontrado, então executamos a lógica do Scroll Spy.
     if (sidebarNav) {
-        // O código a seguir é idêntico ao da v2.0, mas agora só é executado quando necessário.
         (() => {
-            const sections = document.querySelectorAll('.role-section');
-            const navLinks = sidebarNav.querySelectorAll('a:not(.back-link)'); // Ignora o link de voltar
+            // Nota: a classe '.content-section' poderá ser usada nas páginas de detalhe
+            // no lugar de '.role-section' para se adequar à nova temática.
+            const sections = document.querySelectorAll('.content-section'); 
+            const navLinks = sidebarNav.querySelectorAll('a:not(.back-link)');
 
             if (sections.length === 0 || navLinks.length === 0) {
                 return;
