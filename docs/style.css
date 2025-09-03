@@ -1,49 +1,31 @@
 /*
     PROJETO: Documentação de Cibersegurança Web
     ARQUIVO: style.css
-    VERSÃO: 4.1
-    DATA: 03/09/2025 (06:32 America/Sao_Paulo)
+    VERSÃO: 4.2
+    DATA: 03/09/2025 (06:36 America/Sao_Paulo)
     
-    CHANGELOG v4.1 (ATUALIZAÇÃO DE REFINAMENTO):
-    - ATUALIZAÇÃO VISUAL:
-      - Interações dos cards aprimoradas com borda gradiente e brilho no ícone.
-      - Tipografia refinada com ajustes de letter-spacing e line-height para melhor legibilidade.
-      - Sombra dos cards (box-shadow) suavizada para um efeito de profundidade mais sutil.
-    - ORGANIZAÇÃO E CORREÇÕES:
-      - Introduzido um sistema de variáveis de espaçamento (--space-xs, --space-s, etc.) e aplicado globalmente.
-      - Refatorado o código para usar as novas variáveis, garantindo consistência rítmica.
-      - Implementados estilos para classes de organização como .content-section.
-      - Adicionada uma nova variável de cor (--color-text-tertiary) para hierarquia visual.
+    CHANGELOG v4.2 (ATUALIZAÇÃO DE SUPORTE E CORREÇÃO):
+    - CORREÇÃO: Adicionada a classe utilitária `.no-transitions` para suportar a funcionalidade de 
+      transição suave do script.js v4.1. Isso previne o "flash" de animação no carregamento da página.
+    - REFINAMENTO (A11y): Aprimorado o estilo de `:focus-visible` com um contorno mais espesso
+      para melhorar a clareza da navegação por teclado.
 */
 
 /* --- 1. IMPORTAÇÕES E DEFINIÇÕES GLOBAIS --- */
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@500;700&family=Inter:wght@400;500;700&display=swap');
 
 :root {
-    /* Paleta de Cores (Tema Escuro - Padrão) */
     --color-background: #0a192f;
     --color-surface: #112240;
     --color-text-primary: #ccd6f6;
-    --color-text-secondary: #a7b4d4; /* Levemente mais claro para melhor leitura */
-    --color-text-tertiary: #8892b0;  /* CORREÇÃO: Nova cor para metadados */
+    --color-text-secondary: #a7b4d4;
+    --color-text-tertiary: #8892b0;
     --color-primary-accent: #64ffda;
     --color-border: #233554;
     --color-shadow: rgba(100, 255, 218, 0.07);
-
-    /* Tipografia */
+    --space-xxs: 0.25rem; --space-xs: 0.5rem; --space-s: 1rem; --space-m: 1.5rem; --space-l: 2rem; --space-xl: 3rem; --space-xxl: 4rem;
     --font-family-headings: 'Fira Code', monospace;
     --font-family-body: 'Inter', sans-serif;
-
-    /* ORGANIZAÇÃO: Variáveis de Espaçamento */
-    --space-xxs: 0.25rem; /* 4px */
-    --space-xs:  0.5rem;  /* 8px */
-    --space-s:   1rem;    /* 16px */
-    --space-m:   1.5rem;  /* 24px */
-    --space-l:   2rem;    /* 32px */
-    --space-xl:  3rem;    /* 48px */
-    --space-xxl: 4rem;    /* 64px */
-
-    /* Outros */
     --border-radius: 4px;
     --transition-speed: 250ms;
 }
@@ -65,7 +47,7 @@ html.light-theme {
 body { 
     font-family: var(--font-family-body);
     font-size: 1rem;
-    line-height: 1.7; /* ATUALIZAÇÃO VISUAL: Maior espaçamento de linha */
+    line-height: 1.7;
     color: var(--color-text-primary);
     background-color: var(--color-background);
     -webkit-font-smoothing: antialiased;
@@ -75,19 +57,31 @@ body {
 @media (min-width: 768px) { body { font-size: 1.125rem; } }
 
 /* --- 3. TIPOGRAFIA E UTILITÁRIOS GLOBAIS --- */
-h1, h2, h3 { font-family: var(--font-family-headings); color: var(--color-text-primary); line-height: 1.4; font-weight: 700; letter-spacing: 0.5px; /* ATUALIZAÇÃO VISUAL */ }
+h1, h2, h3 { font-family: var(--font-family-headings); color: var(--color-text-primary); line-height: 1.4; font-weight: 700; letter-spacing: 0.5px; }
 h1 { font-size: clamp(2rem, 5vw, 2.5rem); }
 h2 { font-size: clamp(1.5rem, 4vw, 2rem); }
 h3 { font-size: 1.25rem; }
-
 a { color: var(--color-primary-accent); text-decoration: none; transition: filter var(--transition-speed); }
 a:hover { filter: brightness(1.2); }
-a:focus, button:focus-visible { outline: 2px solid var(--color-primary-accent); outline-offset: 4px; border-radius: 2px; }
+
+/* REFINAMENTO (A11y): Estilo de foco mais robusto e visível. */
+a:focus-visible, button:focus-visible { 
+    outline: 3px solid var(--color-primary-accent); 
+    outline-offset: 3px; 
+    border-radius: 2px; 
+}
+
 .container { width: 90%; max-width: 1100px; margin: 0 auto; }
 .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 
-/* --- 4. COMPONENTES GLOBAIS --- */
+/* CORREÇÃO: Classe utilitária para o script desativar transições durante o carregamento. */
+.no-transitions *,
+.no-transitions *::before,
+.no-transitions *::after {
+  transition: none !important;
+}
 
+/* --- 4. COMPONENTES GLOBAIS --- */
 .site-header { padding: var(--space-m) 0; border-bottom: 1px solid var(--color-border); }
 .header-content { display: flex; justify-content: space-between; align-items: center; }
 .logo-link { display: inline-flex; align-items: center; gap: var(--space-s); color: var(--color-text-primary); font-weight: 700; }
@@ -97,17 +91,14 @@ a:focus, button:focus-visible { outline: 2px solid var(--color-primary-accent); 
 .subtitle { font-size: 1rem; color: var(--color-text-secondary); text-align: center; margin-top: var(--space-s); font-family: var(--font-family-headings); }
 .theme-toggle { background: transparent; border: 1px solid var(--color-border); width: 40px; height: 40px; border-radius: 50%; cursor: pointer; color: var(--color-text-tertiary); }
 .theme-toggle:hover { color: var(--color-primary-accent); border-color: var(--color-primary-accent); }
-
 .site-footer { padding: var(--space-l) 0; margin-top: var(--space-xl); text-align: center; font-size: 0.9rem; color: var(--color-text-secondary); border-top: 1px solid var(--color-border); }
 .site-footer p:first-child { margin-bottom: var(--space-xs); }
 
 /* --- 5. ESTRUTURA E CARDS DA PÁGINA PRINCIPAL --- */
 .content-section { padding: var(--space-xl) 0; }
 #introduction.content-section { padding-top: var(--space-l); padding-bottom: var(--space-l); }
-
 .intro-text { font-size: 1.125rem; color: var(--color-text-secondary); max-width: 70ch; margin: 0 auto var(--space-m) auto; text-align: center; }
 .intro-highlight { font-family: var(--font-family-headings); font-size: 1.25rem; color: var(--color-primary-accent); text-align: center; }
-
 .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: var(--space-m); }
 
 .security-card {
@@ -118,11 +109,9 @@ a:focus, button:focus-visible { outline: 2px solid var(--color-primary-accent); 
     border-radius: var(--border-radius);
     padding: var(--space-m);
     transition: transform var(--transition-speed), box-shadow var(--transition-speed);
-    position: relative; /* Para a borda gradiente */
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* ATUALIZAÇÃO VISUAL: Sombra mais suave */
+    position: relative;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
-
-/* ATUALIZAÇÃO VISUAL: Efeito de borda gradiente no hover */
 .security-card::before {
     content: '';
     position: absolute;
