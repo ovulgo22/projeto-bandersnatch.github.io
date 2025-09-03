@@ -1,7 +1,6 @@
 /*
- * STYLE.CSS v3.0 - Interface Avançada e Imersiva
- * Estiliza todos os novos componentes da arquitetura v3.0,
- * com foco em animações, responsividade e uma estética coesa.
+ * STYLE.CSS v3.2 - Acessibilidade e Refatoração (Código Completo)
+ * Adiciona a classe sr-only, melhora o foco de teclado e refatora os estilos de botão.
  */
 
 /*----------------------------------------------------------------*/
@@ -29,21 +28,42 @@
 }
 
 html {
-    font-size: 16px; /* Base para unidades 'rem' */
+    font-size: 16px;
 }
 
 body {
     background-color: var(--color-background);
     color: var(--color-text);
     font-family: var(--font-main);
-    overflow: hidden; /* Previne barras de rolagem indesejadas */
+    overflow: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
 
+/*----------------------------------------------------------------*/
+/* 2. CLASSES UTILITÁRIAS
+/*----------------------------------------------------------------*/
+/* v3.2 CORREÇÃO DE ACESSIBILIDADE: Oculta visualmente, mas mantém para leitores de tela. */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+.hidden {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
 
 /*----------------------------------------------------------------*/
-/* 2. TELA DE CARREGAMENTO E NOSCRIPT
+/* 3. TELA DE CARREGAMENTO E NOSCRIPT
 /*----------------------------------------------------------------*/
 #loading-screen, .noscript-warning {
     position: fixed;
@@ -83,9 +103,8 @@ body {
     margin-bottom: 1rem;
 }
 
-
 /*----------------------------------------------------------------*/
-/* 3. LAYOUT PRINCIPAL E FUNDOS
+/* 4. LAYOUT PRINCIPAL E FUNDOS
 /*----------------------------------------------------------------*/
 #ui-container {
     position: relative;
@@ -104,7 +123,7 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 0.3; /* Deixa o fundo mais sutil */
+    opacity: 0.3;
 }
 
 #vfx-overlay {
@@ -112,7 +131,7 @@ body {
     inset: 0;
     z-index: 2;
     pointer-events: none;
-    background: radial-gradient(ellipse at center, rgba(0,0,0,0) 50%, rgba(0,0,0,0.7) 100%); /* Efeito de vinheta */
+    background: radial-gradient(ellipse at center, rgba(0,0,0,0) 50%, rgba(0,0,0,0.7) 100%);
 }
 
 #game-content {
@@ -127,9 +146,8 @@ body {
     flex-direction: column;
 }
 
-
 /*----------------------------------------------------------------*/
-/* 4. CABEÇALHO, STATUS E BOTÃO DE CONFIGURAÇÕES
+/* 5. CABEÇALHO, STATUS E BOTÃO DE CONFIGURAÇÕES
 /*----------------------------------------------------------------*/
 #game-header {
     display: flex;
@@ -146,23 +164,8 @@ body {
     font-size: 1.25rem;
 }
 
-#open-settings-button {
-    background: none;
-    border: none;
-    color: var(--color-text);
-    font-size: 2rem;
-    cursor: pointer;
-    transition: transform var(--transition-speed-fast) ease;
-}
-
-#open-settings-button:hover {
-    color: var(--color-primary-accent);
-    transform: rotate(45deg);
-}
-
-
 /*----------------------------------------------------------------*/
-/* 5. CONTEÚDO PRINCIPAL (HISTÓRIA E ESCOLHAS)
+/* 6. CONTEÚDO PRINCIPAL (HISTÓRIA E ESCOLHAS)
 /*----------------------------------------------------------------*/
 #main-content {
     flex-grow: 1;
@@ -172,11 +175,14 @@ body {
     text-align: center;
 }
 
-#story-text {
+#story-container {
+    min-height: 150px;
+}
+
+#story-text-visual {
     font-size: 1.5rem;
     line-height: 1.7;
     text-shadow: 0 0 8px rgba(0,0,0,0.7);
-    min-height: 150px;
 }
 
 #choices-container {
@@ -188,21 +194,42 @@ body {
     min-height: 100px;
 }
 
-.choice-button {
-    background: transparent;
-    border: 2px solid var(--color-secondary-accent);
-    color: var(--color-secondary-accent);
-    padding: 1rem 2rem;
-    font-family: var(--font-display);
-    font-size: 1.5rem;
+/*----------------------------------------------------------------*/
+/* 7. BOTÕES (ESTILOS REATORADOS E FOCO DE TECLADO)
+/*----------------------------------------------------------------*/
+
+/* v3.2 REATORAÇÃO: Estilos base aplicados a todos os botões da interface */
+.choice-button, #restart-button, #open-settings-button, #close-settings-button {
     cursor: pointer;
+    font-family: var(--font-display);
+    background: transparent;
+    border: 1px solid transparent;
+    color: var(--color-text);
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    transition: background-color var(--transition-speed-fast), color var(--transition-speed-fast),
+                border-color var(--transition-speed-fast), box-shadow var(--transition-speed-normal),
+                opacity var(--transition-speed-normal), transform var(--transition-speed-normal);
+}
+
+/* v3.2 ACESSIBILIDADE: Estilo de foco aprimorado para navegação por teclado */
+.choice-button:focus-visible, #restart-button:focus-visible, 
+#open-settings-button:focus-visible, #close-settings-button:focus-visible,
+input[type="range"]:focus-visible {
+    outline: none;
+    box-shadow: 0 0 12px var(--color-primary-accent);
+}
+
+/* Estilos específicos para cada tipo de botão */
+.choice-button {
+    border-width: 2px;
+    border-color: var(--color-secondary-accent);
+    padding: 1rem 2rem;
+    font-size: 1.5rem;
     width: 90%;
     max-width: 600px;
     opacity: 0;
     transform: translateY(15px);
-    transition: background-color var(--transition-speed-fast), color var(--transition-speed-fast),
-                border-color var(--transition-speed-fast), box-shadow var(--transition-speed-normal),
-                opacity var(--transition-speed-normal), transform var(--transition-speed-normal);
 }
 
 .choice-button:hover:not(:disabled) {
@@ -212,45 +239,54 @@ body {
     box-shadow: 0 0 20px var(--color-primary-accent);
 }
 
-/* v3.0: Estilo claro para botões desabilitados, resolvendo o bug de feedback da v2.2 */
 .choice-button:disabled {
     color: var(--color-disabled);
     border-color: var(--color-disabled);
     cursor: not-allowed;
-    opacity: 0.4 !important; /* Força a opacidade para feedback imediato */
+    opacity: 0.4 !important;
 }
 
-
-/*----------------------------------------------------------------*/
-/* 6. RODAPÉ E BOTÃO DE REINICIAR
-/*----------------------------------------------------------------*/
 #game-footer {
     padding: 2rem;
     text-align: center;
 }
 
-#restart-button {
-    /* Estilo similar ao choice-button, mas mais sutil */
-    background: transparent;
-    border: 1px solid var(--color-primary-accent);
+#restart-button, #close-settings-button {
+    border-color: var(--color-primary-accent);
     color: var(--color-primary-accent);
     padding: 0.75rem 1.5rem;
-    font-family: var(--font-display);
     font-size: 1.25rem;
-    cursor: pointer;
-    transition: background-color var(--transition-speed-fast), color var(--transition-speed-fast);
 }
 
-#restart-button:hover {
+#restart-button:hover, #close-settings-button:hover {
     background-color: var(--color-primary-accent);
     color: var(--color-background);
 }
 
+#close-settings-button {
+    width: 100%;
+    margin-top: 2rem;
+    border-color: var(--color-text);
+    color: var(--color-text);
+}
 
-/* ... (todo o código anterior da v3.0 permanece o mesmo) ... */
+#close-settings-button:hover {
+    background-color: var(--color-text);
+    color: var(--color-background);
+}
+
+#open-settings-button {
+    font-size: 2rem;
+    border: none;
+}
+
+#open-settings-button:hover {
+    color: var(--color-primary-accent);
+    transform: rotate(45deg);
+}
 
 /*----------------------------------------------------------------*/
-/* 7. MODAL DE CONFIGURAÇÕES (LÓGICA DE TRANSIÇÃO REFINADA)
+/* 8. MODAL DE CONFIGURAÇÕES
 /*----------------------------------------------------------------*/
 #settings-modal {
     position: fixed;
@@ -262,8 +298,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    
-    /* v3.1 ANOMALY FIX: Lógica de transição simplificada */
     opacity: 0;
     visibility: hidden;
     transition: opacity var(--transition-speed-normal) ease-in-out, visibility var(--transition-speed-normal) ease-in-out;
@@ -273,8 +307,6 @@ body {
     opacity: 1;
     visibility: visible;
 }
-
-/* ... (o restante do código do modal e do CSS permanece o mesmo) ... */
 
 .modal-content {
     background: var(--color-background);
@@ -302,26 +334,6 @@ body {
     font-size: 1.1rem;
 }
 
-#close-settings-button {
-    width: 100%;
-    margin-top: 2rem;
-    /* Reutiliza o estilo do botão de restart */
-    background: transparent;
-    border: 1px solid var(--color-text);
-    color: var(--color-text);
-    padding: 0.75rem 1.5rem;
-    font-family: var(--font-display);
-    font-size: 1.25rem;
-    cursor: pointer;
-    transition: background-color var(--transition-speed-fast), color var(--transition-speed-fast);
-}
-
-#close-settings-button:hover {
-    background-color: var(--color-text);
-    color: var(--color-background);
-}
-
-/* Estilização Customizada para Inputs (simplificada) */
 input[type="range"] {
     -webkit-appearance: none;
     appearance: none;
@@ -342,20 +354,18 @@ input[type="range"]::-webkit-slider-thumb {
     border-radius: 50%;
 }
 
-/*----------------------------------------------------------------*/
-/* 8. CLASSES UTILITÁRIAS E EFEITOS (GLITCH, HIDDEN)
-/*----------------------------------------------------------------*/
-.hidden {
-    opacity: 0 !important;
-    visibility: hidden !important;
-    pointer-events: none !important;
+.radio-group { /* Adicionado para estilização dos radios */
+    display: flex;
+    gap: 10px;
 }
 
-#glitch-overlay { /* O código do glitch permanece o mesmo da v2.1 */
+/*----------------------------------------------------------------*/
+/* 9. EFEITOS (GLITCH)
+/*----------------------------------------------------------------*/
+#glitch-overlay {
     position: fixed; inset: 0; pointer-events: none; z-index: 999;
 }
 #glitch-overlay.active::before, #glitch-overlay.active::after {
-    /* Animações e estilos do glitch da v2.1 são inseridos aqui */
     content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
 }
 #glitch-overlay.active::before { background: var(--color-background); opacity: 0.05; animation: glitch-anim-1 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both; }
@@ -363,27 +373,22 @@ input[type="range"]::-webkit-slider-thumb {
 @keyframes glitch-anim-1{0%,100%{clip-path:inset(0 0 95% 0)}25%{clip-path:inset(50% 0 20% 0)}50%{clip-path:inset(90% 0 5% 0)}75%{clip-path:inset(20% 0 60% 0)}}
 @keyframes glitch-anim-2{0%,100%{transform:translateY(0)}50%{transform:translateY(calc(var(--glitch-intensity,1)*20px))}}
 
-
 /*----------------------------------------------------------------*/
-/* 9. RESPONSIVIDADE PARA DISPOSITIVOS MÓVEIS
+/* 10. RESPONSIVIDADE
 /*----------------------------------------------------------------*/
 @media (max-width: 600px) {
     html {
-        font-size: 14px; /* Reduz a base da fonte em telas pequenas */
+        font-size: 14px;
     }
-
     #game-content {
         padding: 0.5rem;
     }
-    
     .modal-content {
         padding: 1.5rem;
     }
-
-    #story-text {
+    #story-text-visual {
         font-size: 1.25rem;
     }
-
     .choice-button, #restart-button {
         font-size: 1.2rem;
     }
