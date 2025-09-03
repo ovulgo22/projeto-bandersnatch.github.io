@@ -632,3 +632,470 @@ body.loading #page-wrapper {
 .theme-option:hover {
     background-color: var(--color-background-interactive);
 }
+
+/* ==========================================================================
+   (Continuação de) 4. HEADER & NAVIGATION
+   ========================================================================== */
+
+/* -------------------
+ * Mega Menu (Desktop)
+ * ------------------- */
+.has-dropdown {
+    position: relative;
+}
+
+.mega-menu {
+    display: none; /* Controlado via JS/hover */
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: clamp(500px, 60vw, 700px); /* Largura responsiva com limites */
+    background-color: var(--color-background-offset);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-lg);
+    padding: var(--spacing-xl);
+    margin-top: var(--spacing-md);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-50%) translateY(10px);
+    transition: opacity var(--transition-duration-fast), transform var(--transition-duration-fast);
+    z-index: 1000;
+}
+
+.has-dropdown:hover .mega-menu {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+.mega-menu-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-xl);
+}
+
+.mega-menu-heading {
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.mega-menu-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.mega-menu-column ul a {
+    display: block;
+    padding: var(--spacing-sm) 0;
+    color: var(--color-text-secondary);
+    font-weight: 500;
+    border-radius: 4px;
+    transition: color var(--transition-duration-fast), background-color var(--transition-duration-fast);
+}
+
+.mega-menu-column ul a:hover {
+    color: var(--color-primary-accent);
+    background-color: var(--color-background-interactive);
+    text-decoration: none;
+}
+
+.featured-article .featured-link {
+    display: block;
+    text-decoration: none;
+}
+.featured-article .featured-link:hover p {
+    color: var(--color-primary-accent);
+}
+
+.featured-article .featured-image {
+    width: 100%;
+    height: auto;
+    border-radius: var(--border-radius);
+    margin-bottom: var(--spacing-md);
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+}
+
+.featured-article p {
+    font-weight: 500;
+    color: var(--color-text-primary);
+    line-height: 1.4;
+    font-size: var(--font-size-md);
+    margin: 0;
+    transition: color var(--transition-duration-fast);
+}
+
+/* ==========================================================================
+   5. MAIN CONTENT & SECTIONS
+   ========================================================================== */
+.main-content {
+    padding-top: var(--header-height);
+}
+
+.content-section {
+    padding: var(--spacing-xxl) 0;
+}
+
+/* Seções com fundo escuro (para contraste, como a de API) */
+.dark-section {
+    background-color: var(--color-background-darker);
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+}
+[data-theme='dark'] .dark-section {
+    background-color: #000;
+}
+
+
+.section-header {
+    text-align: center;
+    margin-bottom: var(--spacing-xxl);
+}
+
+.section-title {
+    font-size: 2.25rem; /* 36px */
+    font-weight: 800;
+    margin-bottom: var(--spacing-md);
+}
+
+.section-subtitle {
+    font-size: var(--font-size-lg);
+    color: var(--color-text-secondary);
+    max-width: 65ch;
+    margin: 0 auto;
+}
+
+.section-divider {
+    width: 100%;
+    height: 100px; /* Altura do espaço do divisor */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.section-divider svg {
+    width: 100%;
+    height: auto;
+}
+
+.divider-path {
+    fill: var(--color-background-darker); /* Cor que combina com a próxima seção */
+    stroke: var(--color-border);
+    stroke-width: 1px;
+}
+[data-theme='dark'] .divider-path {
+    fill: #000;
+}
+
+/* ==========================================================================
+   6. COMPONENT: HERO SECTION
+   ========================================================================== */
+.hero-section {
+    position: relative;
+    height: calc(100vh - var(--header-height));
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    color: #fff; /* O texto será sobre o canvas, então branco é uma aposta segura */
+}
+
+.hero-background-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-color: #0A0A0A; /* Fallback caso o canvas não carregue */
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    padding: var(--container-padding);
+}
+
+.hero-title {
+    font-size: clamp(3rem, 10vw, 6rem); /* Título massivo e responsivo */
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin-bottom: var(--spacing-lg);
+}
+
+/* Animação de entrada para as linhas do título */
+.hero-title-line {
+    display: block;
+    transform: translateY(110%);
+    transition: transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+}
+body.loaded .hero-title-line:nth-child(1) { transition-delay: 100ms; }
+body.loaded .hero-title-line:nth-child(2) { transition-delay: 200ms; }
+body.loaded .hero-title-line:nth-child(3) { transition-delay: 300ms; }
+
+.hero-title-line-wrapper {
+    overflow: hidden;
+    display: block;
+}
+
+body.loaded .hero-title-line {
+    transform: translateY(0);
+}
+
+.hero-subtitle {
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    max-width: 60ch;
+    margin: 0 auto var(--spacing-xl);
+    color: rgba(255, 255, 255, 0.8);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease 500ms, transform 0.6s ease 500ms;
+}
+body.loaded .hero-subtitle {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.hero-cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-md);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease 600ms, transform 0.6s ease 600ms;
+}
+body.loaded .hero-cta-buttons {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Botões com estilo único para a Hero */
+.cta-button {
+    display: inline-block;
+    padding: var(--spacing-md) var(--spacing-xl);
+    border-radius: var(--border-radius);
+    font-size: var(--font-size-md);
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform var(--transition-duration-fast), background-color var(--transition-duration-fast), box-shadow var(--transition-duration-fast);
+    border: 2px solid transparent;
+}
+.cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+}
+
+.cta-button.primary {
+    background-color: var(--color-primary-accent);
+    color: var(--color-primary-accent-text);
+}
+.cta-button.primary:hover {
+    background-color: var(--color-primary-accent-hover);
+}
+
+.cta-button.secondary {
+    background-color: transparent;
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.5);
+}
+.cta-button.secondary:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: #fff;
+}
+
+
+.hero-scroll-indicator {
+    position: absolute;
+    bottom: var(--spacing-xl);
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255, 255, 255, 0.7);
+    font-size: var(--font-size-sm);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-sm);
+    opacity: 0;
+    animation: fade-in 1s ease 1.5s forwards;
+}
+
+.scroll-arrow {
+    animation: bounce 2s infinite;
+}
+
+
+/* ==========================================================================
+   7. COMPONENT: CARDS & PROSE
+   ========================================================================== */
+
+/* -------------------
+ * Estilização de conteúdo de texto
+ * ------------------- */
+.prose {
+    max-width: 75ch;
+}
+
+.prose h3 {
+    margin-top: var(--spacing-xl);
+    margin-bottom: var(--spacing-md);
+}
+
+.prose ul {
+    list-style-type: disc;
+    padding-left: var(--spacing-lg);
+}
+
+/* -------------------
+ * Cards de Conceito
+ * ------------------- */
+.concepts-grid {
+    align-items: stretch;
+}
+
+.concept-card {
+    background-color: var(--color-background-offset);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-xl);
+    display: flex;
+    flex-direction: column;
+    transition: transform var(--transition-duration-fast), box-shadow var(--transition-duration-fast), border-color var(--transition-duration-fast);
+}
+
+.concept-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--color-primary-accent);
+}
+
+.concept-card .card-icon {
+    width: 48px;
+    height: 48px;
+    background-color: var(--color-background-interactive);
+    color: var(--color-primary-accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--spacing-lg);
+}
+
+.concept-card .card-icon svg {
+    width: 24px;
+    height: 24px;
+}
+
+.concept-card .card-title {
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--spacing-sm);
+}
+
+.concept-card .card-title a {
+    text-decoration: none;
+    color: inherit;
+}
+.concept-card .card-title a::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+
+.concept-card .card-description {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-md);
+    margin-bottom: var(--spacing-lg);
+    flex-grow: 1; /* Faz a descrição crescer para alinhar os links */
+}
+
+.concept-card .card-link {
+    font-weight: 600;
+    color: var(--color-primary-accent);
+    text-decoration: none;
+    align-self: flex-start;
+}
+.concept-card .card-link:hover {
+    text-decoration: underline;
+}
+
+/* -------------------
+ * Card Interativo (Diagrama)
+ * ------------------- */
+.interactive-card {
+    background-color: var(--color-background-offset);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-lg);
+    display: flex;
+    flex-direction: column;
+}
+
+.interactive-card .card-header h4 {
+    margin: 0;
+    text-align: center;
+}
+
+.interactive-card .card-content {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#project-structure-visualization {
+    width: 100%;
+    padding: var(--spacing-lg) 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+#project-structure-visualization .layer {
+    background-color: var(--color-background-interactive);
+    border: 1px dashed var(--color-border-interactive);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-lg);
+    width: 80%;
+    text-align: center;
+    transition: transform var(--transition-duration-fast), background-color var(--transition-duration-fast);
+    cursor: pointer;
+}
+#project-structure-visualization .layer:hover {
+    transform: scale(1.05);
+    background-color: var(--color-background-darker);
+}
+
+.layer .layer-title {
+    display: block;
+    font-weight: 600;
+    margin-bottom: var(--spacing-sm);
+}
+.layer .tech-stack {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    font-family: var(--font-family-mono);
+}
+
+#project-structure-visualization .connector {
+    width: 2px;
+    height: 24px;
+    background-color: var(--color-border-interactive);
+}
