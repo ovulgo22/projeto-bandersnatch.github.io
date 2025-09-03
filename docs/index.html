@@ -1,88 +1,120 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="manifest" href="manifest.json">
+    <title>Guia Completo de Carreiras em Desenvolvimento Web | Do AI ao A11y</title>
 
-    <title>Projeto Bandersnatch | Uma Experiência Narrativa</title>
-    <meta name="description" content="Mergulhe em uma história interativa onde suas escolhas moldam a realidade. Uma experiência inspirada em Black Mirror: Bandersnatch.">
-    <meta name="author" content="Seu Nome ou Nome do Estúdio">
-    <meta name="theme-color" content="#0A0A0A">
+    <meta name="description" content="Uma documentação aprofundada sobre os 11 principais cargos no desenvolvimento de sites modernos, incluindo Arquiteto de Informação, UX/UI Design, Front-end, Back-end, DevOps, SEO, QA e Acessibilidade.">
 
-    <meta property="og:title" content="Projeto Bandersnatch">
-    <meta property="og:description" content="Mergulhe em uma história interativa onde suas escolhas moldam a realidade.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://seu-usuario.github.io/seu-repositorio/">
-    <meta property="og:image" content="https://seu-usuario.github.io/seu-repositorio/social-preview.png">
-    
-    <link rel="icon" href="favicon.ico" sizes="any">
-    <link rel="icon" href="favicon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <meta name="keywords" content="Desenvolvimento Web, HTML, CSS, JavaScript, UX Design, UI Design, Front-end, Back-end, DevOps, SEO, QA, Acessibilidade">
 
-    <link rel="preload" as="image" href="img/sala-escura.jpg">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=VT323&display=swap" rel="stylesheet">
-    
     <link rel="stylesheet" href="style.css">
+
+    <script src="script.js" defer></script>
 </head>
 <body>
 
-    <div id="loading-screen">
-        <div class="spinner"></div>
-        <p>INICIANDO SIMULAÇÃO...</p>
-    </div>
+    <header class="site-header">
+        <div class="container">
+            <h1>Guia Definitivo de Carreiras Web</h1>
+            <p class="subtitle">Análise aprofundada dos papéis que constroem a web moderna.</p>
+            
+            <button id="theme-toggle" class="theme-toggle" aria-label="Alternar para tema escuro">
+                </button>
+        </div>
+    </header>
 
-    <div id="ui-container">
-        <div id="background-container"></div>
-        <div id="vfx-overlay"></div>
-        <div id="glitch-overlay"></div>
-        
-        <div id="settings-modal" class="hidden" role="dialog" aria-modal="true" aria-labelledby="settings-title">
-            </div>
+    <main class="site-main">
+        <div class="container">
+            <section id="introduction">
+                <h2>Bem-vindo(a) ao Conhecimento Centralizado</h2>
+                <p>
+                    Este site é um recurso vivo, projetado para fornecer uma compreensão detalhada e prática das especialidades essenciais no ciclo de vida de um projeto web. Navegue pelas seções abaixo para explorar as responsabilidades, habilidades e a mentalidade por trás de cada cargo.
+                </p>
+            </section>
 
-        <div id="game-content">
-            <header id="game-header">
-                <div id="stats-container" role="status"></div>
-                <button id="open-settings-button" aria-label="Abrir configurações">&#9881;</button>
-            </header>
-
-            <main id="main-content">
-                <section id="story-container">
-                    <p id="story-text-visual" aria-hidden="true"></p>
-                    <p id="story-text-accessible" class="sr-only" aria-live="assertive" aria-atomic="true"></p>
-                </section>
+            <section id="roles-list">
+                <h2>Os 11 Pilares do Desenvolvimento Web</h2>
                 
-                <section id="timer-container" class="hidden">
-                    <div id="timer-bar"></div>
-                </section>
+                <article class="role-card" id="arquiteto-informacao">
+                    <h3 class="role-card__title">1. Arquiteto de Informação (AI)</h3>
+                    <p class="role-card__description">O planejador mestre da estrutura. Organiza o conteúdo e a navegação para criar um fluxo lógico e intuitivo, garantindo que os usuários encontrem o que precisam sem esforço.</p>
+                    <a href="#detalhe-ai" class="role-card__link">Ver Detalhes &rarr;</a>
+                </article>
 
-                <section id="choices-container" role="group" aria-label="Escolhas disponíveis"></section>
-            </main>
+                <article class="role-card" id="ux-designer">
+                    <h3 class="role-card__title">2. Designer de Experiência do Usuário (UX)</h3>
+                    <p class="role-card__description">O advogado do usuário. Pesquisa, testa e projeta a jornada do usuário para ser eficiente, eficaz e agradável, focando em como o produto "se sente".</p>
+                    <a href="#detalhe-ux" class="role-card__link">Ver Detalhes &rarr;</a>
+                </article>
 
-            <footer id="game-footer">
-                <button id="restart-button" class="hidden">Recomeçar Simulação</button>
-            </footer>
+                <article class="role-card" id="ui-designer">
+                    <h3 class="role-card__title">3. Designer de Interface do Usuário (UI)</h3>
+                    <p class="role-card__description">O artista visual da interação. Cria a aparência e o estilo do site, focando em cores, tipografia, ícones e layout para construir uma interface bonita e funcional.</p>
+                    <a href="#detalhe-ui" class="role-card__link">Ver Detalhes &rarr;</a>
+                </article>
+
+                <article class="role-card" id="dev-frontend">
+                    <h3 class="role-card__title">4. Desenvolvedor Front-End</h3>
+                    <p class="role-card__description">O construtor da interface. Traduz o design visual em código interativo usando HTML, CSS e JavaScript, garantindo que o site funcione perfeitamente no navegador do usuário.</p>
+                    <a href="#detalhe-frontend" class="role-card__link">Ver Detalhes &rarr;</a>
+                </article>
+
+                <article class="role-card" id="dev-backend">
+                    <h3 class="role-card__title">5. Desenvolvedor Back-End</h3>
+                    <p class="role-card__description">O engenheiro dos bastidores. Constrói e mantém a lógica do servidor, bancos de dados e APIs que alimentam o site e suas funcionalidades dinâmicas.</p>
+                    <a href="#detalhe-backend" class="role-card__link">Ver Detalhes &rarr;</a>
+                </article>
+
+                <article class="role-card" id="dev-fullstack">
+                    <h3 class="role-card__title">6. Desenvolvedor Full-Stack</h3>
+                    <p class="role-card__description">O generalista especialista. Domina tanto o front-end quanto o back-end, capaz de construir e gerenciar um aplicativo da web completo, do cliente ao servidor.</p>
+                    <a href="#detalhe-fullstack" class="role-card__link">Ver Detalhes &rarr;</a>
+                </article>
+
+                <article class="role-card" id="devops">
+                    <h3 class="role-card__title">7. Engenheiro de DevOps</h3>
+                    <p class="role-card__description">O otimizador de fluxo de trabalho. Automatiza a integração, teste e implantação de código, construindo pontes entre desenvolvimento e operações para entregas rápidas e confiáveis.</p>
+                    <a href="#detalhe-devops" class="role-card__link">Ver Detalhes &rarr;</a>
+                </article>
+
+                <article class="role-card" id="seo">
+                    <h3 class="role-card__title">8. Especialista em SEO</h3>
+                    <p class="role-card__description">O estrategista de visibilidade. Otimiza o site técnica e estrategicamente para classificar bem nos motores de busca, atraindo tráfego orgânico qualificado.</p>
+                    <a href="#detalhe-seo" class="role-card__link">Ver Detalhes &rarr;</a>
+                </article>
+
+                <article class="role-card" id="qa-tester">
+                    <h3 class="role-card__title">9. Analista de Garantia de Qualidade (QA)</h3>
+                    <p class="role-card__description">O guardião da qualidade. Procura sistematicamente por bugs, falhas e inconsistências para garantir que o produto final seja robusto, funcional e livre de erros.</p>
+                    <a href="#detalhe-qa" class="role-card__link">Ver Detalhes &rarr;</a>
+                </article>
+
+                <article class="role-card" id="creative-dev">
+                    <h3 class="role-card__title">10. Desenvolvedor Criativo</h3>
+                    <p class="role-card__description">O inovador experimental. Combina arte e código para criar experiências digitais únicas, interativas e imersivas que vão além dos sites tradicionais.</p>
+                    <a href="#detalhe-creative" class="role-card__link">Ver Detalhes &rarr;</a>
+                </article>
+
+                <article class="role-card" id="dev-a11y">
+                    <h3 class="role-card__title">11. Desenvolvedor de Acessibilidade (A11y)</h3>
+                    <p class="role-card__description">O campeão da inclusão. Garante que o site seja utilizável por todas as pessoas, independentemente de suas habilidades ou deficiências, implementando padrões de acessibilidade web.</p>
+                    <a href="#detalhe-a11y" class="role-card__link">Ver Detalhes &rarr;</a>
+                </article>
+
+            </section>
         </div>
-    </div>
+    </main>
 
-    <noscript>
-        <div class="noscript-warning">
-            <h1>AVISO</h1>
-            <p>Esta experiência narrativa requer JavaScript para funcionar.</p>
-            <p>Por favor, habilite o JavaScript no seu navegador para continuar.</p>
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2025 Guia Definitivo de Carreiras Web. Todos os direitos reservados.</p>
+            <p>Um projeto construído com a sinergia de 11 especialidades.</p>
         </div>
-    </noscript>
-
-    <div id="audio-container">
-        </div>
-
-    <script src="story.js" defer></script>
-    <script src="ui.js" defer></script>
-    <script src="script.js" defer></script>
+    </footer>
 
 </body>
 </html>
