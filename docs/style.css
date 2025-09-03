@@ -1,123 +1,130 @@
 /*
-    PROJETO: Documentação de Cargos em Desenvolvimento Web
+    PROJETO: Documentação de Cibersegurança Web
     ARQUIVO: style.css
-    VERSÃO: 3.1
-    DATA: 03/09/2025 (06:13 America/Sao_Paulo)
+    VERSÃO: 4.0
+    DATA: 03/09/2025 (06:23 America/Sao_Paulo)
     
-    CHANGELOG v3.1 (Atualização para Multi-Página):
-    - CORREÇÃO/REINTRODUÇÃO: Reintroduzidos os estilos da v2.0 para o layout de duas colunas
-      (.page-layout), barra de navegação lateral (.sidebar-nav) e seções de conteúdo (.role-section).
-      Esses estilos agora se aplicam às páginas de detalhe (ex: /roles/*.html).
-    - ADICIONADO: Estilos para os novos elementos das páginas de detalhe, como o cabeçalho do
-      artigo (.article-header), introdução (.article-intro) e o link de voltar (.back-link).
-    - ADICIONADO: Reintroduzido o estilo para o link de acessibilidade .skip-link.
-    - COEXISTÊNCIA: Os estilos da página principal (hub) e das páginas de detalhe agora
-      coexistem de forma harmoniosa neste único arquivo.
+    CHANGELOG v4.0 (MEGA ATUALIZAÇÃO - NOVA TEMÁTICA):
+    - REESCRITA COMPLETA: O arquivo foi reconstruído para a nova temática "Cibersegurança Web".
+    - NOVA PALETA DE CORES: Implementado um tema "dark-first" com fundo azul-marinho, texto claro e detalhes em ciano.
+    - NOVA TIPOGRAFIA: Adotadas as fontes 'Inter' para corpo e 'Fira Code' para títulos, refletindo uma estética mais técnica.
+    - NOVOS COMPONENTES: Estilos criados para os novos elementos, como .security-card, .site-logo e o cabeçalho redesenhado.
+    - EFEITOS APRIMORADOS: Adicionados efeitos de transição e "glow" para uma experiência mais interativa.
+    - ACESSIBILIDADE: Contraste de cores revisado e estados de foco aprimorados para o novo tema.
 */
 
-/* --- 1. IMPORTAÇÕES E DEFINIÇÕES GLOBAIS (sem alterações) --- */
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Merriweather:wght@700;900&display=swap');
+/* --- 1. IMPORTAÇÕES E DEFINIÇÕES GLOBAIS --- */
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@500;700&family=Inter:wght@400;500;700&display=swap');
 
 :root {
-    --color-background: #f8f9fa;
-    --color-text-primary: #212529;
-    --color-text-secondary: #5a6169;
-    --color-surface: #ffffff;
-    --color-primary: #0057b7;
-    --color-border: #dee2e6;
-    --font-family-headings: 'Merriweather', serif;
-    --font-family-body: 'Lato', sans-serif;
+    /* Paleta de Cores (Tema Escuro - Padrão) */
+    --color-background: #0a192f;      /* Azul Marinho Escuro (Navy) */
+    --color-surface: #112240;       /* Azul Marinho Claro */
+    --color-text-primary: #ccd6f6;   /* Cinza Claro (Slate) */
+    --color-text-secondary: #8892b0; /* Cinza Médio (Light Slate) */
+    --color-primary-accent: #64ffda;   /* Ciano Elétrico */
+    --color-border: #233554;
+    --color-shadow: rgba(100, 255, 218, 0.1);
+
+    /* Tipografia */
+    --font-family-headings: 'Fira Code', monospace;
+    --font-family-body: 'Inter', sans-serif;
+
+    /* Outros */
     --spacing-unit: 1rem;
-    --border-radius: 8px;
-    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --border-radius: 4px;
     --transition-speed: 250ms;
 }
 
-html.dark-theme {
-    --color-background: #121212;
-    --color-text-primary: #e0e0e0;
-    --color-text-secondary: #a0a0a0;
-    --color-surface: #1e1e1e;
-    --color-primary: #4dabf7;
-    --color-border: #424242;
-    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.3);
+html.light-theme {
+    /* Paleta de Cores (Tema Claro) */
+    --color-background: #f8f9fa;
+    --color-surface: #ffffff;
+    --color-text-primary: #212529;
+    --color-text-secondary: #5a6169;
+    --color-primary-accent: #0057b7; /* Azul Forte */
+    --color-border: #dee2e6;
+    --color-shadow: rgba(0, 87, 183, 0.1);
 }
 
-/* --- 2. RESET E ESTILOS BASE (sem alterações) --- */
+/* --- 2. RESET E ESTILOS BASE --- */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
-body { font-family: var(--font-family-body); font-size: 1.125rem; line-height: 1.7; color: var(--color-text-primary); background-color: var(--color-background); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; transition: color var(--transition-speed), background-color var(--transition-speed); }
+body { 
+    font-family: var(--font-family-body);
+    font-size: 1rem; /* 16px */
+    line-height: 1.6; 
+    color: var(--color-text-primary);
+    background-color: var(--color-background);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: color var(--transition-speed), background-color var(--transition-speed); 
+}
+@media (min-width: 768px) { body { font-size: 1.125rem; } } /* 18px em telas maiores */
 
 /* --- 3. TIPOGRAFIA E UTILITÁRIOS GLOBAIS --- */
-h1, h2, h3 { font-family: var(--font-family-headings); color: var(--color-text-primary); line-height: 1.3; }
-h1 { font-size: clamp(2.5rem, 5vw, 3.5rem); }
-h2 { font-size: clamp(1.8rem, 4vw, 2.25rem); }
+h1, h2, h3 { font-family: var(--font-family-headings); color: var(--color-text-primary); line-height: 1.3; font-weight: 700; }
+h1 { font-size: clamp(2rem, 5vw, 2.5rem); }
+h2 { font-size: clamp(1.5rem, 4vw, 2rem); }
 h3 { font-size: 1.25rem; }
-p { margin-bottom: var(--spacing-unit); max-width: 75ch; }
-ul { margin-bottom: var(--spacing-unit); padding-left: 2rem; }
-li { margin-bottom: calc(var(--spacing-unit) / 2); }
-a { color: var(--color-primary); text-decoration: none; font-weight: 700; transition: opacity var(--transition-speed); }
-a:hover { opacity: 0.8; text-decoration: underline; }
-a:focus, button:focus { outline: 3px solid var(--color-primary); outline-offset: 4px; border-radius: 4px; }
-.container { width: 90%; max-width: 1200px; margin-left: auto; margin-right: auto; }
+
+a { color: var(--color-primary-accent); text-decoration: none; transition: color var(--transition-speed); }
+a:hover { color: var(--color-primary-accent); text-decoration: none; filter: brightness(1.2); }
+a:focus, button:focus { outline: 2px solid var(--color-primary-accent); outline-offset: 4px; border-radius: 2px; }
+.container { width: 90%; max-width: 1100px; margin-left: auto; margin-right: auto; }
 .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
-.skip-link { position: absolute; top: -100px; left: 0; background-color: var(--color-primary); color: white; padding: var(--spacing-unit); z-index: 1000; transition: top var(--transition-speed) ease-in-out; }
-.skip-link:focus { top: 0; }
 
-/* --- 4. COMPONENTES GLOBAIS (Header, Footer, Botão) (sem alterações) --- */
-.site-header, .site-footer { padding: calc(var(--spacing-unit) * 2) 0; text-align: center; }
-.site-header { border-bottom: 1px solid var(--color-border); position: relative; }
-.subtitle { font-size: 1.2rem; color: var(--color-text-secondary); }
-.site-footer { margin-top: calc(var(--spacing-unit) * 3); border-top: 1px solid var(--color-border); font-size: 0.9rem; color: var(--color-text-secondary); }
-.theme-toggle { position: absolute; top: 50%; right: 5%; transform: translateY(-50%); background: transparent; border: 2px solid var(--color-border); width: 45px; height: 45px; border-radius: 50%; cursor: pointer; transition: all var(--transition-speed) ease-in-out; }
-.theme-toggle:hover { border-color: var(--color-primary); transform: translateY(-50%) rotate(15deg); }
+/* --- 4. COMPONENTES GLOBAIS --- */
 
-/* --- 5. ESTILOS DA PÁGINA PRINCIPAL (HUB - index.html) --- */
-#introduction { padding: calc(var(--spacing-unit) * 2) 0; }
-.grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: calc(var(--spacing-unit) * 1.5); }
-.role-card { display: flex; flex-direction: column; height: 100%; background-color: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--border-radius); box-shadow: var(--shadow-sm); text-decoration: none; color: var(--color-text-primary); transition: transform var(--transition-speed), box-shadow var(--transition-speed); }
-@media (prefers-reduced-motion: no-preference) { .role-card:hover, .role-card:focus { transform: translateY(-5px); box-shadow: var(--shadow-md); text-decoration: none; opacity: 1; } }
-.role-card article { display: flex; flex-direction: column; flex-grow: 1; padding: calc(var(--spacing-unit) * 1.5); }
-.role-card__header { display: flex; align-items: center; gap: var(--spacing-unit); margin-bottom: var(--spacing-unit); }
-.role-card .role-icon { width: 2.25rem; height: 2.25rem; flex-shrink: 0; color: var(--color-primary); fill: currentColor; }
-.role-card__title { color: var(--color-text-primary); }
-.role-card__summary { color: var(--color-text-secondary); flex-grow: 1; }
-.role-card__tags { display: flex; flex-wrap: wrap; gap: calc(var(--spacing-unit) / 2); margin-bottom: var(--spacing-unit); }
-.role-card__tags span { font-size: 0.8rem; padding: 0.25em 0.75em; background-color: var(--color-background); border: 1px solid var(--color-border); border-radius: 20px; color: var(--color-text-secondary); }
-.role-card__footer { margin-top: auto; color: var(--color-primary); font-weight: 700; text-align: right; }
+/* Cabeçalho */
+.site-header { padding: calc(var(--spacing-unit) * 1.5) 0; border-bottom: 1px solid var(--color-border); }
+.header-content { display: flex; justify-content: space-between; align-items: center; }
+.logo-link { display: inline-flex; align-items: center; gap: var(--spacing-unit); color: var(--color-text-primary); font-weight: 700; }
+.logo-link:hover { color: var(--color-primary-accent); }
+.site-logo { width: 40px; height: 40px; }
+.site-header h1 { font-size: 1.5rem; }
+.subtitle { font-size: 1rem; color: var(--color-text-secondary); text-align: center; margin-top: var(--spacing-unit); font-family: var(--font-family-headings); }
 
-/* --- 6. ESTILOS PARA PÁGINAS DE DETALHE (/roles/*.html) (Reintroduzidos na v3.1) --- */
-.page-layout { display: grid; grid-template-columns: 1fr; gap: calc(var(--spacing-unit) * 2); margin-top: calc(var(--spacing-unit) * 2); }
-.sidebar-nav { /* Comportamento sticky ativado em telas maiores */ }
-.sidebar-nav .back-link { display: block; font-weight: 700; margin-bottom: var(--spacing-unit) * 1.5; padding-bottom: var(--spacing-unit); border-bottom: 1px solid var(--color-border); }
-.sidebar-nav h2 { font-size: 1.2rem; margin-bottom: var(--spacing-unit); }
-.sidebar-nav ol { list-style: none; padding-left: 0; }
-.sidebar-nav li { margin-bottom: calc(var(--spacing-unit) / 2); }
-.sidebar-nav a { display: block; padding: calc(var(--spacing-unit) / 4) calc(var(--spacing-unit) / 2); border-radius: 4px; font-weight: 400; color: var(--color-text-secondary); }
-.sidebar-nav a:not(.back-link):hover { background-color: var(--color-border); color: var(--color-text-primary); text-decoration: none; opacity: 1; }
-.sidebar-nav a.active { background-color: var(--color-primary); color: white; font-weight: 700; }
+/* Botão de Tema */
+.theme-toggle { background: transparent; border: 1px solid var(--color-border); width: 40px; height: 40px; border-radius: 50%; cursor: pointer; color: var(--color-text-secondary); }
+.theme-toggle:hover { color: var(--color-primary-accent); border-color: var(--color-primary-accent); }
 
-.article-header { padding-bottom: var(--spacing-unit); border-bottom: 2px solid var(--color-border); margin-bottom: var(--spacing-unit) * 2; }
-.article-header h1 { margin-bottom: var(--spacing-unit); }
-.article-intro { font-size: 1.25rem; color: var(--color-text-secondary); line-height: 1.6; }
+/* Seção de Introdução */
+#introduction { padding: calc(var(--spacing-unit) * 3) 0; text-align: center; }
+.intro-text { font-size: 1.125rem; color: var(--color-text-secondary); max-width: 70ch; margin: 0 auto 1.5rem auto; }
+.intro-highlight { font-family: var(--font-family-headings); font-size: 1.25rem; color: var(--color-primary-accent); }
 
-.role-section { padding-top: var(--spacing-unit); }
-.role-section h2 { margin-top: calc(var(--spacing-unit) * 2); margin-bottom: var(--spacing-unit); padding-bottom: calc(var(--spacing-unit) / 2); border-bottom: 1px solid var(--color-border); }
-.role-section h3 { font-size: 1.5rem; margin: 1.5rem 0 0.5rem; color: var(--color-text-primary); }
+/* Rodapé */
+.site-footer { padding: calc(var(--spacing-unit) * 2) 0; margin-top: calc(var(--spacing-unit) * 3); text-align: center; font-size: 0.9rem; color: var(--color-text-secondary); border-top: 1px solid var(--color-border); }
+.site-footer p:first-child { margin-bottom: 0.5rem; }
 
-/* --- 7. MEDIA QUERIES --- */
-@media (min-width: 1024px) {
-    /* Ativa o layout de duas colunas apenas nas páginas que usam .page-layout */
-    .page-layout {
-        grid-template-columns: 280px 1fr;
-        gap: calc(var(--spacing-unit) * 3);
-    }
-    .sidebar-nav {
-        position: sticky;
-        top: calc(var(--spacing-unit) * 2);
-        align-self: start;
-        max-height: calc(100vh - 4rem);
-        overflow-y: auto;
-    }
+/* --- 5. LAYOUT DE GRID E CARDS DE SEGURANÇA (v4.0) --- */
+.grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--spacing-unit); }
+
+.security-card {
+    display: flex;
+    text-decoration: none;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    padding: calc(var(--spacing-unit) * 1.5);
+    transition: transform var(--transition-speed), box-shadow var(--transition-speed);
 }
+.security-card:hover, .security-card:focus-within {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px -15px var(--color-shadow);
+}
+.security-card article { display: flex; flex-direction: column; width: 100%; }
+
+.security-card__header { display: flex; align-items: center; gap: var(--spacing-unit); margin-bottom: 1.5rem; }
+.security-icon { width: 40px; height: 40px; flex-shrink: 0; }
+.security-card__title { color: var(--color-text-primary); transition: color var(--transition-speed); }
+.security-card:hover .security-card__title { color: var(--color-primary-accent); }
+
+.security-card__summary { color: var(--color-text-secondary); font-size: 1rem; flex-grow: 1; margin-bottom: 1.5rem; }
+
+.security-card__tags { display: flex; flex-wrap: wrap; gap: calc(var(--spacing-unit) / 2); font-family: var(--font-family-headings); font-size: 0.8rem; }
+.security-card__tags span { padding: 0.25em 0.75em; color: var(--color-text-secondary); }
+
+.security-card__footer { margin-top: auto; color: var(--color-text-secondary); font-weight: 500; text-align: right; font-size: 0.9rem; transition: color var(--transition-speed); }
+.security-card:hover .security-card__footer { color: var(--color-primary-accent); }
