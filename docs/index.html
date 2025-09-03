@@ -1,170 +1,529 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="theme-dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>[Seu Nome] | [Sua Profissão ou Título Principal]</title>
+    <title>[Seu Nome] | Desenvolvedor Full-Stack & Creative Technologist</title>
     
-    <meta name="description" content="[Escreva aqui uma descrição concisa e atrativa sobre você e seu trabalho, com até 160 caracteres.]">
-    
-    <meta property="og:title" content="[Seu Nome] | [Sua Profissão ou Título Principal]">
-    <meta property="og:description" content="[Repita ou adapte a descrição para redes sociais.]">
-    <meta property="og:image" content="https://www.youtube.com/watch?v=qmZ9uDRGCFk">
-    <meta property="og:url" content="https://docs.github.com/pt/pages/getting-started-with-github-pages/creating-a-github-pages-site">
+    <meta name="description" content="Portfólio de [Seu Nome], um especialista em desenvolvimento full-stack e tecnologia criativa, construindo experiências digitais inovadoras com React, Node.js, WebGL e design de sistemas.">
+    <meta name="keywords" content="Desenvolvedor Full-Stack, Creative Technologist, WebGL, Three.js, React, Node.js, Portfólio, [Seu Nome]">
+    <meta name="author" content="[Seu Nome]">
+    <link rel="canonical" href="https://www.seusite.com/">
+
+    <meta property="og:title" content="[Seu Nome] | Portfólio de Tecnologia e Inovação">
+    <meta property="og:description" content="Explorando a interseção entre código e criatividade. Veja meus projetos em desenvolvimento web, experiências interativas e mais.">
+    <meta property="og:image" content="https://pt-br.tilda.education/en/articles-social-media-image-size-guide">
+    <meta property="og:url" content="https://www.seusite.com/">
     <meta property="og:type" content="website">
-    
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-    
-    <link rel="stylesheet" href="style.css">
-    
-    <script src="script.js" defer></script>
+    <meta property="og:locale" content="pt_BR">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@[SEU USUÁRIO NO TWITTER]">
+    <meta name="twitter:creator" content="@[SEU USUÁRIO NO TWITTER]">
+    <meta name="twitter:title" content="[Seu Nome] | Portfólio de Tecnologia e Inovação">
+    <meta name="twitter:description" content="Explorando a interseção entre código e criatividade. Veja meus projetos.">
+    <meta name="twitter:image" content="https://pt-br.tilda.education/en/articles-social-media-image-size-guide">
+
+    <meta name="theme-color" content="#1a1a1a">
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="mask-icon" href="icons/safari-pinned-tab.svg" color="#8ab4f8">
+    <meta name="msapplication-TileColor" content="#121212">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="dns-prefetch" href="https://api.github.com"> <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "[Seu Nome]",
+      "url": "https://www.seusite.com/",
+      "image": "https://www.fotor.com/pt/features/ai-headshot-generator/",
+      "sameAs": [
+        "https://pt.linkedin.com/",
+        "https://www.youtube.com/watch?v=TsaLQAetPLU",
+        "https://twitter.com/i/flow/login?input_flow_data=%7B%22requested_variant%22%3A%22eyJsYW5nIjoicHQifQ%3D%3D%22%7D"
+      ],
+      "jobTitle": "Desenvolvedor Full-Stack & Creative Technologist",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "[Sua Empresa ou 'Autônomo']"
+      },
+      "alumniOf": {
+        "@type": "CollegeOrUniversity",
+        "name": "[Nome da sua Universidade]"
+      },
+      "knowsAbout": ["Desenvolvimento Web", "JavaScript", "React", "Node.js", "UX/UI Design", "WebGL", "DevOps", "Acessibilidade Web"],
+      "description": "Desenvolvedor apaixonado por criar soluções digitais que são não apenas funcionais e eficientes, mas também esteticamente agradáveis e intuitivas. Com vasta experiência em todo o ecossistema de desenvolvimento, desde o design de interfaces até a implementação de APIs robustas e o deploy em nuvem."
+    }
+    </script>
+    
+    <style>
+        :root {
+            --color-background-dark: #121212;
+            --color-surface-dark: #1e1e1e;
+            --color-primary-dark: #8ab4f8;
+            --color-text-primary-dark: #e8eaed;
+            --color-text-secondary-dark: #bdc1c6;
+            --color-border-dark: #3c4043;
 
+            --color-background-light: #ffffff;
+            --color-surface-light: #f1f3f4;
+            --color-primary-light: #1a73e8;
+            --color-text-primary-light: #202124;
+            --color-text-secondary-light: #5f6368;
+            --color-border-light: #dadce0;
+            
+            --font-primary: 'Space Grotesk', sans-serif;
+            --font-secondary: 'Roboto', sans-serif;
+            --transition-speed: 0.3s;
+        }
+
+        html.theme-dark {
+            --bg: var(--color-background-dark);
+            --surface: var(--color-surface-dark);
+            --primary: var(--color-primary-dark);
+            --text-primary: var(--color-text-primary-dark);
+            --text-secondary: var(--color-text-secondary-dark);
+            --border: var(--color-border-dark);
+        }
+
+        html.theme-light {
+            --bg: var(--color-background-light);
+            --surface: var(--color-surface-light);
+            --primary: var(--color-primary-light);
+            --text-primary: var(--color-text-primary-light);
+            --text-secondary: var(--color-text-secondary-light);
+            --border: var(--color-border-light);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; font-size: 100%; }
+        body {
+            background-color: var(--bg);
+            color: var(--text-primary);
+            font-family: var(--font-secondary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+        }
+        .skip-link { position: absolute; top: -100px; left: 0; background: var(--primary); color: var(--bg); padding: 8px; z-index: 1000; transition: top 0.3s ease; }
+        .skip-link:focus { top: 0; }
+        
+        /* Estilos essenciais do Header e Hero para evitar layout shift */
+        .main-header { position: sticky; top: 0; width: 100%; z-index: 50; background-color: rgba(18, 18, 18, 0.8); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--border); transition: background-color var(--transition-speed) ease; }
+        .navbar { display: flex; justify-content: space-between; align-items: center; height: 70px; width: 90%; max-width: 1200px; margin: 0 auto; }
+        .logo { font-family: var(--font-primary); font-size: 1.5rem; font-weight: 700; text-decoration: none; color: var(--text-primary); }
+        .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; position: relative; overflow: hidden; }
+        .hero-content { position: relative; z-index: 2; }
+        .hero-title { font-family: var(--font-primary); font-size: clamp(3rem, 10vw, 6rem); font-weight: 700; line-height: 1.1; color: var(--text-primary); }
+        .hero-subtitle { font-size: clamp(1rem, 3vw, 1.5rem); color: var(--text-secondary); max-width: 800px; margin: 1rem auto 2rem auto; }
+        
+        /* SVG Fundo Herói - Animação Básica */
+        #hero-background-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; object-fit: cover; }
+        .svg-line { stroke-dasharray: 1000; stroke-dashoffset: 1000; animation: draw-line 10s linear infinite; }
+        @keyframes draw-line { to { stroke-dashoffset: 0; } }
+    </style>
+    
+    <link rel="stylesheet" href="style.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="style.css"></noscript>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
     <a href="#main-content" class="skip-link">Pular para o conteúdo principal</a>
 
     <header class="main-header">
-<nav class="navbar">
-            <a href="#" class="logo">[Seu Logo ou Iniciais]</a>
+        <nav class="navbar">
+            <a href="index.html" class="logo" aria-label="Página inicial de [Seu Nome]">[SEU LOGO/INICIAIS]</a>
             <ul class="nav-menu" id="nav-menu">
-                <li><a href="#about" class="nav-link">Sobre</a></li>
+                <li><a href="#journey" class="nav-link">Jornada</a></li>
                 <li><a href="#skills" class="nav-link">Habilidades</a></li>
-                <li><a href="#projects" class="nav-link">Projetos</a></li>
+                <li class="has-megamenu">
+                    <a href="projects.html" class="nav-link">Projetos</a>
+                </li>
+                <li><a href="#articles" class="nav-link">Artigos</a></li>
                 <li><a href="#contact" class="nav-link">Contato</a></li>
             </ul>
-            <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav-menu">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </button>
-</nav>
+            <div class="nav-actions">
+                <button id="theme-switcher" aria-label="Alternar tema">
+                    <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                    <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                </button>
+                <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav-menu">
+                    <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+                </button>
+            </div>
+        </nav>
     </header>
 
     <main id="main-content">
 
         <section class="hero" id="hero">
-            <div class="hero-background-animation">
-                </div>
-            <div class="container hero-content">
-                <h1 class="hero-title">[Sua Profissão ou Título Principal]</h1>
-                <p class="hero-subtitle">[Uma frase de impacto que define seu trabalho. Ex: Construindo experiências digitais inovadoras e acessíveis.]</p>
-                <a href="#projects" class="cta-button">Veja meus projetos</a>
-            </div>
-        </section>
-
-        <section class="about" id="about">
-            <div class="container">
-                <h2 class="section-title">Sobre Mim</h2>
-                <div class="about-content">
-                    <div class="about-text">
-                        <p>[Parágrafo 1: Apresentação pessoal e profissional. Fale sobre sua paixão pela área, sua filosofia de trabalho e o que te motiva.]</p>
-                        <p>[Parágrafo 2: Detalhe sua experiência, os tipos de projetos em que trabalhou e as tecnologias ou metodologias com as quais tem mais afinidade.]</p>
-                        <p>[Parágrafo 3: Fale sobre seus objetivos futuros, o que está aprendendo no momento e que tipo de desafios você busca.]</p>
-                    </div>
-                    <div class="about-image">
-                        <img src="https://www.fotor.com/pt/features/ai-headshot-generator/" alt="Foto de [Seu Nome], [Sua Profissão]">
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="skills" id="skills">
-            <div class="container">
-                <h2 class="section-title">Habilidades & Ferramentas</h2>
-                <div class="skills-grid">
-                    <div class="skill-category">
-                        <h3>Design (UX/UI)</h3>
-                        <ul>
-                            <li>Figma</li>
-                            <li>Adobe XD</li>
-                            <li>Pesquisa de Usuário</li>
-                            <li>Arquitetura de Informação</li>
-                            <li>Design Systems</li>
-                        </ul>
-                    </div>
-                     <div class="skill-category">
-                        <h3>Front-End</h3>
-                        <ul>
-                            <li>HTML5, CSS3, JavaScript (ES6+)</li>
-                            <li>React / Vue.js / Svelte</li>
-                            <li>TypeScript</li>
-                            <li>Animações (GSAP)</li>
-                            <li>Acessibilidade (WCAG)</li>
-                        </ul>
-                    </div>
-                     <div class="skill-category">
-                        <h3>Back-End & DevOps</h3>
-                        <ul>
-                            <li>Node.js (Express)</li>
-                            <li>Python (Django / Flask)</li>
-                            <li>Bancos de Dados (SQL, NoSQL)</li>
-                            <li>APIs REST & GraphQL</li>
-                            <li>Docker & CI/CD</li>
-                        </ul>
-                    </div>
-                     </div>
-            </div>
-        </section>
-
-        <section class="projects" id="projects">
-            <div class="container">
-                <h2 class="section-title">Projetos em Destaque</h2>
-                <div class="projects-grid">
-                    <article class="project-card">
-                        <img src="https://www.instagram.com/p/DFpvrLnxMWq/" alt="[Descrição da imagem do projeto 1]" class="project-card__image">
-                        <div class="project-card__content">
-                            <h3 class="project-card__title">[Nome do Projeto 1]</h3>
-                            <p class="project-card__description">[Breve descrição do projeto, o problema que resolveu e o seu papel.]</p>
-                            <div class="project-card__tags">
-                                <span>[Tecnologia 1]</span>
-                                <span>[Tecnologia 2]</span>
-                                <span>[Habilidade]</span>
-                            </div>
-                            <div class="project-card__links">
-                                <a href="https://m.youtube.com/c/projetovidaoficial/live" target="_blank" rel="noopener noreferrer">Ver Projeto</a>
-                                <a href="https://docs.github.com/pt/repositories/creating-and-managing-repositories/quickstart-for-repositories" target="_blank" rel="noopener noreferrer">Ver Código</a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="project-card">
-                        <img src="https://pt.pinterest.com/fonte2022mafm/projetos-para-experimentaras-minhas-fotos/" alt="[Descrição da imagem do projeto 2]" class="project-card__image">
-                        <div class="project-card__content">
-                            <h3 class="project-card__title">[Nome do Projeto 2]</h3>
-                            <p class="project-card__description">[Breve descrição do projeto, o problema que resolveu e o seu papel.]</p>
-                            <div class="project-card__tags">
-                                <span>[Tecnologia 1]</span>
-                                <span>[Tecnologia 2]</span>
-                                <span>[Habilidade]</span>
-                            </div>
-                            <div class="project-card__links">
-                                <a href="https://m.youtube.com/c/projetovidaoficial/live" target="_blank" rel="noopener noreferrer">Ver Projeto</a>
-                                <a href="https://docs.github.com/pt/repositories/creating-and-managing-repositories/quickstart-for-repositories" target="_blank" rel="noopener noreferrer">Ver Código</a>
-                            </div>
-                        </div>
-                    </article>
+            <div class="hero-background">
+                <svg id="hero-background-svg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:rgba(138, 180, 248, 0.2); stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:rgba(138, 180, 248, 0); stop-opacity:1" />
+                        </linearGradient>
+                        <filter id="glow">
+                            <feGaussianBlur stdDeviation="3.5" result="coloredBlur"/>
+                            <feMerge>
+                                <feMergeNode in="coloredBlur"/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
+                    </defs>
+                    <rect width="1920" height="1080" fill="transparent"/>
                     
+                    <g id="particles" fill="var(--primary)" filter="url(#glow)">
+                        <circle cx="150" cy="200" r="2" class="particle" style="animation-delay: -0.5s;"/>
+                        <circle cx="350" cy="400" r="1.5" class="particle" style="animation-delay: -1.2s;"/>
+                        <circle cx="550" cy="150" r="1" class="particle" style="animation-delay: -2.3s;"/>
+                        <circle cx="750" cy="500" r="2.5" class="particle" style="animation-delay: -3.1s;"/>
+                        <circle cx="950" cy="250" r="1.2" class="particle" style="animation-delay: -4.5s;"/>
+                        <circle cx="1150" cy="600" r="2" class="particle" style="animation-delay: -5.2s;"/>
+                        <circle cx="1350" cy="300" r="1.8" class="particle" style="animation-delay: -6.8s;"/>
+                        <circle cx="1550" cy="700" r="2.2" class="particle" style="animation-delay: -7.4s;"/>
+                        <circle cx="1750" cy="450" r="1.5" class="particle" style="animation-delay: -8.1s;"/>
+                        <circle cx="250" cy="800" r="1" class="particle" style="animation-delay: -9.7s;"/>
+                        <circle cx="450" cy="900" r="2.5" class="particle" style="animation-delay: -10.3s;"/>
+                        <circle cx="650" cy="750" r="1.2" class="particle" style="animation-delay: -11.9s;"/>
+                        <circle cx="850" cy="1000" r="2" class="particle" style="animation-delay: -12.5s;"/>
+                        <circle cx="1050" cy="50" r="1.8" class="particle" style="animation-delay: -13.2s;"/>
+                        <circle cx="1250" cy="950" r="2.2" class="particle" style="animation-delay: -14.8s;"/>
+                        <circle cx="1450" cy="100" r="1.5" class="particle" style="animation-delay: -15.6s;"/>
+                        <circle cx="1650" cy="850" r="1" class="particle" style="animation-delay: -16.2s;"/>
+                        <circle cx="1850" cy="650" r="2.5" class="particle" style="animation-delay: -17.9s;"/>
+                        </g>
+                    
+                    <g id="grid-lines" stroke="rgba(138, 180, 248, 0.1)" stroke-width="1">
+                        <path class="svg-line" d="M0 100 H1920" style="animation-duration: 20s;"/>
+                        <path class="svg-line" d="M0 200 H1920" style="animation-duration: 22s; animation-delay: -2s;"/>
+                        <path class="svg-line" d="M0 300 H1920" style="animation-duration: 18s; animation-delay: -4s;"/>
+                        <path class="svg-line" d="M0 400 H1920" style="animation-duration: 25s; animation-delay: -6s;"/>
+                        <path class="svg-line" d="M0 500 H1920" style="animation-duration: 17s; animation-delay: -8s;"/>
+                        <path class="svg-line" d="M0 600 H1920" style="animation-duration: 28s; animation-delay: -10s;"/>
+                        <path class="svg-line" d="M0 700 H1920" style="animation-duration: 21s; animation-delay: -12s;"/>
+                        <path class="svg-line" d="M0 800 H1920" style="animation-duration: 24s; animation-delay: -14s;"/>
+                        <path class="svg-line" d="M0 900 H1920" style="animation-duration: 19s; animation-delay: -16s;"/>
+                        <path class="svg-line" d="M0 1000 H1920" style="animation-duration: 26s; animation-delay: -18s;"/>
+                        <path class="svg-line" d="M100 0 V1080" style="animation-duration: 23s; animation-delay: -1s;"/>
+                        <path class="svg-line" d="M200 0 V1080" style="animation-duration: 20s; animation-delay: -3s;"/>
+                        <path class="svg-line" d="M300 0 V1080" style="animation-duration: 27s; animation-delay: -5s;"/>
+                        <path class="svg-line" d="M400 0 V1080" style="animation-duration: 18s; animation-delay: -7s;"/>
+                        <path class="svg-line" d="M500 0 V1080" style="animation-duration: 29s; animation-delay: -9s;"/>
+                        <path class="svg-line" d="M600 0 V1080" style="animation-duration: 22s; animation-delay: -11s;"/>
+                        <path class="svg-line" d="M700 0 V1080" style="animation-duration: 26s; animation-delay: -13s;"/>
+                        <path class="svg-line" d="M800 0 V1080" style="animation-duration: 19s; animation-delay: -15s;"/>
+                        <path class="svg-line" d="M900 0 V1080" style="animation-duration: 30s; animation-delay: -17s;"/>
+                        <path class="svg-line" d="M1000 0 V1080" style="animation-duration: 24s; animation-delay: -19s;"/>
+                        <path class="svg-line" d="M1100 0 V1080" style="animation-duration: 28s; animation-delay: -2s;"/>
+                        <path class="svg-line" d="M1200 0 V1080" style="animation-duration: 21s; animation-delay: -4s;"/>
+                        <path class="svg-line" d="M1300 0 V1080" style="animation-duration: 25s; animation-delay: -6s;"/>
+                        <path class="svg-line" d="M1400 0 V1080" style="animation-duration: 20s; animation-delay: -8s;"/>
+                        <path class="svg-line" d="M1500 0 V1080" style="animation-duration: 27s; animation-delay: -10s;"/>
+                        <path class="svg-line" d="M1600 0 V1080" style="animation-duration: 23s; animation-delay: -12s;"/>
+                        <path class="svg-line" d="M1700 0 V1080" style="animation-duration: 29s; animation-delay: -14s;"/>
+                        <path class="svg-line" d="M1800 0 V1080" style="animation-duration: 22s; animation-delay: -16s;"/>
+                    </g>
+
+                    <g id="abstract-shapes" opacity="0.1">
+                        <path d="M 200,800 C 400,1000 800,1000 1000,800 S 1400,600 1600,800" stroke="var(--primary)" stroke-width="2" fill="transparent" class="svg-line" style="animation-duration: 30s;"/>
+                        <path d="M 100,200 C 300,100 700,100 900,300 S 1300,500 1500,400" stroke="var(--primary)" stroke-width="2" fill="transparent" class="svg-line" style="animation-duration: 25s; animation-delay: -5s;"/>
+                        <circle cx="1700" cy="200" r="100" stroke="var(--primary)" stroke-width="1" fill="url(#grad1)"/>
+                        <polygon points="100,1000 300,1000 200,850" fill="rgba(138, 180, 248, 0.2)"/>
+                    </g>
+                </svg>
+            </div>
+            <div class="container hero-content">
+                <h1 class="hero-title" data-animate="fade-in-up">[Seu Nome]</h1>
+                <p class="hero-subtitle" data-animate="fade-in-up" data-animation-delay="0.2s">Transformando ideias complexas em experiências digitais elegantes e performáticas. Sou um especialista na interseção entre <strong class="highlight">código</strong>, <strong class="highlight">design</strong> e <strong class="highlight">estratégia</strong>.</p>
+                <div class="hero-cta-group" data-animate="fade-in-up" data-animation-delay="0.4s">
+                    <a href="#projects" class="cta-button primary">Explorar Projetos</a>
+                    <a href="https://zety.com/br/blog/curriculum-pdf" class="cta-button secondary" target="_blank" rel="noopener noreferrer">Baixar CV</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="keynote" id="keynote">
+            <div class="container">
+                <div class="keynote-grid">
+                    <div class="keynote-item" data-animate="fade-in">
+                        <div class="keynote-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg></div>
+                        <h3>Código Robusto</h3>
+                        <p>Desenvolvimento focado em escalabilidade, performance e manutenibilidade, utilizando as melhores práticas e padrões de projeto.</p>
                     </div>
+                    <div class="keynote-item" data-animate="fade-in" data-animation-delay="0.2s">
+                        <div class="keynote-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0L12 2.69z"></path></svg></div>
+                        <h3>Design Centrado no Usuário</h3>
+                        <p>Criação de interfaces intuitivas e acessíveis que resolvem problemas reais e encantam os usuários, embasadas em pesquisa e dados.</p>
+                    </div>
+                    <div class="keynote-item" data-animate="fade-in" data-animation-delay="0.4s">
+                        <div class="keynote-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg></div>
+                        <h3>Estratégia de Produto</h3>
+                        <p>Visão holística do ciclo de vida do produto, alinhando objetivos de negócio com necessidades técnicas e do usuário final.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="journey" id="journey">
+            <div class="container">
+                <h2 class="section-title" data-animate="fade-in">Minha Jornada</h2>
+                <div class="timeline">
+                    <div class="timeline-item" data-animate="fade-in-up">
+                        <div class="timeline-icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"></path></svg></div>
+                        <div class="timeline-content">
+                            <span class="timeline-date">2016 - 2020</span>
+                            <h3 class="timeline-title">Bacharelado em Ciência da Computação</h3>
+                            <h4 class="timeline-subtitle">[Nome da Universidade]</h4>
+                            <p>Base sólida em algoritmos, estruturas de dados, engenharia de software e inteligência artificial. Projeto de conclusão de curso focado em visualização de dados interativa na web.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item" data-animate="fade-in-up">
+                        <div class="timeline-icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg></div>
+                        <div class="timeline-content">
+                            <span class="timeline-date">2019 - 2020</span>
+                            <h3 class="timeline-title">Estágio em Desenvolvimento Front-End</h3>
+                            <h4 class="timeline-subtitle">[Nome da Startup]</h4>
+                            <p>Primeira experiência profissional, trabalhando com Vue.js e SCSS para desenvolver componentes de UI para uma plataforma SaaS. Aprendi sobre metodologias ágeis e sistemas de controle de versão em um ambiente de equipe.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item" data-animate="fade-in-up">
+                        <div class="timeline-icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="12" x2="12" y2="22"></line><path d="M12 12L8 16"></path><path d="M12 12L16 16"></path><path d="M12 2L8 6"></path><path d="M12 2L16 6"></path></svg></div>
+                        <div class="timeline-content">
+                            <span class="timeline-date">2021 - 2023</span>
+                            <h3 class="timeline-title">Desenvolvedor Full-Stack</h3>
+                            <h4 class="timeline-subtitle">[Nome da Empresa de Tecnologia]</h4>
+                            <p>Fui responsável pelo desenvolvimento end-to-end de features para o produto principal, utilizando React com TypeScript no front-end e Node.js (Express) com PostgreSQL no back-end. Implementei pipelines de CI/CD com GitHub Actions e Docker.</p>
+                        </div>
+                    </div>
+                     <div class="timeline-item" data-animate="fade-in-up">
+                        <div class="timeline-icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.9 11.2c.2.4.2.9 0 1.3l-2.6 4.4c-.2.4-.7.7-1.2.7h-4.2c-.5 0-1-.3-1.2-.7L9.1 12c-.2-.4-.2-.9 0-1.3l2.6-4.4c.2-.4.7-.7 1.2-.7h4.2c.5 0 1 .3 1.2.7l2.6 4.4z"></path><path d="M3.1 11.2c.2.4.2.9 0 1.3l-2.6 4.4c-.2.4-.7.7-1.2.7H-5c-.5 0-1-.3-1.2-.7L-11 12c-.2-.4-.2-.9 0-1.3l2.6-4.4c.2-.4.7-.7 1.2-.7H0c.5 0 1 .3 1.2.7l2.6 4.4z"></path></svg></div>
+                        <div class="timeline-content">
+                            <span class="timeline-date">2023 - Presente</span>
+                            <h3 class="timeline-title">Sênior Creative Technologist</h3>
+                            <h4 class="timeline-subtitle">[Agência Digital / Posição Atual]</h4>
+                            <p>Lidero projetos que unem tecnologia de ponta e criatividade. Especializado em experiências interativas com Three.js/WebGL, realidade aumentada (WebXR) e instalações físicas. Prototipação rápida de conceitos e desenvolvimento de soluções inovadoras para grandes marcas.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        </main>
+    
+    <script>
+        // Pequeno script para o seletor de tema - será movido e melhorado em script.js v2.0
+        document.addEventListener('DOMContentLoaded', () => {
+            const themeSwitcher = document.getElementById('theme-switcher');
+            const doc = document.documentElement;
+
+            themeSwitcher.addEventListener('click', () => {
+                doc.classList.toggle('theme-light');
+                doc.classList.toggle('theme-dark');
+            });
+        });
+    </script>
+    
+    <script src="script.js" defer></script>
+</body>
+</html>
+
+<section class="skills-v2" id="skills">
+            <div class="container">
+                <h2 class="section-title" data-animate="fade-in">Ecossistema de Habilidades</h2>
+                <div class="skills-grid">
+                    <div class="skill-card" data-animate="fade-in-up">
+                        <div class="skill-card-icon">
+                            <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>HTML5</title><path d="M1.5 0h21l-1.91 21.563L11.977 24l-8.564-2.438L1.5 0zm7.031 9.75l-.232-2.718 10.059.003.23-2.622-13.42-.003.527 6.002h4.75v.002h4.813l-.33 3.553-3.441 1.01-3.261-1.01-.21-2.28h-2.61l.49 5.155L12 19.34l6.09-1.715.842-9.445H8.53v-.002z" fill="#E34F26"/></svg>
+                        </div>
+                        <h3 class="skill-card-title">HTML5</h3>
+                        <p class="skill-card-desc">Estruturação semântica e acessível para a web moderna.</p>
+                    </div>
+                    <div class="skill-card" data-animate="fade-in-up">
+                        <div class="skill-card-icon">
+                           <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>CSS3</title><path d="M1.5 0h21l-1.91 21.563L11.977 24l-8.565-2.438L1.5 0zm17.09 4.413L5.41 4.41l.213 2.622 10.125-.002-.25 2.715-6.66.002.21 2.281 6.223-.001-.25 2.71-2.923.82-2.74-.82-.187-2.11h-2.61l.35 4.02L12 19.34l5.353-1.523.6-6.78-12.042.002.23-2.622 12.535-.002.23-2.623z" fill="#1572B6"/></svg>
+                        </div>
+                        <h3 class="skill-card-title">CSS3</h3>
+                        <p class="skill-card-desc">Layouts complexos (Flexbox, Grid), animações e design responsivo.</p>
+                    </div>
+                    <div class="skill-card" data-animate="fade-in-up">
+                        <div class="skill-card-icon">
+                            <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>JavaScript</title><path d="M0 0h24v24H0V0zm22.05 18.362h-3.067a.564.564 0 0 0-.486.273c-.736 1.294-1.854 2.22-3.323 2.22-1.469 0-2.587-.926-3.323-2.22a.564.564 0 0 0-.486-.273H8.35a.564.564 0 0 0-.486.273c-.736 1.294-1.854 2.22-3.323 2.22-1.469 0-2.587-.926-3.323-2.22a.564.564 0 0 0-.486-.273H.95a.333.333 0 0 0-.333.333v2.857c0 .183.15.333.333.333h2.868a.564.564 0 0 0 .486-.273c.736-1.294 1.854-2.22 3.323-2.22 1.469 0 2.587.926 3.323 2.22a.564.564 0 0 0 .486.273h3.013a.564.564 0 0 0 .486-.273c.736-1.294 1.854-2.22 3.323-2.22 1.469 0 2.587.926 3.323 2.22a.564.564 0 0 0 .486.273h2.853a.333.333 0 0 0 .333-.333v-2.857a.333.333 0 0 0-.333-.333zM8.35 1.51H5.482a.564.564 0 0 0-.486.273C4.26 3.077 3.142 4 1.673 4 .204 4-.914 3.077-1.65 1.783A.564.564 0 0 0-2.137 1.51h-2.83a.333.333 0 0 0-.333.333v2.857c0 .183.15.333.333.333h2.868a.564.564 0 0 0 .486-.273c.736-1.294 1.854-2.22 3.323-2.22 1.469 0 2.587.926 3.323 2.22a.564.564 0 0 0 .486.273h3.013a.564.564 0 0 0 .486-.273c.736-1.294 1.854-2.22 3.323-2.22 1.469 0 2.587.926 3.323 2.22a.564.564 0 0 0 .486.273H15.1a.333.333 0 0 0 .333-.333V1.843a.333.333 0 0 0-.333-.333z" fill="#F7DF1E" transform="translate(4 1.5)"/></svg>
+                        </div>
+                        <h3 class="skill-card-title">JavaScript (ES6+)</h3>
+                        <p class="skill-card-desc">DOM, APIs assíncronas, manipulação de dados e lógica complexa.</p>
+                    </div>
+                    <div class="skill-card" data-animate="fade-in-up">
+                        <div class="skill-card-icon">
+                            <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>React</title><path d="M12.012 21.82a.58.58 0 0 1-.512-.29L7.56 15.01a.58.58 0 0 1 .5-.81l3.18 1.05a.58.58 0 0 0 .71-.16l5.48-9.02a.58.58 0 0 1 .98-.02l-6.1 14.65a.58.58 0 0 1-.48.3zm-1.8-16.14a.58.58 0 0 1-.51-.29L5.76 1.87a.58.58 0 0 1 .5-.81l3.18 1.05a.58.58 0 0 0 .71-.16l5.48-9.02a.58.58 0 0 1 .98-.02L9.9 14.65a.58.58 0 0 1-.48.3zM23.95 9.4a.58.58 0 0 1-.51-.29l-3.94-6.52a.58.58 0 0 1 .5-.81l3.18 1.05a.58.58 0 0 0 .71-.16l5.48-9.02a.58.58 0 0 1 .98-.02L25.63 8.3a.58.58 0 0 1-.48.3z" transform="matrix(.47265 0 0 .47265 1.037 6.13)" fill="#61DAFB"/></svg>
+                        </div>
+                        <h3 class="skill-card-title">React</h3>
+                        <p class="skill-card-desc">Componentização, hooks, gerenciamento de estado (Redux, Zustand) e Next.js.</p>
+                    </div>
+                     <div class="skill-card" data-animate="fade-in-up">
+                        <div class="skill-card-icon">
+                           <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Node.js</title><path d="M11.75 0C5.263 0 0 5.262 0 11.75c0 6.487 5.263 11.75 11.75 11.75 6.488 0 11.75-5.263 11.75-11.75C23.5 5.262 18.238 0 11.75 0zm7.143 14.881l-1.956.974c-.19.096-.334.304-.28.513l.69 2.762c.07.282-.132.554-.413.62l-2.52.59c-.27.064-.543-.075-.668-.32l-1.59-3.17c-.126-.247-.42-.34-.658-.216l-2.22.99c-.24.108-.528-.03-.63-.27l-1.21-2.89c-.1-.24.037-.52.277-.63l1.956-.974c.19-.096.334-.304.28-.513l-.69-2.762c-.07-.282.132-.554.413-.62l2.52-.59c.27-.064.543.075.668.32l1.59 3.17c.126.247.42.34.658.216l2.22-.99c.24-.108.528.03.63.27l1.21 2.89c.102.24-.035.52-.275.63z" fill="#339933"/></svg>
+                        </div>
+                        <h3 class="skill-card-title">Node.js</h3>
+                        <p class="skill-card-desc">APIs REST/GraphQL com Express/Fastify, autenticação e ORMs.</p>
+                    </div>
+                    <div class="skill-card" data-animate="fade-in-up">
+                        <div class="skill-card-icon">
+                            <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Figma</title><path d="M12 24a12 12 0 0 1-12-12 12 12 0 0 1 12-12 12 12 0 0 1 12 12 12 12 0 0 1-12 12zM12 8.4a3.6 3.6 0 0 0-3.6 3.6 3.6 3.6 0 0 0 3.6 3.6V8.4zM8.4 4.8a3.6 3.6 0 0 0 0 7.2h3.6V4.8H8.4zm7.2 0v10.8a3.6 3.6 0 0 0 0-7.2 3.6 3.6 0 0 0-3.6-3.6h3.6zm0 10.8a3.6 3.6 0 1 0 0 7.2 3.6 3.6 0 0 0 0-7.2zM8.4 15.6A3.6 3.6 0 0 0 12 19.2v-7.2H8.4v3.6z" fill="#F24E1E"/></svg>
+                        </div>
+                        <h3 class="skill-card-title">Figma</h3>
+                        <p class="skill-card-desc">Prototipação, UI Design, Design Systems e colaboração dev-design.</p>
+                    </div>
+                    <div class="skill-card" data-animate="fade-in-up">
+                        <div class="skill-card-icon">
+                            <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Docker</title><path d="M22.445.001H1.556C.696.001 0 .698 0 1.557v16.44c0 .86.696 1.557 1.556 1.557h2.825v-3.235h-1.74a.972.972 0 110-1.943h1.74V9.64h-1.74a.972.972 0 110-1.943h1.74V4.46h-1.74a.972.972 0 110-1.943h1.74V.001h15.064v2.516h-2.022a.972.972 0 100 1.943h2.022v3.235h-2.022a.972.972 0 100 1.943h2.022v3.235h-2.022a.972.972 0 100 1.943h2.022v3.235h-3.418v-3.235H17.3a.972.972 0 100-1.943h1.728V9.64H17.3a.972.972 0 100-1.943h1.728V4.46H17.3a.972.972 0 100-1.943h1.728V.001h.024zm-5.74 19.555h-2.824v-3.235h2.824v3.235zm-4.38 0H9.5v-3.235h2.824v3.235zm-4.381 0H5.118v-3.235h2.825v3.235z" fill="#2496ED"/></svg>
+                        </div>
+                        <h3 class="skill-card-title">DevOps</h3>
+                        <p class="skill-card-desc">CI/CD com GitHub Actions, Docker, Vercel e Netlify.</p>
+                    </div>
+                    <div class="skill-card" data-animate="fade-in-up">
+                        <div class="skill-card-icon">
+                           <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-labelledby="a11yTitle"><title id="a11yTitle">Acessibilidade Web</title><circle cx="12" cy="4.5" r="2.5"/><path d="M14.5 9h-5c-1.1 0-2 .9-2 2v6h2v-5h1v10h2V12h1v5h2v-6c0-1.1-.9-2-2-2z"/><path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm0 22C6.48 22 2 17.52 2 12S6.48 2 12 2s10 4.48 10 10-4.48 10-10 10z" fill="var(--primary)"/></svg>
+                        </div>
+                        <h3 class="skill-card-title">Acessibilidade (A11y)</h3>
+                        <p class="skill-card-desc">Desenvolvimento inclusivo seguindo as diretrizes do WCAG.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="featured-projects" id="projects">
+            <div class="container">
+                <h2 class="section-title" data-animate="fade-in">Projetos em Destaque</h2>
+                <div class="projects-showcase">
+                    <div class="showcase-item" data-animate="fade-in-up">
+                        <div class="showcase-content">
+                            <span class="showcase-category">Experiência Interativa</span>
+                            <h3 class="showcase-title">[Nome do Projeto de Visualização de Dados]</h3>
+                            <div class="showcase-details">
+                                <p><strong>Desafio:</strong> Transformar um conjunto de dados complexos sobre [tema do projeto] em uma narrativa visual interativa e compreensível para o público geral.</p>
+                                <p><strong>Solução:</strong> Criei uma aplicação web single-page com D3.js e React que permite aos usuários explorar os dados através de gráficos dinâmicos, filtros e uma linha do tempo animada.</p>
+                                <p><strong>Meu Papel:</strong> Lidere técnico, responsável pela arquitetura de dados, desenvolvimento front-end e design da experiência.</p>
+                            </div>
+                            <div class="showcase-tags">
+                                <span>React</span><span>D3.js</span><span>TypeScript</span><span>WebGL</span>
+                            </div>
+                            <a href="project-detail.html?id=1" class="cta-button secondary">Ver Estudo de Caso Completo</a>
+                        </div>
+                        <div class="showcase-image">
+                            <img src="https://www.instagram.com/p/DFpvrLnxMWq/" alt="[Descrição da imagem do projeto 1]">
+                        </div>
+                    </div>
+                    <div class="showcase-item" data-animate="fade-in-up">
+                        <div class="showcase-content">
+                             <span class="showcase-category">Plataforma SaaS</span>
+                            <h3 class="showcase-title">[Nome do Projeto de Plataforma E-commerce]</h3>
+                            <div class="showcase-details">
+                                <p><strong>Desafio:</strong> Desenvolver um back-end robusto e escalável para uma plataforma de e-commerce de alta performance, com foco em processamento de pagamentos e gerenciamento de inventário em tempo real.</p>
+                                <p><strong>Solução:</strong> Arquitetura de microsserviços com Node.js e TypeScript, utilizando RabbitMQ para comunicação assíncrona, e PostgreSQL como banco de dados. API GraphQL para o front-end.</p>
+                                <p><strong>Meu Papel:</strong> Desenvolvedor Back-end Sênior, responsável pela modelagem do banco de dados, implementação da API GraphQL e configuração do pipeline de CI/CD.</p>
+                            </div>
+                            <div class="showcase-tags">
+                                <span>Node.js</span><span>GraphQL</span><span>Docker</span><span>PostgreSQL</span><span>CI/CD</span>
+                            </div>
+                            <a href="project-detail.html?id=2" class="cta-button secondary">Ver Estudo de Caso Completo</a>
+                        </div>
+                        <div class="showcase-image">
+                            <img src="https://pt.pinterest.com/fonte2022mafm/projetos-para-experimentaras-minhas-fotos/" alt="[Descrição da imagem do projeto 2]">
+                        </div>
+                    </div>
+                </div>
+                 <div class="see-all-wrapper">
+                    <a href="projects.html" class="cta-button primary">Ver todos os projetos</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="articles" id="articles">
+            <div class="container">
+                <h2 class="section-title" data-animate="fade-in">Escritos Recentes</h2>
+                <div class="articles-grid">
+                    <a href="#" class="article-card" data-animate="fade-in-up">
+                        <div class="article-content">
+                            <span class="article-date">28 de Agosto, 2025</span>
+                            <h3 class="article-title">Otimizando a Performance de Animações Web com a API Intersection Observer</h3>
+                            <p class="article-excerpt">Uma análise profunda de como substituir listeners de scroll por uma abordagem moderna e performática para criar animações de entrada fluidas e eficientes...</p>
+                            <span class="article-readmore">Leia mais &rarr;</span>
+                        </div>
+                    </a>
+                    <a href="#" class="article-card" data-animate="fade-in-up" data-animation-delay="0.2s">
+                        <div class="article-content">
+                            <span class="article-date">15 de Julho, 2025</span>
+                            <h3 class="article-title">Design Systems: A ponte entre Design e Desenvolvimento</h3>
+                            <p class="article-excerpt">Como a criação de um Design System robusto no Figma e sua implementação com Storybook pode acelerar o desenvolvimento, garantir consistência e melhorar a colaboração...</p>
+                            <span class="article-readmore">Leia mais &rarr;</span>
+                        </div>
+                    </a>
+                    <a href="#" class="article-card" data-animate="fade-in-up" data-animation-delay="0.4s">
+                        <div class="article-content">
+                            <span class="article-date">02 de Junho, 2025</span>
+                            <h3 class="article-title">Introdução ao WebGL para Desenvolvedores JavaScript</h3>
+                            <p class="article-excerpt">Desmistificando o pipeline de renderização 3D no navegador. Um guia prático para criar sua primeira cena com Three.js, desde a configuração até a animação de objetos...</p>
+                            <span class="article-readmore">Leia mais &rarr;</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="playground" id="playground">
+             <style scoped>
+                .playground-content { position: relative; width: 100%; height: 500px; background: #0a0a0a; border-radius: 8px; overflow: hidden; }
+                .blob { position: absolute; border-radius: 50%; background: radial-gradient(circle, #8ab4f8 0%, rgba(138, 180, 248, 0) 70%); animation: move 20s infinite alternate; }
+                .blob1 { width: 400px; height: 400px; top: -100px; left: -100px; animation-duration: 25s; }
+                .blob2 { width: 300px; height: 300px; bottom: -50px; right: -50px; animation-duration: 20s; animation-delay: -5s; }
+                .blob3 { width: 200px; height: 200px; top: 50%; left: 50%; transform: translate(-50%, -50%); animation-duration: 15s; animation-delay: -10s; }
+                @keyframes move { from { transform: translate(0, 0) rotate(0deg); } to { transform: translate(100px, 50px) rotate(180deg); } }
+                .playground-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: #fff; background: rgba(0,0,0,0.2); backdrop-filter: blur(10px); }
+                .playground-overlay h3 { font-family: var(--font-primary); font-size: 2rem; }
+            </style>
+            <div class="container">
+                <h2 class="section-title" data-animate="fade-in">Playground Criativo</h2>
+                <div class="playground-content" data-animate="fade-in">
+                    <div class="blob blob1"></div>
+                    <div class="blob blob2"></div>
+                    <div class="blob blob3"></div>
+                    <div class="playground-overlay">
+                        <h3>Animação com CSS Puro</h3>
+                        <p>Uma pequena demonstração de animação procedural e gradientes.</p>
+                    </div>
+                </div>
             </div>
         </section>
 
         <section class="contact" id="contact">
             <div class="container">
-                <h2 class="section-title">Vamos Conversar?</h2>
-                <p>Estou sempre aberto a novas oportunidades e colaborações. Sinta-se à vontade para entrar em contato.</p>
-                <a href="mailto:[SEU EMAIL]" class="cta-button">[SEU EMAIL]</a>
-                <div class="social-links">
-                    <a href="https://pt.linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-                        </a>
-                    <a href="https://www.youtube.com/watch?v=TsaLQAetPLU" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-                        </a>
+                <h2 class="section-title" data-animate="fade-in">Vamos Criar Algo Incrível?</h2>
+                <p class="contact-subtitle" data-animate="fade-in" data-animation-delay="0.1s">Estou disponível para novos projetos, colaborações ou apenas um bom bate-papo sobre tecnologia. Preencha o formulário abaixo ou me encontre nas redes sociais.</p>
+                <form class="contact-form" action="https://www.youtube.com/watch?v=Fq-VbLlDkHo" method="POST" data-animate="fade-in-up" data-animation-delay="0.2s">
+                    <div class="form-group">
+                        <label for="name">Seu Nome</label>
+                        <input type="text" id="name" name="name" required>
                     </div>
+                    <div class="form-group">
+                        <label for="email">Seu E-mail</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="message">Sua Mensagem</label>
+                        <textarea id="message" name="message" rows="6" required></textarea>
+                    </div>
+                    <button type="submit" class="cta-button primary full-width">Enviar Mensagem</button>
+                </form>
             </div>
         </section>
         
@@ -172,9 +531,37 @@
 
     <footer class="main-footer">
         <div class="container">
-            <p>&copy; 2025 [Seu Nome]. Todos os direitos reservados.</p>
+            <div class="footer-grid">
+                <div class="footer-column about-col">
+                    <h3 class="footer-title">[Seu Nome]</h3>
+                    <p>Creative Technologist apaixonado por construir o futuro da web.</p>
+                </div>
+                <div class="footer-column links-col">
+                    <h3 class="footer-title">Navegação</h3>
+                    <ul>
+                        <li><a href="#journey">Jornada</a></li>
+                        <li><a href="#skills">Habilidades</a></li>
+                        <li><a href="projects.html">Projetos</a></li>
+                        <li><a href="#articles">Artigos</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column social-col">
+                    <h3 class="footer-title">Conecte-se</h3>
+                    <div class="footer-social-links">
+                        <a href="https://www.youtube.com/watch?v=TsaLQAetPLU" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                            <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                        </a>
+                        <a href="https://pt.linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                           <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>LinkedIn</title><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 [Seu Nome]. Construído com código e paixão. Todos os direitos reservados.</p>
+            </div>
         </div>
     </footer>
-
+    
 </body>
 </html>
