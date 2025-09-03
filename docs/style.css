@@ -1,19 +1,21 @@
 /*
     PROJETO: Documentação de Cargos em Desenvolvimento Web
     ARQUIVO: style.css
-    VERSÃO: 2.0
-    DATA: 03/09/2025
+    VERSÃO: 3.1
+    DATA: 03/09/2025 (06:13 America/Sao_Paulo)
     
-    CHANGELOG v2.0:
-    - ADICIONADO: Estilos para o layout principal de duas colunas (.page-layout) usando CSS Grid.
-    - ADICIONADO: Estilos para a barra de navegação lateral (.sidebar-nav), incluindo `position: sticky`.
-    - ADICIONADO: Estilos para o link de acessibilidade (.skip-link), visível apenas ao receber foco.
-    - ADICIONADO: Estilos para as novas seções de conteúdo detalhado (.role-section) e seus componentes (.role-title, .role-icon).
-    - ADICIONADO: Estilo para o estado ativo do link na navegação lateral (.sidebar-nav a.active).
-    - REMOVIDO: Estilos obsoletos da v1.0 (.role-card, #roles-list) para manter o código limpo.
+    CHANGELOG v3.1 (Atualização para Multi-Página):
+    - CORREÇÃO/REINTRODUÇÃO: Reintroduzidos os estilos da v2.0 para o layout de duas colunas
+      (.page-layout), barra de navegação lateral (.sidebar-nav) e seções de conteúdo (.role-section).
+      Esses estilos agora se aplicam às páginas de detalhe (ex: /roles/*.html).
+    - ADICIONADO: Estilos para os novos elementos das páginas de detalhe, como o cabeçalho do
+      artigo (.article-header), introdução (.article-intro) e o link de voltar (.back-link).
+    - ADICIONADO: Reintroduzido o estilo para o link de acessibilidade .skip-link.
+    - COEXISTÊNCIA: Os estilos da página principal (hub) e das páginas de detalhe agora
+      coexistem de forma harmoniosa neste único arquivo.
 */
 
-/* --- 1. IMPORTAÇÕES E DEFINIÇÕES GLOBAIS (sem alterações da v1.0) --- */
+/* --- 1. IMPORTAÇÕES E DEFINIÇÕES GLOBAIS (sem alterações) --- */
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Merriweather:wght@700;900&display=swap');
 
 :root {
@@ -42,70 +44,28 @@ html.dark-theme {
     --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-/* --- 2. RESET E ESTILOS BASE (sem alterações da v1.0) --- */
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+/* --- 2. RESET E ESTILOS BASE (sem alterações) --- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+body { font-family: var(--font-family-body); font-size: 1.125rem; line-height: 1.7; color: var(--color-text-primary); background-color: var(--color-background); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; transition: color var(--transition-speed), background-color var(--transition-speed); }
 
-@media (prefers-reduced-motion: no-preference) {
-    html {
-        scroll-behavior: smooth;
-    }
-}
-
-body {
-    font-family: var(--font-family-body);
-    font-size: 1.125rem;
-    line-height: 1.7;
-    color: var(--color-text-primary);
-    background-color: var(--color-background);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    transition: color var(--transition-speed), background-color var(--transition-speed);
-}
-
-/* --- 3. TIPOGRAFIA E UTILITÁRIOS (sem alterações da v1.0) --- */
-h1, h2, h3 {
-    font-family: var(--font-family-headings);
-    color: var(--color-text-primary);
-    line-height: 1.3;
-}
+/* --- 3. TIPOGRAFIA E UTILITÁRIOS GLOBAIS --- */
+h1, h2, h3 { font-family: var(--font-family-headings); color: var(--color-text-primary); line-height: 1.3; }
 h1 { font-size: clamp(2.5rem, 5vw, 3.5rem); }
 h2 { font-size: clamp(1.8rem, 4vw, 2.25rem); }
-h3 { font-size: 1.5rem; margin: 1.5rem 0 0.5rem; }
-
+h3 { font-size: 1.25rem; }
 p { margin-bottom: var(--spacing-unit); max-width: 75ch; }
 ul { margin-bottom: var(--spacing-unit); padding-left: 2rem; }
 li { margin-bottom: calc(var(--spacing-unit) / 2); }
-
 a { color: var(--color-primary); text-decoration: none; font-weight: 700; transition: opacity var(--transition-speed); }
 a:hover { opacity: 0.8; text-decoration: underline; }
 a:focus, button:focus { outline: 3px solid var(--color-primary); outline-offset: 4px; border-radius: 4px; }
-
 .container { width: 90%; max-width: 1200px; margin-left: auto; margin-right: auto; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+.skip-link { position: absolute; top: -100px; left: 0; background-color: var(--color-primary); color: white; padding: var(--spacing-unit); z-index: 1000; transition: top var(--transition-speed) ease-in-out; }
+.skip-link:focus { top: 0; }
 
-/* --- 4. NOVOS ESTILOS DE ACESSIBILIDADE --- */
-/* A11y: Estilo para o link "Pular para o conteúdo". Fica fora da tela por padrão
-   e aparece apenas quando recebe foco, como ao pressionar a tecla Tab na carga da página. */
-.skip-link {
-    position: absolute;
-    top: -100px; /* Posiciona o elemento completamente fora da tela. */
-    left: 0;
-    background-color: var(--color-primary);
-    color: white;
-    padding: var(--spacing-unit);
-    z-index: 1000;
-    transition: top var(--transition-speed) ease-in-out;
-}
-.skip-link:focus {
-    top: 0; /* Traz o link para a visão quando ele recebe foco. */
-}
-
-/* --- 5. COMPONENTES PRINCIPAIS (Header, Footer, Botão) (sem alterações da v1.0) --- */
+/* --- 4. COMPONENTES GLOBAIS (Header, Footer, Botão) (sem alterações) --- */
 .site-header, .site-footer { padding: calc(var(--spacing-unit) * 2) 0; text-align: center; }
 .site-header { border-bottom: 1px solid var(--color-border); position: relative; }
 .subtitle { font-size: 1.2rem; color: var(--color-text-secondary); }
@@ -113,93 +73,50 @@ a:focus, button:focus { outline: 3px solid var(--color-primary); outline-offset:
 .theme-toggle { position: absolute; top: 50%; right: 5%; transform: translateY(-50%); background: transparent; border: 2px solid var(--color-border); width: 45px; height: 45px; border-radius: 50%; cursor: pointer; transition: all var(--transition-speed) ease-in-out; }
 .theme-toggle:hover { border-color: var(--color-primary); transform: translateY(-50%) rotate(15deg); }
 
-/* --- 6. NOVO LAYOUT DA PÁGINA (v2.0) --- */
-/* Front-End: Usando CSS Grid para criar o layout de duas colunas.
-   Mobile-first: por padrão, é uma única coluna (barra lateral acima do conteúdo). */
-.page-layout {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: calc(var(--spacing-unit) * 2);
-    margin-top: calc(var(--spacing-unit) * 2);
-}
+/* --- 5. ESTILOS DA PÁGINA PRINCIPAL (HUB - index.html) --- */
+#introduction { padding: calc(var(--spacing-unit) * 2) 0; }
+.grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: calc(var(--spacing-unit) * 1.5); }
+.role-card { display: flex; flex-direction: column; height: 100%; background-color: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--border-radius); box-shadow: var(--shadow-sm); text-decoration: none; color: var(--color-text-primary); transition: transform var(--transition-speed), box-shadow var(--transition-speed); }
+@media (prefers-reduced-motion: no-preference) { .role-card:hover, .role-card:focus { transform: translateY(-5px); box-shadow: var(--shadow-md); text-decoration: none; opacity: 1; } }
+.role-card article { display: flex; flex-direction: column; flex-grow: 1; padding: calc(var(--spacing-unit) * 1.5); }
+.role-card__header { display: flex; align-items: center; gap: var(--spacing-unit); margin-bottom: var(--spacing-unit); }
+.role-card .role-icon { width: 2.25rem; height: 2.25rem; flex-shrink: 0; color: var(--color-primary); fill: currentColor; }
+.role-card__title { color: var(--color-text-primary); }
+.role-card__summary { color: var(--color-text-secondary); flex-grow: 1; }
+.role-card__tags { display: flex; flex-wrap: wrap; gap: calc(var(--spacing-unit) / 2); margin-bottom: var(--spacing-unit); }
+.role-card__tags span { font-size: 0.8rem; padding: 0.25em 0.75em; background-color: var(--color-background); border: 1px solid var(--color-border); border-radius: 20px; color: var(--color-text-secondary); }
+.role-card__footer { margin-top: auto; color: var(--color-primary); font-weight: 700; text-align: right; }
 
-/* --- 7. NOVOS COMPONENTES (Barra Lateral e Conteúdo Principal) (v2.0) --- */
-/* UX/UI: Barra lateral que se torna fixa durante a rolagem para fácil navegação. */
-.sidebar-nav {
-    /* O comportamento 'sticky' só será ativado em telas maiores (veja Media Queries). */
-}
-.sidebar-nav h2 {
-    font-size: 1.2rem;
-    margin-bottom: var(--spacing-unit);
-    border-bottom: 1px solid var(--color-border);
-    padding-bottom: calc(var(--spacing-unit) / 2);
-}
-.sidebar-nav ol {
-    list-style: none;
-    padding-left: 0;
-}
-.sidebar-nav li {
-    margin-bottom: calc(var(--spacing-unit) / 2);
-}
-.sidebar-nav a {
-    display: block;
-    padding: calc(var(--spacing-unit) / 4) calc(var(--spacing-unit) / 2);
-    border-radius: 4px;
-    font-weight: 400;
-    color: var(--color-text-secondary);
-}
-.sidebar-nav a:hover {
-    background-color: var(--color-border);
-    color: var(--color-text-primary);
-    text-decoration: none;
-    opacity: 1;
-}
-/* Creative Dev/UX: Estilo para o link ativo, que será controlado via JavaScript. */
-.sidebar-nav a.active {
-    background-color: var(--color-primary);
-    color: white;
-    font-weight: 700;
-}
+/* --- 6. ESTILOS PARA PÁGINAS DE DETALHE (/roles/*.html) (Reintroduzidos na v3.1) --- */
+.page-layout { display: grid; grid-template-columns: 1fr; gap: calc(var(--spacing-unit) * 2); margin-top: calc(var(--spacing-unit) * 2); }
+.sidebar-nav { /* Comportamento sticky ativado em telas maiores */ }
+.sidebar-nav .back-link { display: block; font-weight: 700; margin-bottom: var(--spacing-unit) * 1.5; padding-bottom: var(--spacing-unit); border-bottom: 1px solid var(--color-border); }
+.sidebar-nav h2 { font-size: 1.2rem; margin-bottom: var(--spacing-unit); }
+.sidebar-nav ol { list-style: none; padding-left: 0; }
+.sidebar-nav li { margin-bottom: calc(var(--spacing-unit) / 2); }
+.sidebar-nav a { display: block; padding: calc(var(--spacing-unit) / 4) calc(var(--spacing-unit) / 2); border-radius: 4px; font-weight: 400; color: var(--color-text-secondary); }
+.sidebar-nav a:not(.back-link):hover { background-color: var(--color-border); color: var(--color-text-primary); text-decoration: none; opacity: 1; }
+.sidebar-nav a.active { background-color: var(--color-primary); color: white; font-weight: 700; }
 
-/* Estilos para as seções de conteúdo detalhado. */
-.role-section {
-    padding-top: calc(var(--spacing-unit) * 3);
-    border-top: 2px solid var(--color-border);
-}
-/* A primeira seção não precisa de borda ou espaçamento no topo. */
-#introduction + .role-section {
-    padding-top: 0;
-    border-top: none;
-}
-.role-title {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-unit);
-    margin-bottom: var(--spacing-unit);
-}
-.role-icon {
-    width: 2.25rem;
-    height: 2.25rem;
-    flex-shrink: 0; /* Previne que o ícone seja esmagado. */
-    color: var(--color-primary); /* Por padrão, usa a cor primária. */
-    fill: currentColor; /* O SVG herda a cor do seu elemento pai (a tag h2). */
-}
+.article-header { padding-bottom: var(--spacing-unit); border-bottom: 2px solid var(--color-border); margin-bottom: var(--spacing-unit) * 2; }
+.article-header h1 { margin-bottom: var(--spacing-unit); }
+.article-intro { font-size: 1.25rem; color: var(--color-text-secondary); line-height: 1.6; }
 
-/* --- 8. MEDIA QUERIES (DESIGN RESPONSIVO) --- */
-/* Ativando o layout de duas colunas e a barra lateral fixa apenas em telas maiores. */
+.role-section { padding-top: var(--spacing-unit); }
+.role-section h2 { margin-top: calc(var(--spacing-unit) * 2); margin-bottom: var(--spacing-unit); padding-bottom: calc(var(--spacing-unit) / 2); border-bottom: 1px solid var(--color-border); }
+.role-section h3 { font-size: 1.5rem; margin: 1.5rem 0 0.5rem; color: var(--color-text-primary); }
+
+/* --- 7. MEDIA QUERIES --- */
 @media (min-width: 1024px) {
+    /* Ativa o layout de duas colunas apenas nas páginas que usam .page-layout */
     .page-layout {
-        /* Define duas colunas: a primeira com 280px para a navegação
-           e a segunda ocupando o espaço restante (1fr). */
         grid-template-columns: 280px 1fr;
         gap: calc(var(--spacing-unit) * 3);
     }
     .sidebar-nav {
         position: sticky;
-        top: calc(var(--spacing-unit) * 2); /* Distância do topo ao se tornar fixo. */
-        align-self: start; /* Garante que a barra lateral se alinhe ao topo do grid. */
-        /* Define uma altura máxima para a barra lateral, permitindo que ela tenha sua própria rolagem
-           se o conteúdo for muito extenso, sem empurrar o rodapé para baixo. */
+        top: calc(var(--spacing-unit) * 2);
+        align-self: start;
         max-height: calc(100vh - 4rem);
         overflow-y: auto;
     }
