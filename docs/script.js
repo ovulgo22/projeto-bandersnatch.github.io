@@ -1,38 +1,39 @@
 /*
     PROJETO: Documentação de Cibersegurança Web
     ARQUIVO: script.js
-    VERSÃO: 4.0
-    DATA: 03/09/2025 (06:25 America/Sao_Paulo)
+    VERSÃO: 4.1
+    DATA: 03/09/2025 (06:35 America/Sao_Paulo)
     
-    CHANGELOG v4.0 (MEGA ATUALIZAÇÃO - NOVA TEMÁTICA):
-    - CORREÇÃO (LÓGICA DE TEMA): Refatorado para a nova abordagem "dark-first" do CSS.
-      - O script agora alterna a classe `.light-theme` no elemento <html>.
-      - A lógica de `localStorage` e `prefers-color-scheme` foi invertida para refletir que escuro é o padrão.
-    - MANUTENÇÃO (SCROLL SPY): O módulo de Scroll Spy foi mantido, pois será utilizado
-      nas futuras páginas de detalhe. Sua lógica condicional previne a execução na página principal.
-    - LIMPEZA: Comentários e variáveis atualizados para a nova temática.
+    CHANGELOG v4.1 (ATUALIZAÇÃO DE REFINAMENTO):
+    - ATUALIZAÇÃO VISUAL: Adicionada lógica para suportar uma transição suave (crossfade) ao alternar temas.
+    - CORREÇÃO: Implementado um mecanismo para desativar temporariamente as transições no carregamento
+      da página, prevenindo o "flash de transição" inicial e garantindo que apenas as
+      ações do usuário sejam animadas.
+    - ORGANIZAÇÃO: O código foi levemente reestruturado para acomodar a nova lógica de transição.
 */
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- MÓDULO 1: ALTERNÂNCIA DE TEMA (Lógica invertida para "dark-first") ---
+    // --- MÓDULO 1: ALTERNÂNCIA DE TEMA (Com transição suave) ---
 
     (() => {
         const themeToggleButton = document.getElementById('theme-toggle');
         const htmlElement = document.documentElement;
+        const bodyElement = document.body;
 
-        if (!themeToggleButton) {
-            console.warn('Botão de alternância de tema não encontrado no DOM.');
+        if (!themeToggleButton || !bodyElement) {
+            console.warn('Elementos essenciais para o tema não encontrados no DOM.');
             return;
         }
+
+        // CORREÇÃO: Adiciona uma classe para desativar transições durante a configuração inicial.
+        bodyElement.classList.add('no-transitions');
 
         const ICONS = { light: '☀️', dark: '🌙' };
 
         const applyTheme = (theme) => {
-            // Se o tema for 'light', adiciona a classe. Se for 'dark', remove (voltando ao padrão).
             htmlElement.classList.toggle('light-theme', theme === 'light');
             
-            // O label e o ícone são o OPOSTO do tema atual. Se o tema é claro, o botão mostra a lua para MUDAR para escuro.
             const newLabel = `Alternar para tema ${theme === 'light' ? 'escuro' : 'claro'}`;
             themeToggleButton.setAttribute('aria-label', newLabel);
             themeToggleButton.innerHTML = theme === 'light' ? ICONS.dark : ICONS.light;
@@ -41,16 +42,19 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         const savedTheme = localStorage.getItem('theme');
-        // Agora, o não-padrão é o tema claro.
         const systemPrefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
-
-        // O tema inicial será o salvo, OU 'light' se o sistema preferir, OU o padrão ('dark').
         const initialTheme = savedTheme || (systemPrefersLight ? 'light' : 'dark');
         
         applyTheme(initialTheme);
 
+        // ATUALIZAÇÃO VISUAL: Reativa as transições após a configuração inicial.
+        // O setTimeout garante que o navegador processe a renderização inicial antes de reativar as transições.
+        setTimeout(() => {
+            bodyElement.classList.remove('no-transitions');
+        }, 100);
+
+
         themeToggleButton.addEventListener('click', () => {
-            // Verifica o tema atual pela ausência ou presença da classe.
             const currentTheme = htmlElement.classList.contains('light-theme') ? 'light' : 'dark';
             const newTheme = currentTheme === 'light' ? 'dark' : 'light';
             applyTheme(newTheme);
@@ -58,16 +62,12 @@ document.addEventListener('DOMContentLoaded', () => {
     })();
 
 
-    // --- MÓDULO 2: SCROLL SPY PARA PÁGINAS DE DETALHE (Mantido para uso futuro) ---
+    // --- MÓDULO 2: SCROLL SPY PARA PÁGINAS DE DETALHE (Sem alterações) ---
     
-    // Esta lógica não será executada na página principal (index.html), pois
-    // o elemento '.sidebar-nav' não existe nela. Ela aguarda as páginas de conteúdo.
     const sidebarNav = document.querySelector('.sidebar-nav');
 
     if (sidebarNav) {
         (() => {
-            // Nota: a classe '.content-section' poderá ser usada nas páginas de detalhe
-            // no lugar de '.role-section' para se adequar à nova temática.
             const sections = document.querySelectorAll('.content-section'); 
             const navLinks = sidebarNav.querySelectorAll('a:not(.back-link)');
 
