@@ -1,12 +1,25 @@
 /*
- * STYLE.CSS v2.1 - Otimizações e Correções
+ * STYLE.CSS v3.0 - Interface Avançada e Imersiva
+ * Estiliza todos os novos componentes da arquitetura v3.0,
+ * com foco em animações, responsividade e uma estética coesa.
  */
+
+/*----------------------------------------------------------------*/
+/* 1. VARIÁVEIS GLOBAIS E CONFIGURAÇÃO BASE
+/*----------------------------------------------------------------*/
 :root {
-    --primary-color: #EAEAEA;
-    --background-color: #000000;
-    --accent-color: #00FF41;
+    --color-background: #0A0A0A;
+    --color-text: #E0E0E0;
+    --color-primary-accent: #00FF41;
+    --color-secondary-accent: #FFFFFF;
+    --color-disabled: #555;
+    --color-overlay: rgba(10, 10, 10, 0.8);
+    
     --font-main: 'Roboto Mono', monospace;
     --font-display: 'VT323', monospace;
+    
+    --transition-speed-fast: 0.2s;
+    --transition-speed-normal: 0.4s;
 }
 
 * {
@@ -15,223 +28,355 @@
     padding: 0;
 }
 
+html {
+    font-size: 16px; /* Base para unidades 'rem' */
+}
+
 body {
-    background-color: var(--background-color);
-    color: var(--primary-color);
+    background-color: var(--color-background);
+    color: var(--color-text);
     font-family: var(--font-main);
+    overflow: hidden; /* Previne barras de rolagem indesejadas */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+
+/*----------------------------------------------------------------*/
+/* 2. TELA DE CARREGAMENTO E NOSCRIPT
+/*----------------------------------------------------------------*/
+#loading-screen, .noscript-warning {
+    position: fixed;
+    inset: 0;
+    background-color: var(--color-background);
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    z-index: 1000;
+    transition: opacity var(--transition-speed-normal) ease-in-out;
+}
+
+#loading-screen .spinner {
+    border: 4px solid rgba(255, 255, 255, 0.2);
+    border-left-color: var(--color-primary-accent);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 1.5rem;
+}
+
+#loading-screen p {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.noscript-warning h1 {
+    font-family: var(--font-display);
+    color: var(--color-primary-accent);
+    margin-bottom: 1rem;
+}
+
+
+/*----------------------------------------------------------------*/
+/* 3. LAYOUT PRINCIPAL E FUNDOS
+/*----------------------------------------------------------------*/
+#ui-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
     overflow: hidden;
 }
 
-#game-container {
+#background-container {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+#background-container video, #background-container img {
     width: 100%;
-    max-width: 800px;
-    padding: 20px;
-    text-align: center;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.3; /* Deixa o fundo mais sutil */
+}
+
+#vfx-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    background: radial-gradient(ellipse at center, rgba(0,0,0,0) 50%, rgba(0,0,0,0.7) 100%); /* Efeito de vinheta */
+}
+
+#game-content {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+
+/*----------------------------------------------------------------*/
+/* 4. CABEÇALHO, STATUS E BOTÃO DE CONFIGURAÇÕES
+/*----------------------------------------------------------------*/
+#game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 1rem;
+}
+
+#stats-container {
+    display: flex;
+    gap: 1.5rem;
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+}
+
+#open-settings-button {
+    background: none;
+    border: none;
+    color: var(--color-text);
+    font-size: 2rem;
+    cursor: pointer;
+    transition: transform var(--transition-speed-fast) ease;
+}
+
+#open-settings-button:hover {
+    color: var(--color-primary-accent);
+    transform: rotate(45deg);
+}
+
+
+/*----------------------------------------------------------------*/
+/* 5. CONTEÚDO PRINCIPAL (HISTÓRIA E ESCOLHAS)
+/*----------------------------------------------------------------*/
+#main-content {
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    flex-grow: 1;
-}
-
-/* --- v2.1: Estilos Refinados --- */
-
-#stats-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 10px 20px;
-    background: rgba(10, 10, 10, 0.7);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    font-family: var(--font-display);
-    font-size: 20px;
-    z-index: 10;
-    transition: opacity 0.5s ease-in-out;
-
-    /* v2.1 BUGFIX: Trocado 'text-align' por flexbox para um layout mais robusto. */
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 20px; /* Adiciona espaçamento entre os itens de status */
-}
-
-#timer-container {
-    width: 100%;
-    height: 4px;
-    background-color: rgba(255, 255, 255, 0.2);
-    margin: 20px 0;
-    border-radius: 2px;
-    transition: opacity 0.3s;
-}
-
-#timer-bar {
-    width: 100%;
-    height: 100%;
-    background-color: var(--accent-color);
-    border-radius: 2px;
-}
-
-#timer-bar.active {
-    /* A animação é definida no JS para controlar a duração */
-    animation: countdown linear forwards;
-}
-
-@keyframes countdown {
-    from { width: 100%; }
-    to { width: 0%; }
-}
-
-#story-container {
-    min-height: 250px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    text-align: center;
 }
 
 #story-text {
-    font-size: 20px;
+    font-size: 1.5rem;
     line-height: 1.7;
-    transition: opacity 0.5s;
-}
-
-#choices-container {
-    padding: 20px 0;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    align-items: center;
-    justify-content: center;
+    text-shadow: 0 0 8px rgba(0,0,0,0.7);
     min-height: 150px;
 }
 
+#choices-container {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    min-height: 100px;
+}
+
 .choice-button {
-    background-color: transparent;
-    color: var(--primary-color);
-    border: 2px solid var(--primary-color);
-    padding: 15px 30px;
+    background: transparent;
+    border: 2px solid var(--color-secondary-accent);
+    color: var(--color-secondary-accent);
+    padding: 1rem 2rem;
     font-family: var(--font-display);
-    font-size: 22px;
+    font-size: 1.5rem;
     cursor: pointer;
     width: 90%;
-    max-width: 500px;
+    max-width: 600px;
     opacity: 0;
-    transform: translateY(10px);
-    user-select: none; /* v2.1 UX POLISH: Impede a seleção de texto ao clicar. */
-
-    /* v2.1 OPTIMIZATION: Transições específicas são mais performáticas que 'all'. */
-    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, 
-                border-color 0.2s ease-in-out, box-shadow 0.3s ease,
-                opacity 0.3s ease, transform 0.3s ease;
+    transform: translateY(15px);
+    transition: background-color var(--transition-speed-fast), color var(--transition-speed-fast),
+                border-color var(--transition-speed-fast), box-shadow var(--transition-speed-normal),
+                opacity var(--transition-speed-normal), transform var(--transition-speed-normal);
 }
 
-.choice-button:hover {
-    background-color: var(--accent-color);
-    color: var(--background-color);
-    border-color: var(--accent-color);
-    box-shadow: 0 0 15px var(--accent-color);
+.choice-button:hover:not(:disabled) {
+    background-color: var(--color-primary-accent);
+    color: var(--color-background);
+    border-color: var(--color-primary-accent);
+    box-shadow: 0 0 20px var(--color-primary-accent);
 }
 
-/* Desabilita eventos de ponteiro enquanto os botões estão sendo animados */
-.choices-container.locked .choice-button {
-    pointer-events: none;
+/* v3.0: Estilo claro para botões desabilitados, resolvendo o bug de feedback da v2.2 */
+.choice-button:disabled {
+    color: var(--color-disabled);
+    border-color: var(--color-disabled);
+    cursor: not-allowed;
+    opacity: 0.4 !important; /* Força a opacidade para feedback imediato */
 }
 
-#footer-container {
-    width: 100%;
-    padding: 20px;
+
+/*----------------------------------------------------------------*/
+/* 6. RODAPÉ E BOTÃO DE REINICIAR
+/*----------------------------------------------------------------*/
+#game-footer {
+    padding: 2rem;
     text-align: center;
 }
 
 #restart-button {
-    background-color: transparent;
-    color: var(--accent-color);
-    border: 1px solid var(--accent-color);
-    padding: 10px 20px;
+    /* Estilo similar ao choice-button, mas mais sutil */
+    background: transparent;
+    border: 1px solid var(--color-primary-accent);
+    color: var(--color-primary-accent);
+    padding: 0.75rem 1.5rem;
     font-family: var(--font-display);
-    font-size: 18px;
+    font-size: 1.25rem;
     cursor: pointer;
-    user-select: none; /* v2.1 UX POLISH */
-    /* v2.1 OPTIMIZATION: Transições específicas. */
-    transition: background-color 0.3s, color 0.3s;
+    transition: background-color var(--transition-speed-fast), color var(--transition-speed-fast);
 }
 
 #restart-button:hover {
-    background-color: var(--accent-color);
-    color: var(--background-color);
+    background-color: var(--color-primary-accent);
+    color: var(--color-background);
 }
 
-/* v2.1 ANOMALY FIX: Removido '!important' para um CSS mais manutenível. */
-.hidden {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-}
 
-/* --- Media Query para Tablets e Telas Maiores --- */
-@media (min-width: 768px) {
-    #story-text {
-        font-size: 24px;
-    }
-
-    .choice-button {
-        font-size: 24px;
-        width: 80%;
-    }
-}
-
-/* --- Efeito Glitch --- */
-#glitch-overlay {
+/*----------------------------------------------------------------*/
+/* 7. MODAL DE CONFIGURAÇÕES
+/*----------------------------------------------------------------*/
+#settings-modal {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    pointer-events: none;
-    z-index: 999;
-    background: transparent;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 900;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity var(--transition-speed-normal), visibility var(--transition-speed-normal);
 }
 
-#glitch-overlay.active::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
+#settings-modal.visible {
+    opacity: 1;
+}
+
+.modal-content {
+    background: var(--color-background);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 2.5rem;
+    width: 90%;
+    max-width: 500px;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.modal-content h2 {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--color-primary-accent);
+}
+
+.setting-row {
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.1rem;
+}
+
+#close-settings-button {
     width: 100%;
-    height: 100%;
-    background: var(--background-color);
-    opacity: 0.05;
-    animation: glitch-anim-1 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-}
-
-#glitch-overlay.active::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    margin-top: 2rem;
+    /* Reutiliza o estilo do botão de restart */
     background: transparent;
-    border-top: 2px solid var(--accent-color);
-    opacity: 0.3;
-    animation: glitch-anim-2 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    border: 1px solid var(--color-text);
+    color: var(--color-text);
+    padding: 0.75rem 1.5rem;
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: background-color var(--transition-speed-fast), color var(--transition-speed-fast);
 }
 
-@keyframes glitch-anim-1 {
-    0% { clip-path: inset(0 0 95% 0); }
-    25% { clip-path: inset(50% 0 20% 0); }
-    50% { clip-path: inset(90% 0 5% 0); }
-    75% { clip-path: inset(20% 0 60% 0); }
-    100% { clip-path: inset(0 0 95% 0); }
+#close-settings-button:hover {
+    background-color: var(--color-text);
+    color: var(--color-background);
 }
 
-@keyframes glitch-anim-2 {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(calc(var(--glitch-intensity, 1) * 20px)); }
+/* Estilização Customizada para Inputs (simplificada) */
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 150px;
+    height: 4px;
+    background: var(--color-disabled);
+    outline: none;
+    border-radius: 2px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: var(--color-primary-accent);
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+/*----------------------------------------------------------------*/
+/* 8. CLASSES UTILITÁRIAS E EFEITOS (GLITCH, HIDDEN)
+/*----------------------------------------------------------------*/
+.hidden {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+
+#glitch-overlay { /* O código do glitch permanece o mesmo da v2.1 */
+    position: fixed; inset: 0; pointer-events: none; z-index: 999;
+}
+#glitch-overlay.active::before, #glitch-overlay.active::after {
+    /* Animações e estilos do glitch da v2.1 são inseridos aqui */
+    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+}
+#glitch-overlay.active::before { background: var(--color-background); opacity: 0.05; animation: glitch-anim-1 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both; }
+#glitch-overlay.active::after { background: transparent; border-top: 2px solid var(--color-primary-accent); opacity: 0.3; animation: glitch-anim-2 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both; }
+@keyframes glitch-anim-1{0%,100%{clip-path:inset(0 0 95% 0)}25%{clip-path:inset(50% 0 20% 0)}50%{clip-path:inset(90% 0 5% 0)}75%{clip-path:inset(20% 0 60% 0)}}
+@keyframes glitch-anim-2{0%,100%{transform:translateY(0)}50%{transform:translateY(calc(var(--glitch-intensity,1)*20px))}}
+
+
+/*----------------------------------------------------------------*/
+/* 9. RESPONSIVIDADE PARA DISPOSITIVOS MÓVEIS
+/*----------------------------------------------------------------*/
+@media (max-width: 600px) {
+    html {
+        font-size: 14px; /* Reduz a base da fonte em telas pequenas */
+    }
+
+    #game-content {
+        padding: 0.5rem;
+    }
+    
+    .modal-content {
+        padding: 1.5rem;
+    }
+
+    #story-text {
+        font-size: 1.25rem;
+    }
+
+    .choice-button, #restart-button {
+        font-size: 1.2rem;
+    }
 }
