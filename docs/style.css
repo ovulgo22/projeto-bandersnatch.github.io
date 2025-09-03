@@ -1,0 +1,103 @@
+:root {
+    --primary-color: #EAEAEA;
+    --background-color: #000000;
+    --accent-color: #4CAF50; /* Um verde "hacker" para contraste */
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--primary-color);
+    font-family: 'VT323', monospace;
+    font-size: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+#game-container {
+    width: 100%;
+    max-width: 800px;
+    padding: 40px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh;
+}
+
+#story-container {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px; /* Garante espaço para o texto */
+}
+
+#story-text {
+    line-height: 1.6;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+#choices-container {
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+    justify-content: center;
+    min-height: 150px; /* Garante espaço para os botões */
+    animation: fadeIn 1s ease-in-out 0.5s forwards;
+    opacity: 0; /* Começa invisível para a animação */
+}
+
+.choice-button {
+    background-color: transparent;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+    padding: 15px 30px;
+    font-family: 'VT323', monospace;
+    font-size: 22px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    width: 80%;
+    max-width: 400px;
+}
+
+.choice-button:hover {
+    background-color: var(--primary-color);
+    color: var(--background-color);
+}
+
+#restart-button {
+    background-color: var(--accent-color);
+    color: var(--background-color);
+    border: none;
+    padding: 10px 20px;
+    font-family: 'VT323', monospace;
+    font-size: 18px;
+    cursor: pointer;
+    margin-top: 30px;
+}
+
+.hidden {
+    display: none;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
