@@ -30,15 +30,20 @@
     <a href="#main-content" class="skip-link">Pular para o conteúdo principal</a>
 
     <header class="main-header">
-        <nav class="navbar">
+<nav class="navbar">
             <a href="#" class="logo">[Seu Logo ou Iniciais]</a>
-            <ul class="nav-menu">
-                <li><a href="#about">Sobre</a></li>
-                <li><a href="#skills">Habilidades</a></li>
-                <li><a href="#projects">Projetos</a></li>
-                <li><a href="#contact">Contato</a></li>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#about" class="nav-link">Sobre</a></li>
+                <li><a href="#skills" class="nav-link">Habilidades</a></li>
+                <li><a href="#projects" class="nav-link">Projetos</a></li>
+                <li><a href="#contact" class="nav-link">Contato</a></li>
             </ul>
-        </nav>
+            <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+</nav>
     </header>
 
     <main id="main-content">
