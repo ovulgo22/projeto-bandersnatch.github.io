@@ -4,142 +4,170 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>Cibersegurança Web: Fortificando Aplicações Digitais | Guia Completo</title>
-    <meta name="description" content="Explore os pilares da cibersegurança web, desde a arquitetura segura ao DevSecOps, análise de vulnerabilidades, resposta a incidentes e conformidade. Seu guia essencial para construir e proteger a web.">
-    <meta name="keywords" content="Cibersegurança Web, Segurança de Aplicações, DevSecOps, Engenharia de Segurança, Análise de Vulnerabilidades, OWASP, GDPR, LGPD, ISO 27001, Teste de Invasão, Pentest, Resposta a Incidentes, Conformidade, Privacidade de Dados">
-
+    <title>[Seu Nome] | [Sua Profissão ou Título Principal]</title>
+    
+    <meta name="description" content="[Escreva aqui uma descrição concisa e atrativa sobre você e seu trabalho, com até 160 caracteres.]">
+    
+    <meta property="og:title" content="[Seu Nome] | [Sua Profissão ou Título Principal]">
+    <meta property="og:description" content="[Repita ou adapte a descrição para redes sociais.]">
+    <meta property="og:image" content="https://www.youtube.com/watch?v=qmZ9uDRGCFk">
+    <meta property="og:url" content="https://docs.github.com/pt/pages/getting-started-with-github-pages/creating-a-github-pages-site">
+    <meta property="og:type" content="website">
+    
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    
     <link rel="stylesheet" href="style.css">
+    
     <script src="script.js" defer></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+
 </head>
 <body>
 
-    <header class="site-header">
-        <div class="container">
-            <div class="header-content">
-                <a href="index.html" class="logo-link" aria-label="Página Inicial do Guia de Cibersegurança Web">
-                    <img src="assets/shield-icon.svg" alt="Ícone de Escudo de Segurança" class="site-logo">
-                    <h1>Cibersegurança Web</h1>
-                </a>
-                <button id="theme-toggle" class="theme-toggle" aria-label="Alternar tema claro/escuro"></button>
-            </div>
-            <p class="subtitle">Fortificando Aplicações Digitais: Construa, Proteja, Monitore.</p>
-        </div>
+    <a href="#main-content" class="skip-link">Pular para o conteúdo principal</a>
+
+    <header class="main-header">
+        <nav class="navbar">
+            <a href="#" class="logo">[Seu Logo ou Iniciais]</a>
+            <ul class="nav-menu">
+                <li><a href="#about">Sobre</a></li>
+                <li><a href="#skills">Habilidades</a></li>
+                <li><a href="#projects">Projetos</a></li>
+                <li><a href="#contact">Contato</a></li>
+            </ul>
+        </nav>
     </header>
 
-    <main class="site-main">
-        <div class="container">
-            <section id="introduction" class="content-section">
-                <p class="intro-text">
-                    No cenário digital de hoje, a segurança não é uma opção, mas uma fundação. Este guia foi meticulosamente elaborado para desvendar os princípios, as práticas e os papéis cruciais que asseguram a integridade, a confidencialidade e a disponibilidade das suas aplicações web.
-                </p>
-                <p class="intro-highlight">
-                    Navegue pelas seções abaixo para fortalecer seu conhecimento e suas defesas.
-                </p>
-            </section>
+    <main id="main-content">
 
-            <section id="security-pillars" class="content-section" aria-labelledby="pillars-title">
-                <h2 id="pillars-title" class="section-title visually-hidden">Pilares da Cibersegurança Web</h2>
-                <div class="grid-container">
-
-                    <a href="security-pillars/arquitetura-seguranca.html" class="security-card" aria-label="Detalhes sobre Arquitetura de Segurança Web">
-                        <article>
-                            <header class="security-card__header">
-                                <img src="assets/icons/architecture-icon.svg" alt="Ícone de Arquitetura" class="security-icon">
-                                <h3 class="security-card__title">Arquitetura de Segurança Web</h3>
-                            </header>
-                            <p class="security-card__summary">Projete sistemas com segurança desde a concepção, identificando e mitigando riscos em todas as camadas.</p>
-                            <div class="security-card__tags">
-                                <span>#ThreatModeling</span>
-                                <span>#DesignSeguro</span>
-                                <span>#DevSecOps</span>
-                            </div>
-                            <footer class="security-card__footer">
-                                <span>Explorar &rarr;</span>
-                            </footer>
-                        </article>
-                    </a>
-
-                    <a href="security-pillars/desenvolvimento-seguro.html" class="security-card" aria-label="Detalhes sobre Desenvolvimento Seguro">
-                        <article>
-                            <header class="security-card__header">
-                                <img src="assets/icons/coding-icon.svg" alt="Ícone de Desenvolvimento" class="security-icon">
-                                <h3 class="security-card__title">Desenvolvimento Seguro</h3>
-                            </header>
-                            <p class="security-card__summary">Escreva código que resista a ataques, aplicando práticas recomendadas e frameworks de segurança.</p>
-                            <div class="security-card__tags">
-                                <span>#OWASP</span>
-                                <span>#CodeReview</span>
-                                <span>#Sanitização</span>
-                            </div>
-                            <footer class="security-card__footer">
-                                <span>Explorar &rarr;</span>
-                            </footer>
-                        </article>
-                    </a>
-
-                    <a href="security-pillars/analise-vulnerabilidades.html" class="security-card" aria-label="Detalhes sobre Análise de Vulnerabilidades">
-                        <article>
-                            <header class="security-card__header">
-                                <img src="assets/icons/vulnerability-scan-icon.svg" alt="Ícone de Análise de Vulnerabilidades" class="security-icon">
-                                <h3 class="security-card__title">Análise de Vulnerabilidades</h3>
-                            </header>
-                            <p class="security-card__summary">Identifique fraquezas em suas aplicações através de testes automatizados e manuais.</p>
-                            <div class="security-card__tags">
-                                <span>#Pentest</span>
-                                <span>#SAST</span>
-                                <span>#DAST</span>
-                            </div>
-                            <footer class="security-card__footer">
-                                <span>Explorar &rarr;</span>
-                            </footer>
-                        </article>
-                    </a>
-
-                    <a href="security-pillars/monitoramento-incidentes.html" class="security-card" aria-label="Detalhes sobre Monitoramento e Resposta a Incidentes">
-                        <article>
-                            <header class="security-card__header">
-                                <img src="assets/icons/monitoring-incident-icon.svg" alt="Ícone de Monitoramento e Incidente" class="security-icon">
-                                <h3 class="security-card__title">Monitoramento e Resposta a Incidentes</h3>
-                            </header>
-                            <p class="security-card__summary">Detecte anomalias em tempo real e reaja rapidamente a ameaças para minimizar danos.</p>
-                            <div class="security-card__tags">
-                                <span>#SIEM</span>
-                                <span>#IRP</span>
-                                <span>#Forensics</span>
-                            </div>
-                            <footer class="security-card__footer">
-                                <span>Explorar &rarr;</span>
-                            </footer>
-                        </article>
-                    </a>
-                    
-                    <a href="security-pillars/conformidade-governanca.html" class="security-card" aria-label="Detalhes sobre Conformidade e Governança em Segurança">
-                        <article>
-                            <header class="security-card__header">
-                                <img src="assets/icons/compliance-icon.svg" alt="Ícone de Conformidade" class="security-icon">
-                                <h3 class="security-card__title">Conformidade e Governança</h3>
-                            </header>
-                            <p class="security-card__summary">Navegue pelo complexo cenário regulatório e estabeleça políticas de segurança robustas.</p>
-                            <div class="security-card__tags">
-                                <span>#LGPD</span>
-                                <span>#GDPR</span>
-                                <span>#ISO27001</span>
-                            </div>
-                            <footer class="security-card__footer">
-                                <span>Explorar &rarr;</span>
-                            </footer>
-                        </article>
-                    </a>
-
+        <section class="hero" id="hero">
+            <div class="hero-background-animation">
                 </div>
-            </section>
-        </div>
+            <div class="container hero-content">
+                <h1 class="hero-title">[Sua Profissão ou Título Principal]</h1>
+                <p class="hero-subtitle">[Uma frase de impacto que define seu trabalho. Ex: Construindo experiências digitais inovadoras e acessíveis.]</p>
+                <a href="#projects" class="cta-button">Veja meus projetos</a>
+            </div>
+        </section>
+
+        <section class="about" id="about">
+            <div class="container">
+                <h2 class="section-title">Sobre Mim</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>[Parágrafo 1: Apresentação pessoal e profissional. Fale sobre sua paixão pela área, sua filosofia de trabalho e o que te motiva.]</p>
+                        <p>[Parágrafo 2: Detalhe sua experiência, os tipos de projetos em que trabalhou e as tecnologias ou metodologias com as quais tem mais afinidade.]</p>
+                        <p>[Parágrafo 3: Fale sobre seus objetivos futuros, o que está aprendendo no momento e que tipo de desafios você busca.]</p>
+                    </div>
+                    <div class="about-image">
+                        <img src="https://www.fotor.com/pt/features/ai-headshot-generator/" alt="Foto de [Seu Nome], [Sua Profissão]">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="skills" id="skills">
+            <div class="container">
+                <h2 class="section-title">Habilidades & Ferramentas</h2>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h3>Design (UX/UI)</h3>
+                        <ul>
+                            <li>Figma</li>
+                            <li>Adobe XD</li>
+                            <li>Pesquisa de Usuário</li>
+                            <li>Arquitetura de Informação</li>
+                            <li>Design Systems</li>
+                        </ul>
+                    </div>
+                     <div class="skill-category">
+                        <h3>Front-End</h3>
+                        <ul>
+                            <li>HTML5, CSS3, JavaScript (ES6+)</li>
+                            <li>React / Vue.js / Svelte</li>
+                            <li>TypeScript</li>
+                            <li>Animações (GSAP)</li>
+                            <li>Acessibilidade (WCAG)</li>
+                        </ul>
+                    </div>
+                     <div class="skill-category">
+                        <h3>Back-End & DevOps</h3>
+                        <ul>
+                            <li>Node.js (Express)</li>
+                            <li>Python (Django / Flask)</li>
+                            <li>Bancos de Dados (SQL, NoSQL)</li>
+                            <li>APIs REST & GraphQL</li>
+                            <li>Docker & CI/CD</li>
+                        </ul>
+                    </div>
+                     </div>
+            </div>
+        </section>
+
+        <section class="projects" id="projects">
+            <div class="container">
+                <h2 class="section-title">Projetos em Destaque</h2>
+                <div class="projects-grid">
+                    <article class="project-card">
+                        <img src="https://www.instagram.com/p/DFpvrLnxMWq/" alt="[Descrição da imagem do projeto 1]" class="project-card__image">
+                        <div class="project-card__content">
+                            <h3 class="project-card__title">[Nome do Projeto 1]</h3>
+                            <p class="project-card__description">[Breve descrição do projeto, o problema que resolveu e o seu papel.]</p>
+                            <div class="project-card__tags">
+                                <span>[Tecnologia 1]</span>
+                                <span>[Tecnologia 2]</span>
+                                <span>[Habilidade]</span>
+                            </div>
+                            <div class="project-card__links">
+                                <a href="https://m.youtube.com/c/projetovidaoficial/live" target="_blank" rel="noopener noreferrer">Ver Projeto</a>
+                                <a href="https://docs.github.com/pt/repositories/creating-and-managing-repositories/quickstart-for-repositories" target="_blank" rel="noopener noreferrer">Ver Código</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="project-card">
+                        <img src="https://pt.pinterest.com/fonte2022mafm/projetos-para-experimentaras-minhas-fotos/" alt="[Descrição da imagem do projeto 2]" class="project-card__image">
+                        <div class="project-card__content">
+                            <h3 class="project-card__title">[Nome do Projeto 2]</h3>
+                            <p class="project-card__description">[Breve descrição do projeto, o problema que resolveu e o seu papel.]</p>
+                            <div class="project-card__tags">
+                                <span>[Tecnologia 1]</span>
+                                <span>[Tecnologia 2]</span>
+                                <span>[Habilidade]</span>
+                            </div>
+                            <div class="project-card__links">
+                                <a href="https://m.youtube.com/c/projetovidaoficial/live" target="_blank" rel="noopener noreferrer">Ver Projeto</a>
+                                <a href="https://docs.github.com/pt/repositories/creating-and-managing-repositories/quickstart-for-repositories" target="_blank" rel="noopener noreferrer">Ver Código</a>
+                            </div>
+                        </div>
+                    </article>
+                    
+                    </div>
+            </div>
+        </section>
+
+        <section class="contact" id="contact">
+            <div class="container">
+                <h2 class="section-title">Vamos Conversar?</h2>
+                <p>Estou sempre aberto a novas oportunidades e colaborações. Sinta-se à vontade para entrar em contato.</p>
+                <a href="mailto:[SEU EMAIL]" class="cta-button">[SEU EMAIL]</a>
+                <div class="social-links">
+                    <a href="https://pt.linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                        </a>
+                    <a href="https://www.youtube.com/watch?v=TsaLQAetPLU" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                        </a>
+                    </div>
+            </div>
+        </section>
+        
     </main>
 
-    <footer class="site-footer">
+    <footer class="main-footer">
         <div class="container">
-            <p>&copy; 2025 Guia Cibersegurança Web. Todos os direitos reservados.</p>
-            <p>Construa com Segurança.</p>
+            <p>&copy; 2025 [Seu Nome]. Todos os direitos reservados.</p>
         </div>
     </footer>
 
