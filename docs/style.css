@@ -1,7 +1,9 @@
 :root {
     --primary-color: #EAEAEA;
     --background-color: #000000;
-    --accent-color: #4CAF50; /* Um verde "hacker" para contraste */
+    --accent-color: #00FF41; /* Verde-limão para um look mais "cyber" */
+    --font-main: 'Roboto Mono', monospace;
+    --font-display: 'VT323', monospace;
 }
 
 * {
@@ -13,10 +15,10 @@
 body {
     background-color: var(--background-color);
     color: var(--primary-color);
-    font-family: 'VT323', monospace;
-    font-size: 24px;
+    font-family: var(--font-main);
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
     min-height: 100vh;
     overflow: hidden;
@@ -25,25 +27,71 @@ body {
 #game-container {
     width: 100%;
     max-width: 800px;
-    padding: 40px;
+    padding: 20px;
     text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    height: 100vh;
+    flex-grow: 1; /* Faz o container principal ocupar o espaço disponível */
 }
 
+/* --- v2.0: Estilos dos Novos Elementos --- */
+
+#stats-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px 20px;
+    background: rgba(10, 10, 10, 0.7);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-family: var(--font-display);
+    font-size: 20px;
+    text-align: right;
+    z-index: 10;
+    transition: opacity 0.5s ease-in-out;
+}
+
+#timer-container {
+    width: 100%;
+    height: 4px;
+    background-color: rgba(255, 255, 255, 0.2);
+    margin: 20px 0;
+    border-radius: 2px;
+    transition: opacity 0.3s;
+}
+
+#timer-bar {
+    width: 100%;
+    height: 100%;
+    background-color: var(--accent-color);
+    border-radius: 2px;
+}
+
+#timer-bar.active {
+    animation: countdown linear forwards;
+}
+
+@keyframes countdown {
+    from { width: 100%; }
+    to { width: 0%; }
+}
+
+/* --- Fim dos Estilos de Novos Elementos --- */
+
 #story-container {
-    flex-grow: 1;
+    min-height: 250px;
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 200px; /* Garante espaço para o texto */
 }
 
 #story-text {
-    line-height: 1.6;
-    animation: fadeIn 1.5s ease-in-out;
+    font-size: 20px;
+    line-height: 1.7;
+    transition: opacity 0.5s;
 }
 
 #choices-container {
@@ -53,9 +101,7 @@ body {
     gap: 15px;
     align-items: center;
     justify-content: center;
-    min-height: 150px; /* Garante espaço para os botões */
-    animation: fadeIn 1s ease-in-out 0.5s forwards;
-    opacity: 0; /* Começa invisível para a animação */
+    min-height: 150px;
 }
 
 .choice-button {
@@ -63,41 +109,107 @@ body {
     color: var(--primary-color);
     border: 2px solid var(--primary-color);
     padding: 15px 30px;
-    font-family: 'VT323', monospace;
+    font-family: var(--font-display);
     font-size: 22px;
     cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
-    width: 80%;
-    max-width: 400px;
+    width: 90%;
+    max-width: 500px;
+    transition: all 0.2s ease-in-out;
+    opacity: 0; /* Começa invisível para animação JS */
+    transform: translateY(10px);
 }
 
 .choice-button:hover {
-    background-color: var(--primary-color);
+    background-color: var(--accent-color);
     color: var(--background-color);
+    border-color: var(--accent-color);
+    box-shadow: 0 0 15px var(--accent-color);
+}
+
+#footer-container {
+    width: 100%;
+    padding: 20px;
+    text-align: center;
 }
 
 #restart-button {
-    background-color: var(--accent-color);
-    color: var(--background-color);
-    border: none;
+    background-color: transparent;
+    color: var(--accent-color);
+    border: 1px solid var(--accent-color);
     padding: 10px 20px;
-    font-family: 'VT323', monospace;
+    font-family: var(--font-display);
     font-size: 18px;
     cursor: pointer;
-    margin-top: 30px;
+    transition: all 0.3s;
+}
+
+#restart-button:hover {
+    background-color: var(--accent-color);
+    color: var(--background-color);
 }
 
 .hidden {
-    display: none;
+    opacity: 0 !important;
+    pointer-events: none !important;
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
+/* --- v2.0: Media Query para Tablets e Telas Maiores --- */
+@media (min-width: 768px) {
+    #story-text {
+        font-size: 24px; /* Texto maior e mais legível */
     }
-    to {
-        opacity: 1;
-        transform: translateY(0);
+
+    .choice-button {
+        font-size: 24px;
+        width: 80%;
     }
+}
+
+/* --- v2.0: Efeito Glitch --- */
+#glitch-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 999;
+    background: transparent;
+}
+
+#glitch-overlay.active::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--background-color);
+    opacity: 0.05;
+    animation: glitch-anim-1 0.5s infinite;
+}
+
+#glitch-overlay.active::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border-top: 2px solid var(--accent-color);
+    opacity: 0.3;
+    animation: glitch-anim-2 0.3s infinite;
+}
+
+@keyframes glitch-anim-1 {
+    0%, 100% { clip-path: inset(0 0 95% 0); }
+    25% { clip-path: inset(50% 0 20% 0); }
+    50% { clip-path: inset(90% 0 5% 0); }
+    75% { clip-path: inset(20% 0 60% 0); }
+}
+
+@keyframes glitch-anim-2 {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(calc(var(--glitch-intensity, 1) * 20px)); }
 }
