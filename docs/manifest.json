@@ -1,0 +1,70 @@
+{
+  "name": "Documentação Detalhada - Um Projeto Grandioso",
+  "short_name": "Doc Grandiosa",
+  "description": "Uma plataforma de documentação imersiva para explorar conteúdos complexos com clareza, interatividade e acessibilidade.",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#121212",
+  "theme_color": "#0A0A0A",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/assets/icons/icon-72x72.png",
+      "type": "image/png",
+      "sizes": "72x72"
+    },
+    {
+      "src": "/assets/icons/icon-96x96.png",
+      "type": "image/png",
+      "sizes": "96x96"
+    },
+    {
+      "src": "/assets/icons/icon-128x128.png",
+      "type": "image/png",
+      "sizes": "128x128"
+    },
+    {
+      "src": "/assets/icons/icon-144x144.png",
+      "type": "image/png",
+      "sizes": "144x144"
+    },
+    {
+      "src": "/assets/icons/icon-152x152.png",
+      "type": "image/png",
+      "sizes": "152x152"
+    },
+    {
+      "src": "/assets/icons/icon-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/icons/icon-384x384.png",
+      "type": "image/png",
+      "sizes": "384x384"
+    },
+    {
+      "src": "/assets/icons/icon-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Referência da API",
+      "short_name": "API",
+      "description": "Acesse diretamente a referência da API",
+      "url": "/index.html#section-api-reference",
+      "icons": [{ "src": "/assets/icons/shortcut-api.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Tutoriais",
+      "short_name": "Tutoriais",
+      "description": "Veja os tutoriais passo a passo",
+      "url": "/index.html#section-tutorials",
+      "icons": [{ "src": "/assets/icons/shortcut-tutorials.png", "sizes": "192x192" }]
+    }
+  ],
+  "lang": "pt-BR"
+}
