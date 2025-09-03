@@ -1099,3 +1099,394 @@ body.loaded .hero-cta-buttons {
     height: 24px;
     background-color: var(--color-border-interactive);
 }
+
+/* ==========================================================================
+   8. COMPONENT: API REFERENCE
+   ========================================================================== */
+
+.api-reference-layout {
+    display: grid;
+    grid-template-columns: 1fr; /* Mobile-first: uma coluna */
+    gap: var(--spacing-xxl);
+    position: relative;
+}
+
+/* -------------------
+ * Coluna 1: Navegação da API
+ * ------------------- */
+.api-nav-sidebar {
+    /* Em telas maiores, será position: sticky */
+}
+
+.sidebar-sticky-content {
+    position: sticky;
+    top: calc(var(--header-height) + var(--spacing-xl));
+    max-height: calc(100vh - var(--header-height) - var(--spacing-xl) * 2);
+    overflow-y: auto;
+    padding-right: var(--spacing-md); /* Espaço para a barra de rolagem */
+}
+
+/* Customizando a barra de rolagem para um visual mais limpo */
+.sidebar-sticky-content::-webkit-scrollbar {
+    width: 6px;
+}
+.sidebar-sticky-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+.sidebar-sticky-content::-webkit-scrollbar-thumb {
+    background-color: var(--color-border-interactive);
+    border-radius: 3px;
+}
+
+.api-nav-sidebar h4 {
+    font-size: var(--font-size-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--color-text-muted);
+    padding: 0 var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+}
+
+.api-nav-list,
+.api-nav-sublist {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.api-nav-group-title {
+    font-weight: 600;
+    color: var(--color-text-primary);
+    padding: var(--spacing-sm) var(--spacing-md);
+    display: block;
+}
+
+.api-nav-sublist {
+    border-left: 2px solid var(--color-border);
+    margin-left: var(--spacing-md);
+    padding-left: var(--spacing-md);
+}
+
+.api-nav-link {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm);
+    border-radius: var(--border-radius);
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+    font-family: var(--font-family-mono);
+    transition: background-color var(--transition-duration-fast), color var(--transition-duration-fast);
+}
+
+.api-nav-link.active,
+.api-nav-link:hover {
+    background-color: var(--color-background-interactive);
+    color: var(--color-text-primary);
+    text-decoration: none;
+}
+
+.http-method {
+    font-family: var(--font-family-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: #fff;
+    width: 45px; /* Largura fixa para alinhamento */
+    text-align: center;
+}
+.http-method.get { background-color: var(--color-http-get); }
+.http-method.post { background-color: var(--color-http-post); }
+.http-method.put { background-color: var(--color-http-put); }
+.http-method.delete { background-color: var(--color-http-delete); }
+
+
+/* -------------------
+ * Coluna 2: Conteúdo Principal da API
+ * ------------------- */
+.api-endpoint-details {
+    margin-bottom: var(--spacing-xxl);
+    padding-top: calc(var(--header-height) + var(--spacing-xl));
+    margin-top: calc(-1 * (var(--header-height) + var(--spacing-xl))));
+}
+
+.api-endpoint-details header {
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+}
+
+.endpoint-title {
+    font-family: var(--font-family-mono);
+    font-size: 1.75rem;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    margin: 0;
+}
+.endpoint-title .http-method {
+    font-size: 1rem;
+    width: auto;
+    padding: var(--spacing-sm) var(--spacing-md);
+}
+
+.endpoint-summary {
+    font-size: var(--font-size-lg);
+    color: var(--color-text-secondary);
+    margin-top: var(--spacing-md);
+    margin-bottom: 0;
+}
+
+.endpoint-content h4 {
+    font-size: 1.125rem;
+    margin-top: var(--spacing-xl);
+    margin-bottom: var(--spacing-md);
+}
+
+.params-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: var(--font-size-md);
+}
+.params-list li {
+    border-top: 1px solid var(--color-border);
+    padding: var(--spacing-lg) 0;
+}
+.params-list li:last-child {
+    border-bottom: 1px solid var(--color-border);
+}
+
+.param-type, .param-optional {
+    font-family: var(--font-family-mono);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    margin-left: var(--spacing-sm);
+}
+
+.param-optional {
+    border: 1px solid var(--color-border-interactive);
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+.response-code {
+    margin-bottom: var(--spacing-lg);
+}
+
+.status-code {
+    display: inline-block;
+    font-weight: 600;
+    margin-bottom: var(--spacing-sm);
+}
+.status-code::before {
+    content: '●';
+    margin-right: var(--spacing-sm);
+}
+
+.response-code:first-of-type .status-code { color: var(--color-success); }
+.response-code:not(:first-of-type) .status-code { color: var(--color-danger); }
+
+
+/* -------------------
+ * Coluna 3: Exemplos de Código
+ * ------------------- */
+.api-code-examples {
+    /* Em telas maiores, será position: sticky */
+}
+
+.code-language-selector {
+    display: flex;
+    margin-bottom: var(--spacing-md);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+}
+
+.lang-tab {
+    flex-grow: 1;
+    padding: var(--spacing-sm) var(--spacing-md);
+    background-color: transparent;
+    border: none;
+    border-right: 1px solid var(--color-border);
+    cursor: pointer;
+    font-family: var(--font-family-sans);
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    transition: background-color var(--transition-duration-fast), color var(--transition-duration-fast);
+}
+.lang-tab:last-child {
+    border-right: none;
+}
+.lang-tab.active,
+.lang-tab:hover {
+    background-color: var(--color-background-interactive);
+    color: var(--color-text-primary);
+}
+
+.code-snippet.hidden {
+    display: none;
+}
+
+.response-example-container pre {
+    margin-top: var(--spacing-md);
+}
+
+/* -------------------------------------------
+ * Tema customizado para PrismJS
+ * inspirado em temas como "One Dark"
+ * ------------------------------------------- */
+pre[class*="language-"] {
+    background-color: #282c34;
+}
+
+[data-theme='dark'] pre[class*="language-"] {
+    background-color: #1E1E1E;
+    border: 1px solid var(--color-border);
+}
+
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: #7f848e;
+}
+
+.token.punctuation {
+	color: #abb2bf;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+	color: #e06c75;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+	color: #98c379;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+	color: #56b6c2;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+	color: #c678dd;
+}
+
+.token.function,
+.token.class-name {
+	color: #61afef;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+	color: #d19a66;
+}
+
+.token.important,
+.token.bold {
+	font-weight: bold;
+}
+.token.italic {
+	font-style: italic;
+}
+
+.token.entity {
+	cursor: help;
+}
+
+
+/* ==========================================================================
+   9. COMPONENT: TUTORIALS & CHANGELOG
+   ========================================================================== */
+
+.tutorials-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xl);
+}
+
+.tutorial-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    background-color: var(--color-background-offset);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    transition: transform var(--transition-duration-fast), box-shadow var(--transition-duration-fast);
+}
+
+.tutorial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.tutorial-card-image {
+    position: relative;
+    aspect-ratio: 16 / 9;
+}
+.tutorial-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.tutorial-difficulty {
+    position: absolute;
+    top: var(--spacing-md);
+    left: var(--spacing-md);
+    background-color: rgba(0,0,0,0.6);
+    color: #fff;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: 4px;
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+}
+.tutorial-difficulty.beginner { background-color: var(--color-success); }
+.tutorial-difficulty.intermediate { background-color: var(--color-warning); color: #000; }
+.tutorial-difficulty.advanced { background-color: var(--color-danger); }
+
+
+.tutorial-card-content {
+    padding: var(--spacing-lg);
+}
+
+.tutorial-title {
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--spacing-sm);
+}
+.tutorial-card:hover .tutorial-title {
+    color: var(--color-primary-accent);
+}
+
+.tutorial-description {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+.tutorial-meta {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    font-family: var(--font-family-mono);
+}
