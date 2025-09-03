@@ -3,26 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projeto Bandersnatch</title>
+    <title>Projeto Bandersnatch v2.0</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=VT323&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div id="game-container">
-        <div id="video-background-container">
-            </div>
+
+    <div id="glitch-overlay"></div>
+
+    <header id="stats-container" class="hidden">
+        </header>
+
+    <main id="game-container">
         <div id="story-container">
             <p id="story-text"></p>
         </div>
+        
+        <div id="timer-container" class="hidden">
+            <div id="timer-bar"></div>
+        </div>
+
         <div id="choices-container">
             </div>
-        <button id="restart-button" class="hidden">Reiniciar</button>
-    </div>
+    </main>
 
-    <script src="story.js"></script>
-    <script src="ui.js"></script>
-    <script src="script.js"></script>
+    <footer id="footer-container">
+        <button id="restart-button" class="hidden">Reiniciar Jornada</button>
+    </footer>
+
+    <div id="audio-container">
+        <audio id="sfx-hover" src=""></audio> <audio id="sfx-click" src=""></audio> <audio id="sfx-glitch" src=""></audio> </div>
+
+    <script src="story.js" defer></script>
+    <script src="ui.js" defer></script>
+    <script src="script.js" defer></script>
 </body>
 </html>
