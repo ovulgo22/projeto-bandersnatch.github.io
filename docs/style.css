@@ -1,395 +1,243 @@
 /*
- * STYLE.CSS v3.2 - Acessibilidade e Refatoração (Código Completo)
- * Adiciona a classe sr-only, melhora o foco de teclado e refatora os estilos de botão.
- */
+    PROJETO: Documentação de Cargos em Desenvolvimento Web
+    ARQUIVO: style.css
+    VERSÃO: 1.0
+    DATA: 03/09/2025
+    DESCRIÇÃO: Folha de estilos principal. Define a aparência visual, a responsividade,
+               a acessibilidade e o tema claro/escuro para o site.
+*/
 
-/*----------------------------------------------------------------*/
-/* 1. VARIÁVEIS GLOBAIS E CONFIGURAÇÃO BASE
-/*----------------------------------------------------------------*/
+/* --- 1. IMPORTAÇÕES E DEFINIÇÕES GLOBAIS --- */
+
+/* UI Designer: Importando fontes do Google Fonts para uma tipografia mais rica e profissional.
+   'Merriweather' para títulos (serifada, autoridade) e 'Lato' para o corpo (sans-serif, legibilidade). */
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Merriweather:wght@700;900&display=swap');
+
+/* Front-End & UI Designer: Uso de Variáveis CSS (Custom Properties) para fácil manutenção e theming.
+   Toda a paleta de cores, fontes e espaçamentos é centralizada aqui. */
 :root {
-    --color-background: #0A0A0A;
-    --color-text: #E0E0E0;
-    --color-primary-accent: #00FF41;
-    --color-secondary-accent: #FFFFFF;
-    --color-disabled: #555;
-    --color-overlay: rgba(10, 10, 10, 0.8);
-    
-    --font-main: 'Roboto Mono', monospace;
-    --font-display: 'VT323', monospace;
-    
-    --transition-speed-fast: 0.2s;
-    --transition-speed-normal: 0.4s;
+    /* Paleta de Cores (Tema Claro - Padrão) */
+    --color-background: #f8f9fa;
+    --color-text-primary: #212529;
+    --color-text-secondary: #5a6169;
+    --color-surface: #ffffff;
+    --color-primary: #0057b7; /* Um azul profissional e acessível */
+    --color-border: #dee2e6;
+
+    /* Tipografia */
+    --font-family-headings: 'Merriweather', serif;
+    --font-family-body: 'Lato', sans-serif;
+
+    /* Espaçamento e Bordas */
+    --spacing-unit: 1rem; /* Base de 16px */
+    --border-radius: 8px;
+
+    /* Sombras (Creative Dev) */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+    /* Transições (Creative Dev & UX) */
+    --transition-speed: 250ms;
 }
 
-* {
+/* Front-End: Definindo o tema escuro. O JavaScript irá adicionar a classe .dark-theme no <html> */
+html.dark-theme {
+    --color-background: #121212;
+    --color-text-primary: #e0e0e0;
+    --color-text-secondary: #a0a0a0;
+    --color-surface: #1e1e1e;
+    --color-primary: #4dabf7; /* Um azul mais claro para contraste no escuro */
+    --color-border: #424242;
+    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+
+/* --- 2. RESET E ESTILOS BASE --- */
+
+/* Front-End & QA: Um reset moderno para garantir consistência entre navegadores. */
+*,
+*::before,
+*::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
-html {
-    font-size: 16px;
+/* A11y: `scroll-behavior: smooth` para rolagem suave, mas respeitando as preferências do usuário. */
+@media (prefers-reduced-motion: no-preference) {
+    html {
+        scroll-behavior: smooth;
+    }
 }
 
+/* UX & UI Designer: Estilos base para o corpo do documento. */
 body {
+    font-family: var(--font-family-body);
+    font-size: 1.125rem; /* 18px, bom para leitura */
+    line-height: 1.7;
+    color: var(--color-text-primary);
     background-color: var(--color-background);
-    color: var(--color-text);
-    font-family: var(--font-main);
-    overflow: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    transition: color var(--transition-speed), background-color var(--transition-speed);
 }
 
-/*----------------------------------------------------------------*/
-/* 2. CLASSES UTILITÁRIAS
-/*----------------------------------------------------------------*/
-/* v3.2 CORREÇÃO DE ACESSIBILIDADE: Oculta visualmente, mas mantém para leitores de tela. */
-.sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border-width: 0;
+
+/* --- 3. TIPOGRAFIA E UTILITÁRIOS --- */
+
+h1, h2, h3 {
+    font-family: var(--font-family-headings);
+    color: var(--color-text-primary);
+    line-height: 1.3;
 }
 
-.hidden {
-    opacity: 0 !important;
-    visibility: hidden !important;
-    pointer-events: none !important;
+h1 { font-size: clamp(2.5rem, 5vw, 3.5rem); } /* Tipografia fluida */
+h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); }
+h3 { font-size: 1.5rem; }
+
+p {
+    margin-bottom: var(--spacing-unit);
+    max-width: 75ch; /* Limita a largura da linha para melhor legibilidade */
 }
 
-/*----------------------------------------------------------------*/
-/* 3. TELA DE CARREGAMENTO E NOSCRIPT
-/*----------------------------------------------------------------*/
-#loading-screen, .noscript-warning {
-    position: fixed;
-    inset: 0;
-    background-color: var(--color-background);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    transition: opacity var(--transition-speed-normal) ease-in-out;
+a {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 700;
+    transition: opacity var(--transition-speed);
 }
 
-#loading-screen .spinner {
-    border: 4px solid rgba(255, 255, 255, 0.2);
-    border-left-color: var(--color-primary-accent);
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    animation: spin 1s linear infinite;
-    margin-bottom: 1.5rem;
+a:hover {
+    opacity: 0.8;
+    text-decoration: underline;
 }
 
-#loading-screen p {
-    font-family: var(--font-display);
-    font-size: 1.5rem;
-    letter-spacing: 2px;
+/* A11y: Essencial garantir que elementos focáveis sejam visualmente distintos. */
+a:focus, button:focus {
+    outline: 3px solid var(--color-primary);
+    outline-offset: 4px;
+    border-radius: 4px; /* Para contornos mais suaves */
 }
 
-@keyframes spin {
-    to { transform: rotate(360deg); }
+/* AI & UI Designer: Container para centralizar o conteúdo com uma largura máxima legível. */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.noscript-warning h1 {
-    font-family: var(--font-display);
-    color: var(--color-primary-accent);
-    margin-bottom: 1rem;
-}
 
-/*----------------------------------------------------------------*/
-/* 4. LAYOUT PRINCIPAL E FUNDOS
-/*----------------------------------------------------------------*/
-#ui-container {
-    position: relative;
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-}
+/* --- 4. COMPONENTES ESPECÍFICOS --- */
 
-#background-container {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-}
-
-#background-container video, #background-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0.3;
-}
-
-#vfx-overlay {
-    position: absolute;
-    inset: 0;
-    z-index: 2;
-    pointer-events: none;
-    background: radial-gradient(ellipse at center, rgba(0,0,0,0) 50%, rgba(0,0,0,0.7) 100%);
-}
-
-#game-content {
-    position: relative;
-    z-index: 10;
-    width: 100%;
-    height: 100%;
-    padding: 1rem;
-    max-width: 900px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-}
-
-/*----------------------------------------------------------------*/
-/* 5. CABEÇALHO, STATUS E BOTÃO DE CONFIGURAÇÕES
-/*----------------------------------------------------------------*/
-#game-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    padding: 1rem;
-}
-
-#stats-container {
-    display: flex;
-    gap: 1.5rem;
-    font-family: var(--font-display);
-    font-size: 1.25rem;
-}
-
-/*----------------------------------------------------------------*/
-/* 6. CONTEÚDO PRINCIPAL (HISTÓRIA E ESCOLHAS)
-/*----------------------------------------------------------------*/
-#main-content {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+/* Header e Footer */
+.site-header, .site-footer {
+    padding: calc(var(--spacing-unit) * 2) 0;
     text-align: center;
 }
 
-#story-container {
-    min-height: 150px;
+.site-header {
+    border-bottom: 1px solid var(--color-border);
+    position: relative;
 }
 
-#story-text-visual {
-    font-size: 1.5rem;
-    line-height: 1.7;
-    text-shadow: 0 0 8px rgba(0,0,0,0.7);
+.subtitle {
+    font-size: 1.2rem;
+    color: var(--color-text-secondary);
 }
 
-#choices-container {
-    margin-top: 2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    min-height: 100px;
+.site-footer {
+    margin-top: calc(var(--spacing-unit) * 3);
+    border-top: 1px solid var(--color-border);
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
 }
 
-/*----------------------------------------------------------------*/
-/* 7. BOTÕES (ESTILOS REATORADOS E FOCO DE TECLADO)
-/*----------------------------------------------------------------*/
+/* Main Content */
+.site-main section {
+    padding: calc(var(--spacing-unit) * 3) 0;
+}
 
-/* v3.2 REATORAÇÃO: Estilos base aplicados a todos os botões da interface */
-.choice-button, #restart-button, #open-settings-button, #close-settings-button {
-    cursor: pointer;
-    font-family: var(--font-display);
+/* Botão de Tema (UI/UX & Creative Dev) */
+.theme-toggle {
+    position: absolute;
+    top: 50%;
+    right: 5%;
+    transform: translateY(-50%);
     background: transparent;
-    border: 1px solid transparent;
-    color: var(--color-text);
-    -webkit-tap-highlight-color: transparent;
-    user-select: none;
-    transition: background-color var(--transition-speed-fast), color var(--transition-speed-fast),
-                border-color var(--transition-speed-fast), box-shadow var(--transition-speed-normal),
-                opacity var(--transition-speed-normal), transform var(--transition-speed-normal);
-}
-
-/* v3.2 ACESSIBILIDADE: Estilo de foco aprimorado para navegação por teclado */
-.choice-button:focus-visible, #restart-button:focus-visible, 
-#open-settings-button:focus-visible, #close-settings-button:focus-visible,
-input[type="range"]:focus-visible {
-    outline: none;
-    box-shadow: 0 0 12px var(--color-primary-accent);
-}
-
-/* Estilos específicos para cada tipo de botão */
-.choice-button {
-    border-width: 2px;
-    border-color: var(--color-secondary-accent);
-    padding: 1rem 2rem;
-    font-size: 1.5rem;
-    width: 90%;
-    max-width: 600px;
-    opacity: 0;
-    transform: translateY(15px);
-}
-
-.choice-button:hover:not(:disabled) {
-    background-color: var(--color-primary-accent);
-    color: var(--color-background);
-    border-color: var(--color-primary-accent);
-    box-shadow: 0 0 20px var(--color-primary-accent);
-}
-
-.choice-button:disabled {
-    color: var(--color-disabled);
-    border-color: var(--color-disabled);
-    cursor: not-allowed;
-    opacity: 0.4 !important;
-}
-
-#game-footer {
-    padding: 2rem;
-    text-align: center;
-}
-
-#restart-button, #close-settings-button {
-    border-color: var(--color-primary-accent);
-    color: var(--color-primary-accent);
-    padding: 0.75rem 1.5rem;
-    font-size: 1.25rem;
-}
-
-#restart-button:hover, #close-settings-button:hover {
-    background-color: var(--color-primary-accent);
-    color: var(--color-background);
-}
-
-#close-settings-button {
-    width: 100%;
-    margin-top: 2rem;
-    border-color: var(--color-text);
-    color: var(--color-text);
-}
-
-#close-settings-button:hover {
-    background-color: var(--color-text);
-    color: var(--color-background);
-}
-
-#open-settings-button {
-    font-size: 2rem;
-    border: none;
-}
-
-#open-settings-button:hover {
-    color: var(--color-primary-accent);
-    transform: rotate(45deg);
-}
-
-/*----------------------------------------------------------------*/
-/* 8. MODAL DE CONFIGURAÇÕES
-/*----------------------------------------------------------------*/
-#settings-modal {
-    position: fixed;
-    inset: 0;
-    background-color: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    z-index: 900;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity var(--transition-speed-normal) ease-in-out, visibility var(--transition-speed-normal) ease-in-out;
-}
-
-#settings-modal.visible {
-    opacity: 1;
-    visibility: visible;
-}
-
-.modal-content {
-    background: var(--color-background);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 2.5rem;
-    width: 90%;
-    max-width: 500px;
-    border-radius: 8px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-}
-
-.modal-content h2 {
-    font-family: var(--font-display);
-    font-size: 2rem;
-    text-align: center;
-    margin-bottom: 2rem;
-    color: var(--color-primary-accent);
-}
-
-.setting-row {
-    margin-bottom: 1.5rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 1.1rem;
-}
-
-input[type="range"] {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 150px;
-    height: 4px;
-    background: var(--color-disabled);
-    outline: none;
-    border-radius: 2px;
-}
-
-input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 20px;
-    height: 20px;
-    background: var(--color-primary-accent);
-    cursor: pointer;
+    border: 2px solid var(--color-border);
+    width: 45px;
+    height: 45px;
     border-radius: 50%;
+    cursor: pointer;
+    transition: all var(--transition-speed) ease-in-out;
 }
 
-.radio-group { /* Adicionado para estilização dos radios */
-    display: flex;
-    gap: 10px;
+.theme-toggle:hover {
+    border-color: var(--color-primary);
+    transform: translateY(-50%) rotate(15deg);
 }
 
-/*----------------------------------------------------------------*/
-/* 9. EFEITOS (GLITCH)
-/*----------------------------------------------------------------*/
-#glitch-overlay {
-    position: fixed; inset: 0; pointer-events: none; z-index: 999;
+/* A lista de cards dos cargos (Front-End) */
+#roles-list {
+    /* Usando CSS Grid para um layout de grid responsivo e robusto. */
+    display: grid;
+    grid-template-columns: 1fr; /* Padrão mobile: uma coluna */
+    gap: calc(var(--spacing-unit) * 1.5);
 }
-#glitch-overlay.active::before, #glitch-overlay.active::after {
-    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-}
-#glitch-overlay.active::before { background: var(--color-background); opacity: 0.05; animation: glitch-anim-1 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both; }
-#glitch-overlay.active::after { background: transparent; border-top: 2px solid var(--color-primary-accent); opacity: 0.3; animation: glitch-anim-2 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both; }
-@keyframes glitch-anim-1{0%,100%{clip-path:inset(0 0 95% 0)}25%{clip-path:inset(50% 0 20% 0)}50%{clip-path:inset(90% 0 5% 0)}75%{clip-path:inset(20% 0 60% 0)}}
-@keyframes glitch-anim-2{0%,100%{transform:translateY(0)}50%{transform:translateY(calc(var(--glitch-intensity,1)*20px))}}
 
-/*----------------------------------------------------------------*/
-/* 10. RESPONSIVIDADE
-/*----------------------------------------------------------------*/
-@media (max-width: 600px) {
-    html {
-        font-size: 14px;
+/* O card individual (BEM) */
+.role-card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    padding: calc(var(--spacing-unit) * 1.5);
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+/* Creative Dev: Efeito de "levantar" o card no hover para feedback visual. */
+@media (prefers-reduced-motion: no-preference) {
+    .role-card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-md);
     }
-    #game-content {
-        padding: 0.5rem;
+}
+
+.role-card__title {
+    margin-bottom: calc(var(--spacing-unit) * 0.5);
+    color: var(--color-primary);
+}
+
+.role-card__description {
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-unit);
+}
+
+.role-card__link {
+    display: inline-block;
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+
+/* --- 5. MEDIA QUERIES (DESIGN RESPONSIVO) --- */
+
+/* Front-End & UX: Abordagem Mobile-First. Estilos base são para mobile,
+   e usamos min-width para adaptar a telas maiores. */
+
+/* Para tablets e telas maiores */
+@media (min-width: 768px) {
+    #roles-list {
+        /* Duas colunas para tablets */
+        grid-template-columns: repeat(2, 1fr);
     }
-    .modal-content {
-        padding: 1.5rem;
-    }
-    #story-text-visual {
-        font-size: 1.25rem;
-    }
-    .choice-button, #restart-button {
-        font-size: 1.2rem;
+}
+
+/* Para desktops */
+@media (min-width: 1024px) {
+    #roles-list {
+        /* Três colunas para desktops, aproveitando melhor o espaço. */
+        grid-template-columns: repeat(3, 1fr);
     }
 }
