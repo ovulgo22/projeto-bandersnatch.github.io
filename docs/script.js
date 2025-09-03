@@ -1,28 +1,30 @@
 /*
     PROJETO: Documentação de Cargos em Desenvolvimento Web
     ARQUIVO: script.js
-    VERSÃO: 2.0
-    DATA: 03/09/2025 (06:07 America/Sao_Paulo)
+    VERSÃO: 3.0
+    DATA: 03/09/2025 (06:16 America/Sao_Paulo)
     
-    CHANGELOG v2.0:
-    - MÓDULO ADICIONADO: Scroll Spy (Espião de Rolagem) para a navegação lateral.
-    - FUNCIONALIDADE: Destaca o link na barra lateral que corresponde à seção visível na tela.
-    - TECNOLOGIA: Implementado com a Intersection Observer API para alta performance, evitando
-                  eventos de 'scroll' que podem causar lentidão.
-    - REATORAÇÃO: O código foi organizado em módulos para melhor legibilidade e manutenção.
+    CHANGELOG v3.0 (ATUALIZAÇÃO ARQUITETURAL):
+    - CORREÇÃO/REATORAÇÃO: O script foi adaptado para a nova arquitetura multi-página.
+    - LÓGICA CONDICIONAL: O módulo de Scroll Spy agora é envolvido por uma verificação.
+      Ele só é executado se detectar a presença de uma barra de navegação lateral ('.sidebar-nav') na página.
+    - PREVENÇÃO DE ERROS: Isso previne erros de console na página principal (index.html) e garante
+      que a funcionalidade de rolagem só seja ativada nas páginas de detalhe, onde é necessária.
+    - MANTIDO: O módulo de alternância de tema continua global e funciona em todas as páginas sem alterações.
 */
 
-// QA & Front-End: O evento 'DOMContentLoaded' continua sendo a melhor prática para garantir
-// que o DOM esteja pronto antes da execução de qualquer script.
+// O evento 'DOMContentLoaded' continua a ser a base para a execução segura do script.
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- MÓDULO 1: ALTERNÂNCIA DE TEMA (Lógica da v1.0, sem alterações) ---
-
+    // --- MÓDULO 1: ALTERNÂNCIA DE TEMA (Global) ---
+    // Esta função anônima auto-executável (IIFE) mantém seu escopo isolado.
+    // Funciona em todas as páginas.
     (() => {
         const themeToggleButton = document.getElementById('theme-toggle');
         const htmlElement = document.documentElement;
 
         if (!themeToggleButton) {
+            // A verificação continua sendo uma boa prática.
             console.warn('Botão de alternância de tema não encontrado no DOM.');
             return;
         }
@@ -50,57 +52,50 @@ document.addEventListener('DOMContentLoaded', () => {
     })();
 
 
-    // --- MÓDULO 2: SCROLL SPY PARA NAVEGAÇÃO LATERAL (Novo na v2.0) ---
+    // --- MÓDULO 2: SCROLL SPY PARA NAVEGAÇÃO LATERAL (Condicional - Apenas em Páginas de Detalhe) ---
+    
+    // QA & Front-End: A verificação principal. Buscamos um elemento que só existe nas páginas de detalhe.
+    const sidebarNav = document.querySelector('.sidebar-nav');
 
-    (() => {
-        // Front-End: Selecionamos todas as seções que queremos observar e todos os links da navegação.
-        const sections = document.querySelectorAll('.role-section');
-        const navLinks = document.querySelectorAll('.sidebar-nav a');
+    // Se o elemento .sidebar-nav for encontrado, então executamos a lógica do Scroll Spy.
+    if (sidebarNav) {
+        // O código a seguir é idêntico ao da v2.0, mas agora só é executado quando necessário.
+        (() => {
+            const sections = document.querySelectorAll('.role-section');
+            const navLinks = sidebarNav.querySelectorAll('a:not(.back-link)'); // Ignora o link de voltar
 
-        // QA: Se não houver seções ou links (página vazia), o script não executa o resto do módulo.
-        if (sections.length === 0 || navLinks.length === 0) {
-            return;
-        }
+            if (sections.length === 0 || navLinks.length === 0) {
+                return;
+            }
 
-        // UX/Front-End: Opções para o Intersection Observer.
-        // O 'rootMargin' cria uma "linha de gatilho" imaginária no centro da tela.
-        // -40% do topo e -60% da base significa que a seção só é considerada "ativa"
-        // quando seu início cruza a linha dos 40% superiores da viewport.
-        const observerOptions = {
-            root: null, // Observa em relação à viewport do navegador.
-            rootMargin: '-40% 0px -60% 0px',
-            threshold: 0
-        };
+            const observerOptions = {
+                root: null,
+                rootMargin: '-40% 0px -60% 0px',
+                threshold: 0
+            };
 
-        // A função que será executada sempre que uma seção entrar ou sair da "linha de gatilho".
-        const observerCallback = (entries, observer) => {
-            entries.forEach(entry => {
-                // Se a seção está cruzando nossa linha de gatilho na direção correta...
-                if (entry.isIntersecting) {
-                    // Pega o ID da seção que está visível.
-                    const currentSectionId = entry.target.id;
+            const observerCallback = (entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const currentSectionId = entry.target.id;
+                        
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                        });
 
-                    // Remove a classe 'active' de todos os links.
-                    navLinks.forEach(link => {
-                        link.classList.remove('active');
-                    });
-
-                    // Encontra o link de navegação que corresponde à seção atual e adiciona a classe 'active'.
-                    const activeLink = document.querySelector(`.sidebar-nav a[href="#${currentSectionId}"]`);
-                    if (activeLink) {
-                        activeLink.classList.add('active');
+                        const activeLink = sidebarNav.querySelector(`a[href="#${currentSectionId}"]`);
+                        if (activeLink) {
+                            activeLink.classList.add('active');
+                        }
                     }
-                }
+                });
+            };
+
+            const observer = new IntersectionObserver(observerCallback, observerOptions);
+            sections.forEach(section => {
+                observer.observe(section);
             });
-        };
-
-        // Front-End: Cria a instância do observer.
-        const observer = new IntersectionObserver(observerCallback, observerOptions);
-
-        // Inicia a observação para cada uma das seções de conteúdo.
-        sections.forEach(section => {
-            observer.observe(section);
-        });
-    })();
+        })();
+    }
 
 });
